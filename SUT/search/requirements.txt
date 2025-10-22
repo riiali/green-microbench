@@ -3,7 +3,3 @@ pika==1.2.0
 werkzeug==2.0.1
 Flask-SQLAlchemy==2.5.1
 requests==2.26.0
-prometheus-client==0.20.0
-opentelemetry-sdk==1.26.0
-opentelemetry-instrumentation-flask==0.47b0
-opentelemetry-exporter-otlp==1.26.0
