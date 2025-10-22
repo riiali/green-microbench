@@ -1,0 +1,60 @@
+
+services:
+  rabbitmq:
+    image: "rabbitmq:3-management"
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    networks:
+      - my-network
+
+  apartment:
+    ports:
+      - "5001:5000"
+    build:
+      context: ./apartment
+      dockerfile: Dockerfile.apartment
+    networks: 
+      - my-network
+    depends_on:
+      - rabbitmq
+
+  booking:
+    ports:
+      - "5002:5000"
+    build:
+      context: ./booking
+      dockerfile: Dockerfile.booking
+    networks:
+      - my-network
+    depends_on:
+      - rabbitmq
+
+  search:
+    ports:
+      - "5003:5000"
+    build:
+      context: ./search
+      dockerfile: Dockerfile.search
+    networks:
+      - my-network
+    depends_on:
+      - rabbitmq
+
+
+  api-gateway:
+    ports:
+      - "5000:5000"
+    build:
+      context: ./api-gateway
+      dockerfile: Dockerfile.api-gateway
+    depends_on:
+      - apartment
+      - booking
+      - search
+    networks:
+      - my-network
+
+networks:
+  my-network:
+    driver: bridge
