@@ -1,0 +1,1 @@
+analisi di tutti i risultati ... potrei mettere sia gli scrpit python per calcolare enerfgia, prestazioni ecc che proprio quelli che generano i grafici 
