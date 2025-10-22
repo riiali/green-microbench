@@ -1,0 +1,1 @@
+qui metto le pipelines --> !!! SELF hosted!!! 
