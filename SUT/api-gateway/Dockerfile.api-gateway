@@ -6,6 +6,11 @@ COPY requirements.txt requirements.txt
 RUN pip install -r requirements.txt
 # Installo requests singolarmente per problemi
 RUN pip install requests
+RUN pip install --no-cache-dir \
+    opentelemetry-distro==0.47b0 \
+    opentelemetry-exporter-otlp==1.26.0 \
+    opentelemetry-instrumentation-flask==0.47b0 \
+    opentelemetry-instrumentation-requests==0.47b0
 
 EXPOSE 5000
 COPY . .

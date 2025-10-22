@@ -1,59 +1,122 @@
+version: "3.9"
 
 services:
+  # --- Observability stack ---
+  otel-collector:
+    image: otel/opentelemetry-collector:0.100.0
+    command: ["--config=/etc/otelcol/config.yaml"]
+    volumes:
+      - ../GreenMicrobrenchFramework/collectors/otel/otel-collector.yaml:/etc/otelcol/config.yaml:ro
+    ports:
+      - "4317:4317"   # OTLP gRPC
+      - "9464:9464"   # /metrics Prometheus
+    networks: [my-network]
+
+  jaeger:
+    image: jaegertracing/all-in-one:1.57
+    environment:
+      - COLLECTOR_ZIPKIN_HOST_PORT=:9411
+    ports:
+      - "16686:16686" # UI Jaeger
+    networks: [my-network]
+
+  prometheus:
+    image: prom/prometheus
+    volumes:
+      - ../GreenMicrobrenchFramework/collectors/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    ports:
+      - "9090:9090"
+    networks: [my-network]
+
+  grafana:
+    image: grafana/grafana:11.2.0
+    ports:
+      - "3000:3000"
+    networks: [my-network]
+
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor:latest
+    ports:
+      - "8081:8080"   
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+    networks: [my-network]
+
+  # --- Infra SUT ---
   rabbitmq:
     image: "rabbitmq:3-management"
     ports:
-      - "5672:5672"
-      - "15672:15672"
-    networks:
-      - my-network
+      - "5672:5672"    
+      - "15672:15672"  
+    networks: [my-network]
+
 
   apartment:
-    ports:
-      - "5001:5000"
     build:
       context: ./apartment
       dockerfile: Dockerfile.apartment
-    networks: 
-      - my-network
-    depends_on:
-      - rabbitmq
+    environment:
+      OTEL_SERVICE_NAME: apartment
+      OTEL_EXPORTER_OTLP_ENDPOINT: http://otel-collector:4317
+      OTEL_TRACES_EXPORTER: otlp
+      OTEL_METRICS_EXPORTER: otlp
+      OTEL_LOGS_EXPORTER: none
+      OTEL_RESOURCE_ATTRIBUTES: deployment.environment=lab
+
+    command: ["opentelemetry-instrument","flask","run","--host","0.0.0.0","--port","5000"]
+    depends_on: [rabbitmq, otel-collector]
+    networks: [my-network]
 
   booking:
-    ports:
-      - "5002:5000"
     build:
       context: ./booking
       dockerfile: Dockerfile.booking
-    networks:
-      - my-network
-    depends_on:
-      - rabbitmq
+    environment:
+      OTEL_SERVICE_NAME: booking
+      OTEL_EXPORTER_OTLP_ENDPOINT: http://otel-collector:4317
+      OTEL_TRACES_EXPORTER: otlp
+      OTEL_METRICS_EXPORTER: otlp
+      OTEL_LOGS_EXPORTER: none
+      OTEL_RESOURCE_ATTRIBUTES: deployment.environment=lab
+    command: ["opentelemetry-instrument","flask","run","--host","0.0.0.0","--port","5000"]
+    depends_on: [rabbitmq, otel-collector]
+    networks: [my-network]
 
   search:
-    ports:
-      - "5003:5000"
     build:
       context: ./search
       dockerfile: Dockerfile.search
-    networks:
-      - my-network
-    depends_on:
-      - rabbitmq
+    environment:
+      OTEL_SERVICE_NAME: search
+      OTEL_EXPORTER_OTLP_ENDPOINT: http://otel-collector:4317
+      OTEL_TRACES_EXPORTER: otlp
+      OTEL_METRICS_EXPORTER: otlp
+      OTEL_LOGS_EXPORTER: none
+      OTEL_RESOURCE_ATTRIBUTES: deployment.environment=lab
+    command: ["opentelemetry-instrument","flask","run","--host","0.0.0.0","--port","5000"]
+    depends_on: [rabbitmq, otel-collector]
+    networks: [my-network]
 
 
   api-gateway:
-    ports:
-      - "5000:5000"
     build:
       context: ./api-gateway
       dockerfile: Dockerfile.api-gateway
-    depends_on:
-      - apartment
-      - booking
-      - search
-    networks:
-      - my-network
+    environment:
+      OTEL_SERVICE_NAME: api-gateway
+      OTEL_EXPORTER_OTLP_ENDPOINT: http://otel-collector:4317
+      OTEL_TRACES_EXPORTER: otlp
+      OTEL_METRICS_EXPORTER: otlp
+      OTEL_LOGS_EXPORTER: none
+      OTEL_RESOURCE_ATTRIBUTES: deployment.environment=lab
+    command: ["opentelemetry-instrument","flask","run","--host","0.0.0.0","--port","5000"]
+    depends_on: [apartment, booking, search, otel-collector]
+    ports:
+      - "5000:5000"  
+    networks: [my-network]
 
 networks:
   my-network:
