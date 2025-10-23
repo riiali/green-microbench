@@ -1,0 +1,7 @@
+name: spike
+locustfile: locustfile_guest.py
+host: http://localhost:5000
+users: 500
+spawn_rate: 200
+run_time: 5m
+notes: "sudden spike"

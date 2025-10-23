@@ -1,0 +1,7 @@
+name: steady_10m
+locustfile: locustfile_guest.py
+host: http://localhost:5000
+users: 150
+spawn_rate: 15
+run_time: 1m
+notes: "steady-state load for 10 minutes"
