@@ -1,0 +1,20 @@
+Count,Message,Traceback,Nodes
+70,500 Server Error: INTERNAL SERVER ERROR for url: http://localhost:5000/booking/change,"  File ""C:\Users\alriz\anaconda3\Lib\site-packages\locust\user\task.py"", line 340, in run
+    self.execute_next_task()
+  File ""C:\Users\alriz\anaconda3\Lib\site-packages\locust\user\task.py"", line 373, in execute_next_task
+    self.execute_task(self._task_queue.popleft())
+  File ""C:\Users\alriz\anaconda3\Lib\site-packages\locust\user\task.py"", line 490, in execute_task
+    task(self.user)
+  File ""C:\DEV\green-microbench\GreenMicrobrenchFramework\load\locust\locustfile_guest.py"", line 89, in search_and_book
+    with req(self.client, ""PUT"", ""/booking/change"", json=payload_change, headers=headers, name=""/booking/change""):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""C:\Users\alriz\anaconda3\Lib\contextlib.py"", line 137, in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+  File ""C:\DEV\green-microbench\GreenMicrobrenchFramework\load\locust\locustfile_guest.py"", line 19, in req
+    r.raise_for_status()
+  File ""C:\Users\alriz\anaconda3\Lib\site-packages\locust\clients.py"", line 62, in raise_for_status
+    Response.raise_for_status(self)
+  File ""C:\Users\alriz\anaconda3\Lib\site-packages\requests\models.py"", line 1024, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+",local
