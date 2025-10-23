@@ -1,7 +1,7 @@
 #  How to Port Your Service to GreenMicrobenchFramework
 
-The goal of **GreenMicrobenchFramework** is to analyze and monitor the performance and energy impact of microservice-based applications — **without changing their code**.  
-You only need to modify your **Dockerfiles** and **docker-compose.yml**.
+The goal of **GreenMicrobenchFramework** is to analyze and monitor the performance and energy impact of microservice-based applications under load — **without changing their code**.  
+You only need to modify your **Dockerfiles** and **docker-compose.yml** and simulate the load through locust files. 
 
 ---
 
@@ -107,3 +107,9 @@ networks:
   sutnet:
     external: true
 ```
+
+
+## 3. Define your load model (Locust)
+Place your Locust file(s) inside your SUT repo, e.g.:
+
+GreenMicrobrenchFramework/load/locustfile.py
