@@ -1,1 +1,0 @@
-contiene moduli collegamento con strumenti esterni. Qui voglio mettere collegamento con locust e con shelly. Idealmente fdare folder load per locust e power per shelly 
