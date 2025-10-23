@@ -280,9 +280,18 @@ def get_booking_by_id(booking_id):
     conn = sqlite3.connect('booking.db')
     cursor = conn.cursor()
     cursor.execute("SELECT * FROM bookings WHERE id=?", (booking_id,))
-    booking = cursor.fetchone()
+    row = cursor.fetchone()
     conn.close()
-    return booking
+    # row is a tuple like (id, apartment_id, start_date, end_date, who)
+    if not row:
+        return None
+    return {
+        'id': row[0],
+        'apartment_id': row[1],
+        'start_date': row[2],
+        'end_date': row[3],
+        'who': row[4]
+    }
 
 
 initialize_apartments()
