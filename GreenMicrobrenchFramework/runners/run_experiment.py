@@ -1,4 +1,3 @@
-# GreenMicrobrenchFramework/runners/run_experiment.py
 import argparse, json, os, sys, time, datetime, pathlib, yaml
 from GreenMicrobrenchFramework.adapters.load.locust_adapter import LocustAdapter
 from GreenMicrobrenchFramework.adapters.power.shelly_adapter import ShellyAdapter
