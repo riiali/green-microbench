@@ -1,2 +1,0 @@
-Method,Name,Error,Occurrences
-PUT,/booking/change,CatchResponseError('500 Server Error: INTERNAL SERVER ERROR for url: http://localhost:5000/booking/change'),28

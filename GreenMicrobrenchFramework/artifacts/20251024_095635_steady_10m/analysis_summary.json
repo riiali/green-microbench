@@ -1,0 +1,44 @@
+{
+  "timestamp": "2025-10-27T09:47:56.936544Z",
+  "total_energy_wh": 0.0,
+  "top_energy_service": "apartment",
+  "least_efficient_service_mWh_per_req": "booking",
+  "services": [
+    {
+      "service": "apartment",
+      "energy_Wh": 0.0,
+      "cpu_fraction": 0.0,
+      "requests": 0.0,
+      "p95_latency": NaN,
+      "mWh_per_req": NaN,
+      "energy_share_%": 0.0
+    },
+    {
+      "service": "booking",
+      "energy_Wh": 0.0,
+      "cpu_fraction": 0.0,
+      "requests": 5.454842991435896,
+      "p95_latency": 82.49999999999996,
+      "mWh_per_req": 0.0,
+      "energy_share_%": 0.0
+    },
+    {
+      "service": "localhost",
+      "energy_Wh": 0.0,
+      "cpu_fraction": 0.0,
+      "requests": 0.0,
+      "p95_latency": NaN,
+      "mWh_per_req": NaN,
+      "energy_share_%": 0.0
+    },
+    {
+      "service": "search",
+      "energy_Wh": 0.0,
+      "cpu_fraction": 0.0,
+      "requests": 34.18368274633162,
+      "p95_latency": 187.32876712328766,
+      "mWh_per_req": 0.0,
+      "energy_share_%": 0.0
+    }
+  ]
+}
