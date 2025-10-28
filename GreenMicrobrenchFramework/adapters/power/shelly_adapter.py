@@ -1,32 +1,36 @@
-#sample real power from shellt plug to correlate with software metrics collected during load tests
 import threading
 import time
 import json
 from pathlib import Path
-from typing import Optional, Dict, Any
+from typing import Optional, Dict, Any, Tuple
 import requests
 from datetime import datetime, timezone
 
 class ShellyAdapter:
-    def __init__(self, base_url: str, timeout: float = 3.0):
+    def __init__(self, base_url: str, timeout: float = 3.0, switch_id: int = 0, auth: Optional[Tuple[str, str]] = None):
         self.base_url = base_url.rstrip("/")
         self.timeout = timeout
+        self.switch_id = switch_id
+        self.auth = auth
         self._thr: Optional[threading.Thread] = None
         self._run = False
         self._out_path: Optional[Path] = None
         self._hz = 1.0
 
     def _read_once(self) -> Dict[str, Any]:
-        r = requests.get(f"{self.base_url}/status", timeout=self.timeout)
+        r = requests.get(
+            f"{self.base_url}/rpc/Switch.GetStatus",
+            params={"id": self.switch_id},
+            timeout=self.timeout,
+            auth=self.auth,
+        )
         r.raise_for_status()
         data = r.json()
-        if "meters" in data and data["meters"]:
-            power_w = float(data["meters"][0].get("power", 0.0))
-        elif "emeter" in data:
-            power_w = float(data["emeter"].get("power", 0.0))
-        else:
-            power_w = 0.0
-        return {"ts": datetime.now(timezone.utc).isoformat(), "power_w": power_w}
+        power_w = float(data.get("apower", 0.0))
+        out = {"ts": datetime.now(timezone.utc).isoformat(), "power_w": power_w}
+        if isinstance(data.get("aenergy"), dict) and "total" in data["aenergy"]:
+            out["energy_total_Wh"] = float(data["aenergy"]["total"])
+        return out
 
     def _loop(self) -> None:
         period = 1.0 / self._hz if self._hz > 0 else 1.0
