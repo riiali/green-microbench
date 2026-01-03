@@ -1,3 +1,4 @@
+import subprocess as sp
 import argparse, json, os, sys, time, datetime, pathlib, yaml
 from GreenMicrobrenchFramework.adapters.load.locust_adapter import LocustAdapter
 from GreenMicrobrenchFramework.adapters.power.shelly_adapter import ShellyAdapter
@@ -5,6 +6,7 @@ from GreenMicrobrenchFramework.adapters.metrics.prometheus_adapter import Promet
 from GreenMicrobrenchFramework.adapters.resources.cadvisor_adapter import CAdvisorAdapter
 from GreenMicrobrenchFramework.adapters.metrics.prometheus_export import export_core_series
 from GreenMicrobrenchFramework.adapters.traces.jaeger_adapter import JaegerAdapter
+from GreenMicrobrenchFramework.analyzer.analyze_run import analyze_run
 
 def iso_now():
     return datetime.datetime.utcnow().replace(tzinfo=datetime.timezone.utc).isoformat()
@@ -29,16 +31,59 @@ def integrate_wh(jsonl_path: str) -> float:
         wh += ((w0 + w1) / 2.0) * dt_h
     return wh
 
+#Helpers to get container runtime info via SSH
+
+def get_container_runtime_info(host: str) -> dict:
+    """
+    Returns:
+    {
+      service_name: {
+        container_id,
+        container_id_short,
+        pid
+      }
+    }
+    """
+    cmd = (
+        "docker inspect --format "
+        "'{{ index .Config.Labels \"com.docker.compose.service\" }} {{.Id}} {{.State.Pid}}' "
+        "$(docker ps -q)"
+    )
+
+    try:
+        output = sp.check_output(
+            ["ssh", host, cmd],
+            universal_newlines=True
+        )
+    except Exception as e:
+        print(f"[ERROR] Cannot query Docker runtime info: {e}")
+        return {}
+
+    info = {}
+    for line in output.splitlines():
+        name, cid, pid = line.strip().split()
+        service = name.lstrip("/")  # "/booking" -> "booking"
+
+        info[service] = {
+            "container_id": cid,
+            "container_id_short": cid[:12],
+            "pid": int(pid),
+        }
+
+    return info
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--scenario", required=True)
-    ap.add_argument("--prom", default="http://localhost:9090")
-    ap.add_argument("--jaeger", default="http://localhost:16686")
+    ap.add_argument("--prom", default="http://192.168.1.237:9090")
+    ap.add_argument("--jaeger", default="http://192.168.1.237:16686") #change this!!!!
     ap.add_argument("--shelly", default=None)
     ap.add_argument("--hz", type=float, default=1.0)
     ap.add_argument("--out-root", default="GreenMicrobrenchFramework/artifacts")
     ap.add_argument("--services", nargs="*", default=["api-gateway","booking","search","apartment"])
     ap.add_argument("--step", default="5s")
+    ap.add_argument("--window", default="1m")
     args = ap.parse_args()
 
     with open(args.scenario) as f:
@@ -54,36 +99,95 @@ def main():
     if args.shelly:
         shelly = ShellyAdapter(args.shelly)
         shelly.start(out_path=str(shelly_file), hz=args.hz)
+    
+    # Get container PIDs on Raspberry
+    RASPBERRY_HOST = "ali@192.168.1.237"
+    print("[INFO] Querying Raspberry for Docker runtime info...")
+    SERVICE_RUNTIME_MAP = get_container_runtime_info(RASPBERRY_HOST)
+    print(json.dumps(SERVICE_RUNTIME_MAP, indent=2))
+
+    # Duration in seconds (from YAML scenario)
+    run_time = sc["run_time"]  # "5m", "300s", etc.
+
+    def parse_duration(rt: str) -> int:
+        """Converts '5m', '300s', '1h' into seconds."""
+        if rt.endswith("s"):
+            return int(rt[:-1])
+        if rt.endswith("m"):
+            return int(rt[:-1]) * 60
+        if rt.endswith("h"):
+            return int(rt[:-1]) * 3600
+        raise ValueError(f"Unknown duration format: {rt}")
+
+    duration_sec = parse_duration(run_time)
+
+    # Output dir on Raspberry
+    remote_out = f"/home/ali/Desktop/power_logs/{ts}_{name}"#TODO: da passare direttamente quando si lancia il programma
+
+    # Build SSH command
+    pid_values = " ".join(
+        str(v["pid"]) for v in SERVICE_RUNTIME_MAP.values()
+    )
+
+    ssh_cmd = [
+        "ssh",
+        RASPBERRY_HOST,
+        f"chmod +x ~/Desktop/pj_run.sh && "
+        f"~/Desktop/start_powerjoular_pids.sh {duration_sec} {remote_out} {pid_values}"
+    ]
+
+    print("[INFO] Starting PowerJoular on Raspberry via SSH...")
+    pj_proc = sp.Popen(ssh_cmd, shell=True)
+
 
     start_iso = iso_now()
     loc = LocustAdapter()
-    artifacts = loc.run(
-        locustfile=f"GreenMicrobrenchFramework/load/locust/{sc['locustfile']}",
-        host=sc["host"],
-        users=int(sc["users"]),
-        spawn_rate=int(sc["spawn_rate"]),
-        run_time=str(sc["run_time"]),
-        out_dir=str(out_dir),
-    )
-    end_iso = iso_now()
-
-    if shelly:
-        time.sleep(1.0)
-        shelly.stop()
+    artifacts = None
+    loc_error = None
+    try:
+        artifacts = loc.run(
+            locustfile=f"GreenMicrobrenchFramework/load/locust/{sc['locustfile']}",
+            host=sc["host"],
+            users=int(sc["users"]),
+            spawn_rate=int(sc["spawn_rate"]),
+            run_time=str(sc["run_time"]),
+            out_dir=str(out_dir),
+        )
+    except Exception as e:
+        # record the error but continue with the rest of the experiment
+        loc_error = str(e)
+        artifacts = {"error": loc_error}
+        print(f"[ERROR] Locust run failed: {loc_error}")
+    finally:
+        end_iso = iso_now()
+        if shelly:
+            time.sleep(1.0)
+            try:
+                shelly.stop()
+            except Exception as e:
+                print(f"[WARN] Shelly stop failed: {e}")
 
     prom = PrometheusAdapter(args.prom)
     cadv = CAdvisorAdapter(prom)
-    cpu_frac = cadv.cpu_fraction_over_period(start_iso, end_iso, step=args.step)
+    cpu_frac = cadv.cpu_map_fraction_over_period(
+        start_iso,
+        end_iso,
+        step=args.step,
+        service_runtime_map=SERVICE_RUNTIME_MAP
+    )
 
     total_wh = integrate_wh(str(shelly_file)) if args.shelly else 0.0
     energy_by_service = {k: total_wh * v for k, v in cpu_frac.items()}
+
 
     prom_files = {
         "requests": str(out_dir / "prom_requests_per_service.json"),
         "p95": str(out_dir / "prom_p95_latency_per_service.json"),
         "cpu": str(out_dir / "prom_cpu_by_service.json"),
     }
-    export_core_series(prom, start_iso, end_iso, args.step, prom_files)
+
+    export_core_series(prom, start_iso, end_iso, args.step, prom_files, args.window)
+    with open(prom_files["cpu"], "w") as f: json.dump(cpu_frac, f)
 
     ja = JaegerAdapter(args.jaeger)
     traces_sample = ja.sample_traces(args.services, start_iso, end_iso, limit_per_service=20)
@@ -122,6 +226,11 @@ def main():
         json.dump(manifest, f, indent=2)
 
     print(json.dumps(summary, indent=2))
+
+    try:
+        analyze_run(str(out_dir))
+    except Exception as e:
+        print(f"[WARN] analysis failed: {e}")
 
 if __name__ == "__main__":
     sys.exit(main())

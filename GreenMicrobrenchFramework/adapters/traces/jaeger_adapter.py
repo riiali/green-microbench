@@ -7,7 +7,7 @@ def _to_epoch_us(iso_ts: str) -> int:
     return int(dt.timestamp() * 1_000_000)
 
 class JaegerAdapter:
-    def __init__(self, base_url: str = "http://localhost:16686"):
+    def __init__(self, base_url):
         self.base = base_url.rstrip("/")
 
     def sample_traces(self, services: List[str], start_iso: str, end_iso: str, limit_per_service: int = 20) -> Dict[str, Any]:

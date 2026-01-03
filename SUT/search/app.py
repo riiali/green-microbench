@@ -1,3 +1,4 @@
+import datetime
 import json
 import logging
 import threading
@@ -189,7 +190,8 @@ def initialize_bookings():
 def search_apartments():
     start_date = request.args.get('from')
     end_date = request.args.get('to')
-
+    #log start and end date
+    logging.debug(f"Searching apartments from {start_date} to {end_date}")
     apartments = get_apartments()
 
     bookings = get_bookings()
@@ -216,6 +218,7 @@ def get_apartments():
     cursor.execute("SELECT * FROM apartments")
     apartments = cursor.fetchall()
     conn.close()
+    logging.debug(f"Retrieved apartments: {apartments}")
     return apartments
 
 def get_bookings():
@@ -228,7 +231,6 @@ def get_bookings():
 
 def search_available_apartments(apartments, bookings, start_date, end_date):
     available_apartments = []
-
     for apartment in apartments:
         apartment_id = apartment[0]
         is_available = True
@@ -244,7 +246,8 @@ def search_available_apartments(apartments, bookings, start_date, end_date):
 
         if is_available:
             available_apartments.append(apartment)
-
+    #log available apartments
+    logging.debug(f"Available apartments: {available_apartments}")
     return available_apartments
 
 initialize_apartments()

@@ -295,8 +295,6 @@ def get_booking_by_id(booking_id):
 
 
 initialize_apartments()
-
-# Start the RabbitMQ thread
 logging.debug('Avvio del thread RabbitMQ')
 rabbitmq_thread = threading.Thread(target=run_rabbitmq_consumer)
 rabbitmq_thread.start()
