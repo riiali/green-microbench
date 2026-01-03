@@ -62,3 +62,41 @@ class ShellyAdapter:
         if self._thr:
             self._thr.join(timeout=5.0)
             self._thr = None
+    
+    #read all shelly data at oncem including voltage,current,power factor,temperature,energy        
+    def _read_once_all_data(self) -> Dict[str, Any]:
+        r = requests.post(
+            f"{self.base_url}/rpc/Switch.GetStatus",
+            json={"id": self.switch_id},
+            timeout=self.timeout,
+            auth=self.auth,
+        )
+        r.raise_for_status()
+        data = r.json()
+
+        out: Dict[str, Any] = {
+            "ts": datetime.now(timezone.utc).isoformat(),
+            "id": self.switch_id,
+            "output": data.get("output"),
+            "source": data.get("source"),
+
+            "apower_W": data.get("apower"),
+            "voltage_V": data.get("voltage"),
+            "current_A": data.get("current"),
+            "pf": data.get("pf"),
+
+            "temperature_C": data.get("temperature", {}).get("tC"),
+            "temperature_F": data.get("temperature", {}).get("tF"),
+        }
+
+        aenergy = data.get("aenergy")
+        if isinstance(aenergy, dict):
+            out["energy_total_Wh"] = aenergy.get("total")
+            out["energy_by_minute"] = aenergy.get("by_minute")
+            out["energy_minute_ts"] = aenergy.get("minute_ts")
+
+        if "errors" in data:
+            out["errors"] = data["errors"]
+
+        return out
+
