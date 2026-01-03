@@ -12,6 +12,8 @@ services:
       - "9464:9464"   # /metrics Prometheus
     networks: [my-network]
 
+#Togli jaeger --> distribuire la energy consumption non in base alla verità ma in base alle chiamate. 
+
   jaeger:
     image: jaegertracing/all-in-one:1.57
     environment:
@@ -20,6 +22,7 @@ services:
       - "16686:16686" # UI Jaeger
     networks: [my-network]
 
+#questo sarebbe da mettere da me in locale. 
   prometheus:
     image: prom/prometheus
     volumes:
@@ -27,13 +30,6 @@ services:
     ports:
       - "9090:9090"
     networks: [my-network]
-
-  grafana:
-    image: grafana/grafana:11.2.0
-    ports:
-      - "3000:3000"
-    networks: [my-network]
-
   cadvisor:
     image: gcr.io/cadvisor/cadvisor:latest
     ports:

@@ -22,19 +22,19 @@ class PrometheusAdapter:
         return r.json()["data"]["result"]
 
     def reqs_per_service(self, window: str = "1m") -> List[Dict]:
-        q = f"sum by (service_name) (rate(otel_http_server_duration_count[{window}]))"
+        q = f"sum by (service_name) (rate(otel_http_server_duration_milliseconds_count[{window}]))"
         return self.instant(q)
 
-    def p95_latency_per_service(self, window: str = "5m") -> List[Dict]:
+    def p95_latency_per_service(self, window: str = "1m") -> List[Dict]:
         q = (
             "histogram_quantile(0.95, "
-            f"sum by (le, service_name) (rate(otel_http_server_duration_bucket[{window}])))"
+            f"sum by (le, exported_job) (rate(otel_http_server_duration_milliseconds_bucket[{window}])))"
         )
         return self.instant(q)
 
     def cpu_by_service(self, window: str = "1m") -> List[Dict]:
         q = (
-            "sum by (container_label_com_docker_compose_service) "
+            "sum by (id) "
             f"(rate(container_cpu_usage_seconds_total[{window}]))"
         )
         return self.instant(q)

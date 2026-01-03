@@ -27,14 +27,21 @@ class LocustAdapter:
             "--run-time", run_time,
             "--csv", str(out / "locust"),
             "--csv-full-history",
-            "--html", str(out / "report.html"),
+            "--html", str(out / "locust_report.html"),
+            "--loglevel", "DEBUG",
         ]
         if extra_args:
             cmd += list(extra_args)
-        subprocess.run(cmd, check=True)
+        # capture stdout/stderr so caller can decide how to handle failures
+        try:
+            completed = subprocess.run(cmd, check=True, capture_output=True, text=True)
+        except subprocess.CalledProcessError as e:
+            out = getattr(e, "stdout", "") or ""
+            err = getattr(e, "stderr", "") or ""
+            raise RuntimeError(f"Locust failed (returncode={e.returncode})\nstdout:\n{out}\nstderr:\n{err}") from e
         return {
             "stats_csv": str(out / "locust_stats.csv"),
             "stats_history_csv": str(out / "locust_stats_history.csv"),
             "failures_csv": str(out / "locust_failures.csv"),
-            "report_html": str(out / "report.html"),
+            "report_html": str(out / "locust_report.html"),
         }
