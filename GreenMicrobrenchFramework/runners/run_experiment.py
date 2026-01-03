@@ -175,7 +175,22 @@ def main():
         step=args.step,
         service_runtime_map=SERVICE_RUNTIME_MAP
     )
+    print("[INFO] Exporting CPU % of Raspberry Pi per container (per second)...")
 
+    cpu_ts = cadv.cpu_percent_raspberry_per_service_timeseries(
+        start_iso=start_iso,
+        end_iso=end_iso,
+        service_runtime_map=SERVICE_RUNTIME_MAP,
+        window=args.window,
+    )
+
+
+    cpu_ts_file = out_dir / "cpu_percent_raspberry_per_service_timeseries.json"
+
+    with cpu_ts_file.open("w") as f:
+        json.dump(cpu_ts, f, indent=2)
+
+    print(f"[INFO] Written {cpu_ts_file}")
     total_wh = integrate_wh(str(shelly_file)) if args.shelly else 0.0
     energy_by_service = {k: total_wh * v for k, v in cpu_frac.items()}
 
@@ -184,6 +199,7 @@ def main():
         "requests": str(out_dir / "prom_requests_per_service.json"),
         "p95": str(out_dir / "prom_p95_latency_per_service.json"),
         "cpu": str(out_dir / "prom_cpu_by_service.json"),
+        "cpu_timeseries": str(out_dir / "cpu_percent_raspberry_per_service_timeseries.json"),
     }
 
     export_core_series(prom, start_iso, end_iso, args.step, prom_files, args.window)
@@ -203,6 +219,7 @@ def main():
         "total_energy_wh": total_wh,
         "cpu_fraction": cpu_frac,
         "energy_by_service_wh": energy_by_service,
+        "cpu_percent_raspberry_per_service_timeseries": cpu_ts,
     }
     with (out_dir / "summary.json").open("w") as f:
         json.dump(summary, f, indent=2)
@@ -220,6 +237,7 @@ def main():
             "prom_cpu": prom_files["cpu"],
             "jaeger_sample": str(out_dir / "jaeger_traces_sample.json"),
             "summary": str(out_dir / "summary.json"),
+            "cpu_percent_raspberry_per_service_timeseries": str(cpu_ts_file),
         }
     }
     with (out_dir / "manifest.json").open("w") as f:
