@@ -31,7 +31,7 @@ services:
       - "9090:9090"
     networks: [my-network]
   cadvisor:
-    image: gcr.io/cadvisor/cadvisor:latest
+    image: gcr.io/cadvisor/cadvisor-arm64:v0.55.1
     ports:
       - "8081:8080"   
     volumes:
