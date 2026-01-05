@@ -6,6 +6,7 @@ import sys
 import time
 import datetime
 import pathlib
+from pathlib import Path
 import yaml
 import csv
 from datetime import datetime, timezone, timedelta
@@ -16,7 +17,8 @@ from GreenMicrobrenchFramework.adapters.resources.cadvisor_adapter import CAdvis
 from GreenMicrobrenchFramework.adapters.metrics.prometheus_export import export_core_series
 from GreenMicrobrenchFramework.adapters.traces.jaeger_adapter import JaegerAdapter
 from GreenMicrobrenchFramework.analyzer.analyze_run import analyze_run
-from GreenMicrobrenchFramework.analyzer.cpu_energy_attribution import attribute_shelly_power_to_services
+from GreenMicrobrenchFramework.analyzer.cpu_energy_attribution import ShellyPowerAttributor
+
 
 
 # ---------------------------------------------------------------------------
@@ -161,6 +163,12 @@ def main():
     name = scenario.get("name") or pathlib.Path(args.scenario).stem
     out_dir = pathlib.Path(args.out_root) / f"{ts}_{name}"
     out_dir.mkdir(parents=True, exist_ok=True)
+    
+    prometheus_dir = out_dir / "prometheus"
+    prometheus_dir.mkdir(exist_ok=True)
+    
+    shelly_dir = out_dir / "shelly"
+    shelly_dir.mkdir(exist_ok=True)
 
     # -----------------------------------------------------------------------
     # Shelly power meter
@@ -370,61 +378,79 @@ def main():
         dt = dt + timedelta(hours=1)
         return dt.replace(microsecond=0, tzinfo=timezone.utc).isoformat()
 
-
-    shelly_samples = []
-
-    if shelly and shelly_file.exists():
-        with shelly_file.open() as f:
+    #Read data from files to parse Shelly samples
+    def load_shelly_jsonl(path: Path):
+        samples = []
+        with path.open() as f:
             for line in f:
                 try:
                     rec = json.loads(line)
                 except Exception:
                     continue
+                if "ts" in rec and "power_w" in rec:
+                    samples.append(rec)
+        return samples
 
-                if "power_w" not in rec or "ts" not in rec:
+
+    def load_cadvisor_json(path: Path, host_cpu_cores: int):
+        raw = json.loads(path.read_text())
+        out = {}
+
+        for service, samples in raw.items():
+            clean = []
+            for s in samples:
+                if "ts" not in s:
                     continue
 
-                # Apply timezone correction (Shelly is 1h behind)
-                rec["ts"] = normalize_shelly_timestamp(rec["ts"])
+                if "cpu_cores_used" in s:
+                    cores = float(s["cpu_cores_used"])
+                elif "cpu_percent_host" in s:
+                    cores = float(s["cpu_percent_host"]) / 100 * host_cpu_cores
+                else:
+                    continue
 
-                shelly_samples.append(rec)
+                clean.append({
+                    "ts": s["ts"],
+                    "cpu_cores_used": cores,
+                    "cpu_percent_host": float(s.get("cpu_percent_host", 0.0)),
+                })
+
+            if clean:
+                out[service] = clean
+
+        return out
+
+
     # -----------------------------------------------------------------------
-    # Attribute Shelly power to services (PowerJoular-like model)
+    # Shelly attribution (time-indexed engine)
     # -----------------------------------------------------------------------
-    # Design choice:
-    # The total electrical power measured by the Shelly device is attributed
-    # to individual services proportionally to their CPU usage, as reported
-    # by cAdvisor. This follows the same proportional attribution model
-    # adopted by PowerJoular for per-process power estimation.
-    #
-    # The result is a per-service time series enriched with an additional
-    # field:
-    #   - estimated_power_from_shelly_watt
-    #
-    # This artifact enables:
-    # - service-level energy analysis
-    # - comparison with PowerJoular
-    # - validation of the attribution model
 
-    shelly_attributed_cpu_ts = None
+    
 
-    if shelly and shelly_samples:
-        shelly_attributed_cpu_ts = attribute_shelly_power_to_services(
-            cadvisor_by_service=cpu_ts,
-            shelly_samples=shelly_samples,
-            max_time_skew_s=2.0,
-        )
+    shelly_data = load_shelly_jsonl(out_dir / "power.jsonl")
 
-        shelly_attributed_file = (
-            out_dir / "cpu_timeseries_with_shelly_power_per_service.json"
-        )
+    cadvisor_data = load_cadvisor_json(
+        out_dir / "cpu_percent_raspberry_per_service_timeseries.json",
+        host_cpu_cores=4
+    )
 
-        with shelly_attributed_file.open("w") as f:
-            json.dump(shelly_attributed_cpu_ts, f, indent=2)
+    attributor = ShellyPowerAttributor(
+        host_cpu_cores=4
+    )
 
-        print(f"[INFO] Written {shelly_attributed_file}")
-    else:
-        print("[WARN] Shelly data not available, skipping power attribution")
+    timeline = attributor.build_timeline(
+        shelly_samples=shelly_data,
+        cadvisor_by_service=cadvisor_data
+    )
+
+    aligned = attributor.align_timeline(timeline)
+    attributed = attributor.attribute(aligned)
+
+    per_service = attributor.export_per_service(attributed)
+
+    (out_dir / "cpu_timeseries_with_shelly_power.json").write_text(
+        json.dumps(per_service, indent=2)
+    )
 
 
     
@@ -464,12 +490,9 @@ def main():
     # -----------------------------------------------------------------------
     # Run analysis phase
     # -----------------------------------------------------------------------
-    # analyze_run will:
-    # - read manifest.json
-    # - compute derived metrics
-    # - write analysis_summary.json
 
-    #analyze_run(str(out_dir))
+
+    
 
 
 if __name__ == "__main__":
