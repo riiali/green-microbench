@@ -127,7 +127,7 @@ def initialize_apartments():
                     if apartment_id:
                         ap_added(apartment_id)
             else:
-                print(f"Error fetching available apartments: {response.status_code}")  
+                logging.error(f"Error fetching available apartments: {response.status_code}")  
             break  
         except requests.exceptions.RequestException as e:
             retry_count += 1
