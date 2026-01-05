@@ -1,0 +1,46 @@
+Count,Message,Traceback,Nodes
+164,500 Server Error: INTERNAL SERVER ERROR for url: http://192.168.1.237:5000/search/search?from=2026-01-05&to=2026-01-07,"  File ""C:\DEV\green-microbench\.venv\Lib\site-packages\locust\user\task.py"", line 355, in run
+    self.execute_next_task()
+  File ""C:\DEV\green-microbench\.venv\Lib\site-packages\locust\user\task.py"", line 388, in execute_next_task
+    self.execute_task(self._task_queue.popleft())
+  File ""C:\DEV\green-microbench\.venv\Lib\site-packages\locust\user\task.py"", line 505, in execute_task
+    task(self.user)
+  File ""C:\DEV\green-microbench\GreenMicrobrenchFramework\load\locust\locustfile.py"", line 65, in search
+    with req(self.client, ""GET"",
+  File ""C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.11_3.11.2544.0_x64__qbz5n2kfra8p0\Lib\contextlib.py"", line 137, in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+  File ""C:\DEV\green-microbench\GreenMicrobrenchFramework\load\locust\locustfile.py"", line 19, in req
+    r.raise_for_status()
+  File ""C:\DEV\green-microbench\.venv\Lib\site-packages\locust\clients.py"", line 353, in raise_for_status
+    Response.raise_for_status(self)
+  File ""C:\DEV\green-microbench\.venv\Lib\site-packages\requests\models.py"", line 1026, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+",local
+1,"HTTPConnectionPool(host='192.168.1.237', port=5000): Max retries exceeded with url: /search/search?from=2026-01-05&to=2026-01-07 (Caused by ConnectTimeoutError(<HTTPConnection(host='192.168.1.237', port=5000) at 0x2e38ff3e450>, 'Connection to 192.168.1.237 timed out. (connect timeout=None)'))","  File ""C:\DEV\green-microbench\.venv\Lib\site-packages\locust\user\task.py"", line 355, in run
+    self.execute_next_task()
+  File ""C:\DEV\green-microbench\.venv\Lib\site-packages\locust\user\task.py"", line 388, in execute_next_task
+    self.execute_task(self._task_queue.popleft())
+  File ""C:\DEV\green-microbench\.venv\Lib\site-packages\locust\user\task.py"", line 505, in execute_task
+    task(self.user)
+  File ""C:\DEV\green-microbench\GreenMicrobrenchFramework\load\locust\locustfile.py"", line 65, in search
+    with req(self.client, ""GET"",
+  File ""C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.11_3.11.2544.0_x64__qbz5n2kfra8p0\Lib\contextlib.py"", line 137, in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+  File ""C:\DEV\green-microbench\GreenMicrobrenchFramework\load\locust\locustfile.py"", line 19, in req
+    r.raise_for_status()
+  File ""C:\DEV\green-microbench\.venv\Lib\site-packages\locust\clients.py"", line 352, in raise_for_status
+    raise self.error
+  File ""C:\DEV\green-microbench\.venv\Lib\site-packages\locust\clients.py"", line 240, in _send_request_safe_mode
+    return super().request(method, url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""C:\DEV\green-microbench\.venv\Lib\site-packages\requests\sessions.py"", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""C:\DEV\green-microbench\.venv\Lib\site-packages\requests\sessions.py"", line 703, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""C:\DEV\green-microbench\.venv\Lib\site-packages\requests\adapters.py"", line 688, in send
+    raise ConnectTimeout(e, request=request)
+",local
