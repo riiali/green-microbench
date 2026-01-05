@@ -1,0 +1,7 @@
+name: steady_30m
+locustfile: locustfile.py
+host: http://192.168.1.237:5000
+users: 300
+spawn_rate: 15
+run_time: 30m
+notes: "steady-state load for 30 minute duration"

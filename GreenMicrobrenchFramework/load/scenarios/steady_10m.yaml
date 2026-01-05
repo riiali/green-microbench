@@ -3,5 +3,5 @@ locustfile: locustfile.py
 host: http://192.168.1.237:5000
 users: 150
 spawn_rate: 15
-run_time: 1m
+run_time: 10m
 notes: "steady-state load for 10 minute duration"
