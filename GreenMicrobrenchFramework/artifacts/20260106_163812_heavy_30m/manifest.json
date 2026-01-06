@@ -1,0 +1,17 @@
+{
+  "root": "GreenMicrobrenchFramework\\artifacts\\20260106_163812_heavy_30m",
+  "files": {
+    "locust_stats": null,
+    "locust_history": null,
+    "locust_failures": null,
+    "locust_report": null,
+    "shelly_jsonl": "GreenMicrobrenchFramework\\artifacts\\20260106_163812_heavy_30m\\power.jsonl",
+    "prom_requests": "GreenMicrobrenchFramework\\artifacts\\20260106_163812_heavy_30m\\prom_requests_per_service.json",
+    "prom_p95": "GreenMicrobrenchFramework\\artifacts\\20260106_163812_heavy_30m\\prom_p95_latency_per_service.json",
+    "prom_cpu": "GreenMicrobrenchFramework\\artifacts\\20260106_163812_heavy_30m\\prom_cpu_by_service.json",
+    "prom_cpu_timeseries": "GreenMicrobrenchFramework\\artifacts\\20260106_163812_heavy_30m\\cpu_percent_raspberry_per_service_timeseries.json",
+    "power_joular_data": "GreenMicrobrenchFramework\\artifacts\\20260106_163812_heavy_30m\\power_joular_data.json",
+    "summary": "GreenMicrobrenchFramework\\artifacts\\20260106_163812_heavy_30m\\summary.json",
+    "jaeger_sample": "GreenMicrobrenchFramework\\artifacts\\20260106_163812_heavy_30m\\jaeger_traces_sample.json"
+  }
+}

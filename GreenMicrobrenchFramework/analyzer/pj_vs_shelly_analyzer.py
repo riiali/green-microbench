@@ -650,6 +650,7 @@ def build_html_report(
         pj_kpis_html = ""
         extra_charts_html = ""
         div_cmp = None
+        div_cmp_cpu = None
         div_cmp_bar = None
         cmp_fig = None
         cmp_bar_fig = None
@@ -657,6 +658,7 @@ def build_html_report(
         if pj_available:
             x_pj = [t.isoformat() for t in pj_df["ts"].tolist()]
             y_pj_pow = [float(v) if v == v else None for v in pj_df["cpu_power_watt"].tolist()]
+            y_pj_cpu = [float(v) if v == v else None for v in pj_df["cpu_cores_used"].tolist()]
 
             # Summary stats for PowerJoular.
             pj_energy_wh = _integrate_energy_wh(pj_df, "cpu_power_watt")
@@ -667,6 +669,7 @@ def build_html_report(
             # Extra chart div ids.
             safe = re.sub(r'[^a-zA-Z0-9_]', '_', s.name)
             div_cmp = f"svc_powcmp_{safe}"
+            div_cmp_cpu = f"svc_cpucmp_{safe}"
             div_cmp_bar = f"svc_powcmp_bar_{safe}"
 
             # Comparison charts.
@@ -676,7 +679,17 @@ def build_html_report(
                     {"x": x_pj, "y": y_pj_pow, "name": "cpu_power_watt"},
                 ],
                 y_title="Power (W)",
-                title=f"{s.name} — Shelly estimate vs PowerJoular (over time)",
+                title=f"{s.name} — Power - Shelly estimate vs PowerJoular (over time)",
+            )
+            
+            # Comparison charts.
+            cmp_fig_cpu = _line_multi_fig(
+                traces=[
+                    {"x": x, "y": y_cpu, "name": "estimated_power_from_shelly_watt"},
+                    {"x": x_pj, "y": y_pj_cpu, "name": "cpu_cores_used"},
+                ],
+                y_title="CPU cores used",
+                title=f"{s.name} — CPU - Shelly estimate vs PowerJoular (over time)",
             )
 
             cmp_bar_fig = _bar_compare_fig(
@@ -703,7 +716,11 @@ def build_html_report(
     <div class="chart-wrap">
       {_plotly_div(div_cmp)}
     </div>
+    <div style="height: 16px;"></div>
 
+    <div class="chart-wrap">
+      {_plotly_div(div_cmp_cpu)}
+    </div>
     <div style="height: 16px;"></div>
 
     <div class="chart-wrap">
@@ -753,8 +770,9 @@ def build_html_report(
 
         figs[div_pow] = pow_fig
         figs[div_cpu] = cpu_fig
-        if pj_available and div_cmp and div_cmp_bar and cmp_fig and cmp_bar_fig:
+        if pj_available and div_cmp and div_cmp_cpu and div_cmp_bar and cmp_fig and cmp_bar_fig:
             figs[div_cmp] = cmp_fig
+            figs[div_cmp_cpu] = cmp_fig_cpu
             figs[div_cmp_bar] = cmp_bar_fig
 
     # “Most impactful” analysis section.

@@ -1,0 +1,1080 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Shelly vs PowerJoular report</title>
+
+  <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+
+  <style>
+    :root {
+      --bg: #0b1020;
+      --card: rgba(255,255,255,0.06);
+      --card2: rgba(255,255,255,0.08);
+      --text: rgba(255,255,255,0.92);
+      --muted: rgba(255,255,255,0.65);
+      --border: rgba(255,255,255,0.10);
+      --shadow: 0 10px 30px rgba(0,0,0,0.35);
+      --radius: 18px;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      color: var(--text);
+      background:
+        radial-gradient(1000px 700px at 15% 10%, rgba(124, 58, 237, 0.18), transparent 60%),
+        radial-gradient(900px 700px at 80% 25%, rgba(59, 130, 246, 0.16), transparent 60%),
+        radial-gradient(900px 700px at 55% 90%, rgba(34, 197, 94, 0.10), transparent 60%),
+        var(--bg);
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      line-height: 1.45;
+    }
+
+    a { color: inherit; }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 28px 18px 80px 18px;
+    }
+
+    .title {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .title h1 {
+      margin: 0;
+      font-size: 28px;
+      letter-spacing: 0.2px;
+    }
+
+    .subtitle {
+      margin: 6px 0 0 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .topbar {
+      display: grid;
+      grid-template-columns: 1fr auto auto;
+      gap: 10px;
+      align-items: center;
+      margin: 18px 0 26px 0;
+    }
+
+    .search {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: rgba(0,0,0,0.20);
+      color: var(--text);
+      outline: none;
+    }
+
+    .toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: rgba(0,0,0,0.20);
+      cursor: pointer;
+      user-select: none;
+      white-space: nowrap;
+    }
+
+    .toggle input {
+      accent-color: #a78bfa;
+    }
+
+    .btn {
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.08);
+      color: var(--text);
+      cursor: pointer;
+      user-select: none;
+      white-space: nowrap;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      margin: 14px 0;
+    }
+
+    .card-header {
+      padding: 16px 16px 10px 16px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      background: linear-gradient(180deg, rgba(255,255,255,0.05), transparent);
+    }
+
+    .card-title {
+      margin: 0;
+      font-size: 18px;
+    }
+
+    .card-body {
+      padding: 14px 16px 16px 16px;
+    }
+
+    .muted { color: var(--muted); }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+    @media (min-width: 980px) {
+      .grid-2 { grid-template-columns: 1fr 1fr; }
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+    @media (min-width: 980px) {
+      .grid-3 { grid-template-columns: 1fr 1fr 1fr; }
+    }
+
+    .plotly-chart {
+      width: 100%;
+      min-height: 360px;
+    }
+
+    .chart-wrap {
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      background: rgba(0,0,0,0.18);
+      overflow-x: auto; /* allow lateral scroll if plots get too wide */
+      padding: 10px;
+    }
+
+    .kpi-row {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 12px;
+    }
+    @media (min-width: 980px) {
+      .kpi-row { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    }
+
+    .kpi-row-alt {
+      margin-top: 10px;
+      opacity: 0.95;
+    }
+
+    .kpi {
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(0,0,0,0.14);
+    }
+    .kpi-label {
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .kpi-value {
+      font-size: 16px;
+      margin-top: 2px;
+    }
+
+    .card-title-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .badge {
+      font-size: 12px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.16);
+    }
+    .badge-sut { background: rgba(34, 197, 94, 0.14); }
+    .badge-stack { background: rgba(59, 130, 246, 0.14); }
+
+    .hero {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      padding: 14px 14px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(0,0,0,0.16);
+    }
+    .hero-title {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: 0.2px;
+    }
+    .hero-subtitle {
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .hero-meta {
+      display: grid;
+      gap: 6px;
+      font-size: 13px;
+    }
+
+    .callout {
+      padding: 12px 12px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(0,0,0,0.14);
+    }
+    .callout-title {
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+    .callout-body {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .service-card {
+      scroll-margin-top: 12px;
+    }
+
+    .footer {
+      margin-top: 26px;
+      color: var(--muted);
+      font-size: 12px;
+      text-align: center;
+    }
+
+    .small {
+      font-size: 12px;
+      color: var(--muted);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="title">
+      <div>
+        <h1>Shelly vs PowerJoular report</h1>
+        <div class="subtitle">
+          Input: <span class="small">C:\DEV\green-microbench\GreenMicrobrenchFramework\artifacts\20260105_164612_steady_10m\cpu_timeseries_with_shelly_power.json</span><br/>
+          Window (UTC): <b>2026-01-05T17:46:18+00:00</b> → <b>2026-01-05T17:47:18+00:00</b> · Duration: <b>1m</b> · Services: <b>14</b>
+        </div>
+      </div>
+      <button class="btn" id="btnExpandAll">Expand charts</button>
+    </div>
+
+    <div class="topbar">
+      <input class="search" id="svcSearch" placeholder="Filter microservices (type to search)…"/>
+      <label class="toggle">
+        <input type="checkbox" id="toggleTech" checked/>
+        Show technology stack
+      </label>
+      <button class="btn" id="btnTop">Jump to top</button>
+    </div>
+
+    <section class="card">
+  <div class="card-header">
+    <h2 class="card-title">Most impactful microservice (excluding technology stack)</h2>
+    <p class="muted">
+      Selected as the highest total energy consumer among services not matching the tech-stack patterns.
+    </p>
+  </div>
+
+  <div class="card-body">
+    <div class="hero">
+      <div>
+        <div class="hero-title">frontend</div>
+        <div class="hero-subtitle">Energy: <b>0.037 Wh</b> · Avg power: <b>1.604 W</b> · Avg CPU: <b>0.062 cores</b></div>
+      </div>
+      <div class="hero-meta">
+        <div><span class="muted">Samples</span> <b>6</b></div>
+        <div><span class="muted">Window</span> <b>2026-01-05T17:46:18+00:00 → 2026-01-05T17:47:18+00:00</b></div>
+      </div>
+    </div>
+
+    <div class="callouts grid-3">
+      <div class="callout">
+        <div class="callout-title">Interpretation</div>
+        <div class="callout-body">
+          This service is the best candidate for optimization because it contributes the largest share of the
+          estimated energy attributed from the Shelly measurements.
+        </div>
+      </div>
+      <div class="callout">
+        <div class="callout-title">Peak behavior</div>
+        <div class="callout-body">
+          P95 power: <b>2.706 W</b> · Max power: <b>2.737 W</b><br/>
+          P95 CPU: <b>0.112 cores</b> · Max CPU: <b>0.122 cores</b>
+        </div>
+      </div>
+      <div class="callout">
+        <div class="callout-title">Highest-energy hour</div>
+        <div class="callout-body">
+          Hour starting at <b>2026-01-05T17:00:00+00:00</b>: <b>0.037 Wh</b> (integrated)
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+    <section class="card">
+      <div class="card-header">
+        <h2 class="card-title">Global overview</h2>
+        <p class="muted">Rankings are based on integrated energy (Wh) from <code>estimated_power_from_shelly_watt</code>.</p>
+      </div>
+      <div class="card-body grid-2">
+        <div class="chart-wrap">
+          <div id="bar_energy" class="plotly-chart"></div>
+        </div>
+        <div class="chart-wrap">
+          <div id="bar_avg_power" class="plotly-chart"></div>
+        </div>
+        <div class='chart-wrap' style='grid-column: 1 / -1;'><div id="stacked_top" class="plotly-chart"></div></div>
+        <div class='chart-wrap' style='grid-column: 1 / -1;'><div id="scatter_cpu_pow" class="plotly-chart"></div></div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="card-header">
+        <h2 class="card-title">Microservices</h2>
+        <p class="muted">
+          Each microservice includes two time-series charts:
+          <b>estimated power</b> (from Shelly attribution) and <b>cpu_cores_used</b>.
+          When PowerJoular data is provided, two additional comparison charts are included:
+          <b>Shelly vs PowerJoular over time</b> and a <b>summary bar comparison</b>.
+          Horizontal scroll is enabled for very wide plots.
+        </p>
+      </div>
+      <div class="card-body">
+        <section class="card service-card" data-service="cadvisor" data-badge="TECH STACK">
+  <div class="card-header">
+    <div class="card-title-row">
+      <h3 class="card-title">cadvisor</h3>
+      <span class="badge badge-stack">TECH STACK</span>
+    </div>
+    <div class="kpi-row">
+      <div class="kpi"><div class="kpi-label">Energy</div><div class="kpi-value">0.049 Wh</div></div>
+      <div class="kpi"><div class="kpi-label">Avg power</div><div class="kpi-value">2.837 W</div></div>
+      <div class="kpi"><div class="kpi-label">P95 power</div><div class="kpi-value">3.175 W</div></div>
+      <div class="kpi"><div class="kpi-label">Max power</div><div class="kpi-value">3.192 W</div></div>
+      <div class="kpi"><div class="kpi-label">Avg CPU</div><div class="kpi-value">0.234 cores</div></div>
+      <div class="kpi"><div class="kpi-label">P95 CPU</div><div class="kpi-value">0.247 cores</div></div>
+      <div class="kpi"><div class="kpi-label">Max CPU</div><div class="kpi-value">0.248 cores</div></div>
+      <div class="kpi"><div class="kpi-label">Samples</div><div class="kpi-value">4</div></div>
+    </div>
+  </div>
+
+    <div class="kpi-row kpi-row-alt">
+      <div class="kpi"><div class="kpi-label">PJ Energy</div><div class="kpi-value">0.015 Wh</div></div>
+      <div class="kpi"><div class="kpi-label">PJ Avg power</div><div class="kpi-value">0.913 W</div></div>
+      <div class="kpi"><div class="kpi-label">PJ P95 power</div><div class="kpi-value">2.536 W</div></div>
+      <div class="kpi"><div class="kpi-label">PJ Max power</div><div class="kpi-value">2.663 W</div></div>
+    </div>
+
+  <div class="card-body">
+    <div class="chart-wrap">
+      <div id="svc_pow_cadvisor" class="plotly-chart"></div>
+    </div>
+
+    <div style="height: 16px;"></div>
+    
+    <div class="chart-wrap">
+      <div id="svc_cpu_cadvisor" class="plotly-chart"></div>
+    </div>
+
+    <div style="height: 16px;"></div>
+
+    <div class="chart-wrap">
+      <div id="svc_powcmp_cadvisor" class="plotly-chart"></div>
+    </div>
+
+    <div style="height: 16px;"></div>
+
+    <div class="chart-wrap">
+      <div id="svc_powcmp_bar_cadvisor" class="plotly-chart"></div>
+    </div>
+  </div>
+</section><section class="card service-card" data-service="frontend" data-badge="SUT">
+  <div class="card-header">
+    <div class="card-title-row">
+      <h3 class="card-title">frontend</h3>
+      <span class="badge badge-sut">SUT</span>
+    </div>
+    <div class="kpi-row">
+      <div class="kpi"><div class="kpi-label">Energy</div><div class="kpi-value">0.037 Wh</div></div>
+      <div class="kpi"><div class="kpi-label">Avg power</div><div class="kpi-value">1.604 W</div></div>
+      <div class="kpi"><div class="kpi-label">P95 power</div><div class="kpi-value">2.706 W</div></div>
+      <div class="kpi"><div class="kpi-label">Max power</div><div class="kpi-value">2.737 W</div></div>
+      <div class="kpi"><div class="kpi-label">Avg CPU</div><div class="kpi-value">0.062 cores</div></div>
+      <div class="kpi"><div class="kpi-label">P95 CPU</div><div class="kpi-value">0.112 cores</div></div>
+      <div class="kpi"><div class="kpi-label">Max CPU</div><div class="kpi-value">0.122 cores</div></div>
+      <div class="kpi"><div class="kpi-label">Samples</div><div class="kpi-value">6</div></div>
+    </div>
+  </div>
+
+    <div class="kpi-row kpi-row-alt">
+      <div class="kpi"><div class="kpi-label">PJ Energy</div><div class="kpi-value">0.011 Wh</div></div>
+      <div class="kpi"><div class="kpi-label">PJ Avg power</div><div class="kpi-value">0.664 W</div></div>
+      <div class="kpi"><div class="kpi-label">PJ P95 power</div><div class="kpi-value">1.345 W</div></div>
+      <div class="kpi"><div class="kpi-label">PJ Max power</div><div class="kpi-value">1.605 W</div></div>
+    </div>
+
+  <div class="card-body">
+    <div class="chart-wrap">
+      <div id="svc_pow_frontend" class="plotly-chart"></div>
+    </div>
+
+    <div style="height: 16px;"></div>
+    
+    <div class="chart-wrap">
+      <div id="svc_cpu_frontend" class="plotly-chart"></div>
+    </div>
+
+    <div style="height: 16px;"></div>
+
+    <div class="chart-wrap">
+      <div id="svc_powcmp_frontend" class="plotly-chart"></div>
+    </div>
+
+    <div style="height: 16px;"></div>
+
+    <div class="chart-wrap">
+      <div id="svc_powcmp_bar_frontend" class="plotly-chart"></div>
+    </div>
+  </div>
+</section><section class="card service-card" data-service="search" data-badge="SUT">
+  <div class="card-header">
+    <div class="card-title-row">
+      <h3 class="card-title">search</h3>
+      <span class="badge badge-sut">SUT</span>
+    </div>
+    <div class="kpi-row">
+      <div class="kpi"><div class="kpi-label">Energy</div><div class="kpi-value">0.035 Wh</div></div>
+      <div class="kpi"><div class="kpi-label">Avg power</div><div class="kpi-value">1.975 W</div></div>
+      <div class="kpi"><div class="kpi-label">P95 power</div><div class="kpi-value">3.221 W</div></div>
+      <div class="kpi"><div class="kpi-label">Max power</div><div class="kpi-value">3.328 W</div></div>
+      <div class="kpi"><div class="kpi-label">Avg CPU</div><div class="kpi-value">0.035 cores</div></div>
+      <div class="kpi"><div class="kpi-label">P95 CPU</div><div class="kpi-value">0.058 cores</div></div>
+      <div class="kpi"><div class="kpi-label">Max CPU</div><div class="kpi-value">0.063 cores</div></div>
+      <div class="kpi"><div class="kpi-label">Samples</div><div class="kpi-value">6</div></div>
+    </div>
+  </div>
+
+    <div class="kpi-row kpi-row-alt">
+      <div class="kpi"><div class="kpi-label">PJ Energy</div><div class="kpi-value">0.005 Wh</div></div>
+      <div class="kpi"><div class="kpi-label">PJ Avg power</div><div class="kpi-value">0.306 W</div></div>
+      <div class="kpi"><div class="kpi-label">PJ P95 power</div><div class="kpi-value">0.605 W</div></div>
+      <div class="kpi"><div class="kpi-label">PJ Max power</div><div class="kpi-value">0.917 W</div></div>
+    </div>
+
+  <div class="card-body">
+    <div class="chart-wrap">
+      <div id="svc_pow_search" class="plotly-chart"></div>
+    </div>
+
+    <div style="height: 16px;"></div>
+    
+    <div class="chart-wrap">
+      <div id="svc_cpu_search" class="plotly-chart"></div>
+    </div>
+
+    <div style="height: 16px;"></div>
+
+    <div class="chart-wrap">
+      <div id="svc_powcmp_search" class="plotly-chart"></div>
+    </div>
+
+    <div style="height: 16px;"></div>
+
+    <div class="chart-wrap">
+      <div id="svc_powcmp_bar_search" class="plotly-chart"></div>
+    </div>
+  </div>
+</section><section class="card service-card" data-service="prometheus" data-badge="TECH STACK">
+  <div class="card-header">
+    <div class="card-title-row">
+      <h3 class="card-title">prometheus</h3>
+      <span class="badge badge-stack">TECH STACK</span>
+    </div>
+    <div class="kpi-row">
+      <div class="kpi"><div class="kpi-label">Energy</div><div class="kpi-value">0.031 Wh</div></div>
+      <div class="kpi"><div class="kpi-label">Avg power</div><div class="kpi-value">1.907 W</div></div>
+      <div class="kpi"><div class="kpi-label">P95 power</div><div class="kpi-value">2.707 W</div></div>
+      <div class="kpi"><div class="kpi-label">Max power</div><div class="kpi-value">2.752 W</div></div>
+      <div class="kpi"><div class="kpi-label">Avg CPU</div><div class="kpi-value">0.033 cores</div></div>
+      <div class="kpi"><div class="kpi-label">P95 CPU</div><div class="kpi-value">0.045 cores</div></div>
+      <div class="kpi"><div class="kpi-label">Max CPU</div><div class="kpi-value">0.045 cores</div></div>
+      <div class="kpi"><div class="kpi-label">Samples</div><div class="kpi-value">7</div></div>
+    </div>
+  </div>
+
+    <div class="kpi-row kpi-row-alt">
+      <div class="kpi"><div class="kpi-label">PJ Energy</div><div class="kpi-value">0.001 Wh</div></div>
+      <div class="kpi"><div class="kpi-label">PJ Avg power</div><div class="kpi-value">0.068 W</div></div>
+      <div class="kpi"><div class="kpi-label">PJ P95 power</div><div class="kpi-value">0.338 W</div></div>
+      <div class="kpi"><div class="kpi-label">PJ Max power</div><div class="kpi-value">0.501 W</div></div>
+    </div>
+
+  <div class="card-body">
+    <div class="chart-wrap">
+      <div id="svc_pow_prometheus" class="plotly-chart"></div>
+    </div>
+
+    <div style="height: 16px;"></div>
+    
+    <div class="chart-wrap">
+      <div id="svc_cpu_prometheus" class="plotly-chart"></div>
+    </div>
+
+    <div style="height: 16px;"></div>
+
+    <div class="chart-wrap">
+      <div id="svc_powcmp_prometheus" class="plotly-chart"></div>
+    </div>
+
+    <div style="height: 16px;"></div>
+
+    <div class="chart-wrap">
+      <div id="svc_powcmp_bar_prometheus" class="plotly-chart"></div>
+    </div>
+  </div>
+</section><section class="card service-card" data-service="consul" data-badge="SUT">
+  <div class="card-header">
+    <div class="card-title-row">
+      <h3 class="card-title">consul</h3>
+      <span class="badge badge-sut">SUT</span>
+    </div>
+    <div class="kpi-row">
+      <div class="kpi"><div class="kpi-label">Energy</div><div class="kpi-value">0.013 Wh</div></div>
+      <div class="kpi"><div class="kpi-label">Avg power</div><div class="kpi-value">1.585 W</div></div>
+      <div class="kpi"><div class="kpi-label">P95 power</div><div class="kpi-value">3.198 W</div></div>
+      <div class="kpi"><div class="kpi-label">Max power</div><div class="kpi-value">3.343 W</div></div>
+      <div class="kpi"><div class="kpi-label">Avg CPU</div><div class="kpi-value">0.015 cores</div></div>
+      <div class="kpi"><div class="kpi-label">P95 CPU</div><div class="kpi-value">0.015 cores</div></div>
+      <div class="kpi"><div class="kpi-label">Max CPU</div><div class="kpi-value">0.015 cores</div></div>
+      <div class="kpi"><div class="kpi-label">Samples</div><div class="kpi-value">5</div></div>
+    </div>
+  </div>
+
+    <div class="kpi-row kpi-row-alt">
+      <div class="kpi"><div class="kpi-label">PJ Energy</div><div class="kpi-value">0.000 Wh</div></div>
+      <div class="kpi"><div class="kpi-label">PJ Avg power</div><div class="kpi-value">0.000 W</div></div>
+      <div class="kpi"><div class="kpi-label">PJ P95 power</div><div class="kpi-value">0.000 W</div></div>
+      <div class="kpi"><div class="kpi-label">PJ Max power</div><div class="kpi-value">0.000 W</div></div>
+    </div>
+
+  <div class="card-body">
+    <div class="chart-wrap">
+      <div id="svc_pow_consul" class="plotly-chart"></div>
+    </div>
+
+    <div style="height: 16px;"></div>
+    
+    <div class="chart-wrap">
+      <div id="svc_cpu_consul" class="plotly-chart"></div>
+    </div>
+
+    <div style="height: 16px;"></div>
+
+    <div class="chart-wrap">
+      <div id="svc_powcmp_consul" class="plotly-chart"></div>
+    </div>
+
+    <div style="height: 16px;"></div>
+
+    <div class="chart-wrap">
+      <div id="svc_powcmp_bar_consul" class="plotly-chart"></div>
+    </div>
+  </div>
+</section><section class="card service-card" data-service="reservation" data-badge="SUT">
+  <div class="card-header">
+    <div class="card-title-row">
+      <h3 class="card-title">reservation</h3>
+      <span class="badge badge-sut">SUT</span>
+    </div>
+    <div class="kpi-row">
+      <div class="kpi"><div class="kpi-label">Energy</div><div class="kpi-value">0.001 Wh</div></div>
+      <div class="kpi"><div class="kpi-label">Avg power</div><div class="kpi-value">0.044 W</div></div>
+      <div class="kpi"><div class="kpi-label">P95 power</div><div class="kpi-value">0.125 W</div></div>
+      <div class="kpi"><div class="kpi-label">Max power</div><div class="kpi-value">0.142 W</div></div>
+      <div class="kpi"><div class="kpi-label">Avg CPU</div><div class="kpi-value">0.002 cores</div></div>
+      <div class="kpi"><div class="kpi-label">P95 CPU</div><div class="kpi-value">0.004 cores</div></div>
+      <div class="kpi"><div class="kpi-label">Max CPU</div><div class="kpi-value">0.004 cores</div></div>
+      <div class="kpi"><div class="kpi-label">Samples</div><div class="kpi-value">4</div></div>
+    </div>
+  </div>
+
+    <div class="kpi-row kpi-row-alt">
+      <div class="kpi"><div class="kpi-label">PJ Energy</div><div class="kpi-value">0.000 Wh</div></div>
+      <div class="kpi"><div class="kpi-label">PJ Avg power</div><div class="kpi-value">0.011 W</div></div>
+      <div class="kpi"><div class="kpi-label">PJ P95 power</div><div class="kpi-value">0.045 W</div></div>
+      <div class="kpi"><div class="kpi-label">PJ Max power</div><div class="kpi-value">0.057 W</div></div>
+    </div>
+
+  <div class="card-body">
+    <div class="chart-wrap">
+      <div id="svc_pow_reservation" class="plotly-chart"></div>
+    </div>
+
+    <div style="height: 16px;"></div>
+    
+    <div class="chart-wrap">
+      <div id="svc_cpu_reservation" class="plotly-chart"></div>
+    </div>
+
+    <div style="height: 16px;"></div>
+
+    <div class="chart-wrap">
+      <div id="svc_powcmp_reservation" class="plotly-chart"></div>
+    </div>
+
+    <div style="height: 16px;"></div>
+
+    <div class="chart-wrap">
+      <div id="svc_powcmp_bar_reservation" class="plotly-chart"></div>
+    </div>
+  </div>
+</section><section class="card service-card" data-service="rate" data-badge="SUT">
+  <div class="card-header">
+    <div class="card-title-row">
+      <h3 class="card-title">rate</h3>
+      <span class="badge badge-sut">SUT</span>
+    </div>
+    <div class="kpi-row">
+      <div class="kpi"><div class="kpi-label">Energy</div><div class="kpi-value">0.000 Wh</div></div>
+      <div class="kpi"><div class="kpi-label">Avg power</div><div class="kpi-value">0.056 W</div></div>
+      <div class="kpi"><div class="kpi-label">P95 power</div><div class="kpi-value">0.120 W</div></div>
+      <div class="kpi"><div class="kpi-label">Max power</div><div class="kpi-value">0.123 W</div></div>
+      <div class="kpi"><div class="kpi-label">Avg CPU</div><div class="kpi-value">0.001 cores</div></div>
+      <div class="kpi"><div class="kpi-label">P95 CPU</div><div class="kpi-value">0.003 cores</div></div>
+      <div class="kpi"><div class="kpi-label">Max CPU</div><div class="kpi-value">0.003 cores</div></div>
+      <div class="kpi"><div class="kpi-label">Samples</div><div class="kpi-value">5</div></div>
+    </div>
+  </div>
+
+    <div class="kpi-row kpi-row-alt">
+      <div class="kpi"><div class="kpi-label">PJ Energy</div><div class="kpi-value">0.000 Wh</div></div>
+      <div class="kpi"><div class="kpi-label">PJ Avg power</div><div class="kpi-value">0.005 W</div></div>
+      <div class="kpi"><div class="kpi-label">PJ P95 power</div><div class="kpi-value">0.026 W</div></div>
+      <div class="kpi"><div class="kpi-label">PJ Max power</div><div class="kpi-value">0.065 W</div></div>
+    </div>
+
+  <div class="card-body">
+    <div class="chart-wrap">
+      <div id="svc_pow_rate" class="plotly-chart"></div>
+    </div>
+
+    <div style="height: 16px;"></div>
+    
+    <div class="chart-wrap">
+      <div id="svc_cpu_rate" class="plotly-chart"></div>
+    </div>
+
+    <div style="height: 16px;"></div>
+
+    <div class="chart-wrap">
+      <div id="svc_powcmp_rate" class="plotly-chart"></div>
+    </div>
+
+    <div style="height: 16px;"></div>
+
+    <div class="chart-wrap">
+      <div id="svc_powcmp_bar_rate" class="plotly-chart"></div>
+    </div>
+  </div>
+</section><section class="card service-card" data-service="memcached-profile" data-badge="SUT">
+  <div class="card-header">
+    <div class="card-title-row">
+      <h3 class="card-title">memcached-profile</h3>
+      <span class="badge badge-sut">SUT</span>
+    </div>
+    <div class="kpi-row">
+      <div class="kpi"><div class="kpi-label">Energy</div><div class="kpi-value">0.000 Wh</div></div>
+      <div class="kpi"><div class="kpi-label">Avg power</div><div class="kpi-value">0.020 W</div></div>
+      <div class="kpi"><div class="kpi-label">P95 power</div><div class="kpi-value">0.051 W</div></div>
+      <div class="kpi"><div class="kpi-label">Max power</div><div class="kpi-value">0.057 W</div></div>
+      <div class="kpi"><div class="kpi-label">Avg CPU</div><div class="kpi-value">0.000 cores</div></div>
+      <div class="kpi"><div class="kpi-label">P95 CPU</div><div class="kpi-value">0.000 cores</div></div>
+      <div class="kpi"><div class="kpi-label">Max CPU</div><div class="kpi-value">0.000 cores</div></div>
+      <div class="kpi"><div class="kpi-label">Samples</div><div class="kpi-value">4</div></div>
+    </div>
+  </div>
+
+    <div class="kpi-row kpi-row-alt">
+      <div class="kpi"><div class="kpi-label">PJ Energy</div><div class="kpi-value">0.000 Wh</div></div>
+      <div class="kpi"><div class="kpi-label">PJ Avg power</div><div class="kpi-value">0.001 W</div></div>
+      <div class="kpi"><div class="kpi-label">PJ P95 power</div><div class="kpi-value">0.000 W</div></div>
+      <div class="kpi"><div class="kpi-label">PJ Max power</div><div class="kpi-value">0.036 W</div></div>
+    </div>
+
+  <div class="card-body">
+    <div class="chart-wrap">
+      <div id="svc_pow_memcached_profile" class="plotly-chart"></div>
+    </div>
+
+    <div style="height: 16px;"></div>
+    
+    <div class="chart-wrap">
+      <div id="svc_cpu_memcached_profile" class="plotly-chart"></div>
+    </div>
+
+    <div style="height: 16px;"></div>
+
+    <div class="chart-wrap">
+      <div id="svc_powcmp_memcached_profile" class="plotly-chart"></div>
+    </div>
+
+    <div style="height: 16px;"></div>
+
+    <div class="chart-wrap">
+      <div id="svc_powcmp_bar_memcached_profile" class="plotly-chart"></div>
+    </div>
+  </div>
+</section><section class="card service-card" data-service="geo" data-badge="SUT">
+  <div class="card-header">
+    <div class="card-title-row">
+      <h3 class="card-title">geo</h3>
+      <span class="badge badge-sut">SUT</span>
+    </div>
+    <div class="kpi-row">
+      <div class="kpi"><div class="kpi-label">Energy</div><div class="kpi-value">0.000 Wh</div></div>
+      <div class="kpi"><div class="kpi-label">Avg power</div><div class="kpi-value">0.051 W</div></div>
+      <div class="kpi"><div class="kpi-label">P95 power</div><div class="kpi-value">0.104 W</div></div>
+      <div class="kpi"><div class="kpi-label">Max power</div><div class="kpi-value">0.112 W</div></div>
+      <div class="kpi"><div class="kpi-label">Avg CPU</div><div class="kpi-value">0.001 cores</div></div>
+      <div class="kpi"><div class="kpi-label">P95 CPU</div><div class="kpi-value">0.001 cores</div></div>
+      <div class="kpi"><div class="kpi-label">Max CPU</div><div class="kpi-value">0.001 cores</div></div>
+      <div class="kpi"><div class="kpi-label">Samples</div><div class="kpi-value">3</div></div>
+    </div>
+  </div>
+
+    <div class="kpi-row kpi-row-alt">
+      <div class="kpi"><div class="kpi-label">PJ Energy</div><div class="kpi-value">0.000 Wh</div></div>
+      <div class="kpi"><div class="kpi-label">PJ Avg power</div><div class="kpi-value">0.003 W</div></div>
+      <div class="kpi"><div class="kpi-label">PJ P95 power</div><div class="kpi-value">0.016 W</div></div>
+      <div class="kpi"><div class="kpi-label">PJ Max power</div><div class="kpi-value">0.040 W</div></div>
+    </div>
+
+  <div class="card-body">
+    <div class="chart-wrap">
+      <div id="svc_pow_geo" class="plotly-chart"></div>
+    </div>
+
+    <div style="height: 16px;"></div>
+    
+    <div class="chart-wrap">
+      <div id="svc_cpu_geo" class="plotly-chart"></div>
+    </div>
+
+    <div style="height: 16px;"></div>
+
+    <div class="chart-wrap">
+      <div id="svc_powcmp_geo" class="plotly-chart"></div>
+    </div>
+
+    <div style="height: 16px;"></div>
+
+    <div class="chart-wrap">
+      <div id="svc_powcmp_bar_geo" class="plotly-chart"></div>
+    </div>
+  </div>
+</section><section class="card service-card" data-service="memcached-rate" data-badge="SUT">
+  <div class="card-header">
+    <div class="card-title-row">
+      <h3 class="card-title">memcached-rate</h3>
+      <span class="badge badge-sut">SUT</span>
+    </div>
+    <div class="kpi-row">
+      <div class="kpi"><div class="kpi-label">Energy</div><div class="kpi-value">0.000 Wh</div></div>
+      <div class="kpi"><div class="kpi-label">Avg power</div><div class="kpi-value">0.019 W</div></div>
+      <div class="kpi"><div class="kpi-label">P95 power</div><div class="kpi-value">0.044 W</div></div>
+      <div class="kpi"><div class="kpi-label">Max power</div><div class="kpi-value">0.049 W</div></div>
+      <div class="kpi"><div class="kpi-label">Avg CPU</div><div class="kpi-value">0.000 cores</div></div>
+      <div class="kpi"><div class="kpi-label">P95 CPU</div><div class="kpi-value">0.000 cores</div></div>
+      <div class="kpi"><div class="kpi-label">Max CPU</div><div class="kpi-value">0.000 cores</div></div>
+      <div class="kpi"><div class="kpi-label">Samples</div><div class="kpi-value">5</div></div>
+    </div>
+  </div>
+
+    <div class="kpi-row kpi-row-alt">
+      <div class="kpi"><div class="kpi-label">PJ Energy</div><div class="kpi-value">0.000 Wh</div></div>
+      <div class="kpi"><div class="kpi-label">PJ Avg power</div><div class="kpi-value">0.004 W</div></div>
+      <div class="kpi"><div class="kpi-label">PJ P95 power</div><div class="kpi-value">0.000 W</div></div>
+      <div class="kpi"><div class="kpi-label">PJ Max power</div><div class="kpi-value">0.135 W</div></div>
+    </div>
+
+  <div class="card-body">
+    <div class="chart-wrap">
+      <div id="svc_pow_memcached_rate" class="plotly-chart"></div>
+    </div>
+
+    <div style="height: 16px;"></div>
+    
+    <div class="chart-wrap">
+      <div id="svc_cpu_memcached_rate" class="plotly-chart"></div>
+    </div>
+
+    <div style="height: 16px;"></div>
+
+    <div class="chart-wrap">
+      <div id="svc_powcmp_memcached_rate" class="plotly-chart"></div>
+    </div>
+
+    <div style="height: 16px;"></div>
+
+    <div class="chart-wrap">
+      <div id="svc_powcmp_bar_memcached_rate" class="plotly-chart"></div>
+    </div>
+  </div>
+</section><section class="card service-card" data-service="user" data-badge="SUT">
+  <div class="card-header">
+    <div class="card-title-row">
+      <h3 class="card-title">user</h3>
+      <span class="badge badge-sut">SUT</span>
+    </div>
+    <div class="kpi-row">
+      <div class="kpi"><div class="kpi-label">Energy</div><div class="kpi-value">0.000 Wh</div></div>
+      <div class="kpi"><div class="kpi-label">Avg power</div><div class="kpi-value">0.010 W</div></div>
+      <div class="kpi"><div class="kpi-label">P95 power</div><div class="kpi-value">0.019 W</div></div>
+      <div class="kpi"><div class="kpi-label">Max power</div><div class="kpi-value">0.019 W</div></div>
+      <div class="kpi"><div class="kpi-label">Avg CPU</div><div class="kpi-value">0.001 cores</div></div>
+      <div class="kpi"><div class="kpi-label">P95 CPU</div><div class="kpi-value">0.001 cores</div></div>
+      <div class="kpi"><div class="kpi-label">Max CPU</div><div class="kpi-value">0.001 cores</div></div>
+      <div class="kpi"><div class="kpi-label">Samples</div><div class="kpi-value">4</div></div>
+    </div>
+  </div>
+
+
+  <div class="card-body">
+    <div class="chart-wrap">
+      <div id="svc_pow_user" class="plotly-chart"></div>
+    </div>
+
+    <div style="height: 16px;"></div>
+    
+    <div class="chart-wrap">
+      <div id="svc_cpu_user" class="plotly-chart"></div>
+    </div>
+
+  </div>
+</section><section class="card service-card" data-service="memcached-reserve" data-badge="SUT">
+  <div class="card-header">
+    <div class="card-title-row">
+      <h3 class="card-title">memcached-reserve</h3>
+      <span class="badge badge-sut">SUT</span>
+    </div>
+    <div class="kpi-row">
+      <div class="kpi"><div class="kpi-label">Energy</div><div class="kpi-value">0.000 Wh</div></div>
+      <div class="kpi"><div class="kpi-label">Avg power</div><div class="kpi-value">0.009 W</div></div>
+      <div class="kpi"><div class="kpi-label">P95 power</div><div class="kpi-value">0.023 W</div></div>
+      <div class="kpi"><div class="kpi-label">Max power</div><div class="kpi-value">0.026 W</div></div>
+      <div class="kpi"><div class="kpi-label">Avg CPU</div><div class="kpi-value">0.000 cores</div></div>
+      <div class="kpi"><div class="kpi-label">P95 CPU</div><div class="kpi-value">0.000 cores</div></div>
+      <div class="kpi"><div class="kpi-label">Max CPU</div><div class="kpi-value">0.000 cores</div></div>
+      <div class="kpi"><div class="kpi-label">Samples</div><div class="kpi-value">4</div></div>
+    </div>
+  </div>
+
+    <div class="kpi-row kpi-row-alt">
+      <div class="kpi"><div class="kpi-label">PJ Energy</div><div class="kpi-value">0.000 Wh</div></div>
+      <div class="kpi"><div class="kpi-label">PJ Avg power</div><div class="kpi-value">0.003 W</div></div>
+      <div class="kpi"><div class="kpi-label">PJ P95 power</div><div class="kpi-value">0.000 W</div></div>
+      <div class="kpi"><div class="kpi-label">PJ Max power</div><div class="kpi-value">0.149 W</div></div>
+    </div>
+
+  <div class="card-body">
+    <div class="chart-wrap">
+      <div id="svc_pow_memcached_reserve" class="plotly-chart"></div>
+    </div>
+
+    <div style="height: 16px;"></div>
+    
+    <div class="chart-wrap">
+      <div id="svc_cpu_memcached_reserve" class="plotly-chart"></div>
+    </div>
+
+    <div style="height: 16px;"></div>
+
+    <div class="chart-wrap">
+      <div id="svc_powcmp_memcached_reserve" class="plotly-chart"></div>
+    </div>
+
+    <div style="height: 16px;"></div>
+
+    <div class="chart-wrap">
+      <div id="svc_powcmp_bar_memcached_reserve" class="plotly-chart"></div>
+    </div>
+  </div>
+</section><section class="card service-card" data-service="profile" data-badge="SUT">
+  <div class="card-header">
+    <div class="card-title-row">
+      <h3 class="card-title">profile</h3>
+      <span class="badge badge-sut">SUT</span>
+    </div>
+    <div class="kpi-row">
+      <div class="kpi"><div class="kpi-label">Energy</div><div class="kpi-value">0.000 Wh</div></div>
+      <div class="kpi"><div class="kpi-label">Avg power</div><div class="kpi-value">0.018 W</div></div>
+      <div class="kpi"><div class="kpi-label">P95 power</div><div class="kpi-value">0.026 W</div></div>
+      <div class="kpi"><div class="kpi-label">Max power</div><div class="kpi-value">0.027 W</div></div>
+      <div class="kpi"><div class="kpi-label">Avg CPU</div><div class="kpi-value">0.001 cores</div></div>
+      <div class="kpi"><div class="kpi-label">P95 CPU</div><div class="kpi-value">0.001 cores</div></div>
+      <div class="kpi"><div class="kpi-label">Max CPU</div><div class="kpi-value">0.001 cores</div></div>
+      <div class="kpi"><div class="kpi-label">Samples</div><div class="kpi-value">2</div></div>
+    </div>
+  </div>
+
+    <div class="kpi-row kpi-row-alt">
+      <div class="kpi"><div class="kpi-label">PJ Energy</div><div class="kpi-value">0.000 Wh</div></div>
+      <div class="kpi"><div class="kpi-label">PJ Avg power</div><div class="kpi-value">0.009 W</div></div>
+      <div class="kpi"><div class="kpi-label">PJ P95 power</div><div class="kpi-value">0.049 W</div></div>
+      <div class="kpi"><div class="kpi-label">PJ Max power</div><div class="kpi-value">0.082 W</div></div>
+    </div>
+
+  <div class="card-body">
+    <div class="chart-wrap">
+      <div id="svc_pow_profile" class="plotly-chart"></div>
+    </div>
+
+    <div style="height: 16px;"></div>
+    
+    <div class="chart-wrap">
+      <div id="svc_cpu_profile" class="plotly-chart"></div>
+    </div>
+
+    <div style="height: 16px;"></div>
+
+    <div class="chart-wrap">
+      <div id="svc_powcmp_profile" class="plotly-chart"></div>
+    </div>
+
+    <div style="height: 16px;"></div>
+
+    <div class="chart-wrap">
+      <div id="svc_powcmp_bar_profile" class="plotly-chart"></div>
+    </div>
+  </div>
+</section><section class="card service-card" data-service="recommendation" data-badge="SUT">
+  <div class="card-header">
+    <div class="card-title-row">
+      <h3 class="card-title">recommendation</h3>
+      <span class="badge badge-sut">SUT</span>
+    </div>
+    <div class="kpi-row">
+      <div class="kpi"><div class="kpi-label">Energy</div><div class="kpi-value">0.000 Wh</div></div>
+      <div class="kpi"><div class="kpi-label">Avg power</div><div class="kpi-value">0.053 W</div></div>
+      <div class="kpi"><div class="kpi-label">P95 power</div><div class="kpi-value">0.070 W</div></div>
+      <div class="kpi"><div class="kpi-label">Max power</div><div class="kpi-value">0.072 W</div></div>
+      <div class="kpi"><div class="kpi-label">Avg CPU</div><div class="kpi-value">0.001 cores</div></div>
+      <div class="kpi"><div class="kpi-label">P95 CPU</div><div class="kpi-value">0.001 cores</div></div>
+      <div class="kpi"><div class="kpi-label">Max CPU</div><div class="kpi-value">0.001 cores</div></div>
+      <div class="kpi"><div class="kpi-label">Samples</div><div class="kpi-value">2</div></div>
+    </div>
+  </div>
+
+    <div class="kpi-row kpi-row-alt">
+      <div class="kpi"><div class="kpi-label">PJ Energy</div><div class="kpi-value">0.000 Wh</div></div>
+      <div class="kpi"><div class="kpi-label">PJ Avg power</div><div class="kpi-value">0.019 W</div></div>
+      <div class="kpi"><div class="kpi-label">PJ P95 power</div><div class="kpi-value">0.106 W</div></div>
+      <div class="kpi"><div class="kpi-label">PJ Max power</div><div class="kpi-value">0.213 W</div></div>
+    </div>
+
+  <div class="card-body">
+    <div class="chart-wrap">
+      <div id="svc_pow_recommendation" class="plotly-chart"></div>
+    </div>
+
+    <div style="height: 16px;"></div>
+    
+    <div class="chart-wrap">
+      <div id="svc_cpu_recommendation" class="plotly-chart"></div>
+    </div>
+
+    <div style="height: 16px;"></div>
+
+    <div class="chart-wrap">
+      <div id="svc_powcmp_recommendation" class="plotly-chart"></div>
+    </div>
+
+    <div style="height: 16px;"></div>
+
+    <div class="chart-wrap">
+      <div id="svc_powcmp_bar_recommendation" class="plotly-chart"></div>
+    </div>
+  </div>
+</section>
+      </div>
+    </section>
+
+    <div class="footer">
+      Generated at 2026-01-05T16:52:44.281354+00:00 (UTC)
+    </div>
+  </div>
+
+  <script>
+    // Render Plotly figures.
+    (function() {
+      const figs = {"bar_energy":{"data":[{"type":"bar","x":[0.04851003959436258,0.03678344862989649,0.035360072674634827,0.03121323702349576,0.013302681799095113,0.0005494044370972776,0.00047859372923087233,0.00027694089824017504,0.0001734542000454278,0.0001584889312143407,0.00011004956524688912,6.068104791800566e-05,0.0,0.0],"y":["cadvisor","frontend","search","prometheus","consul","reservation","rate","memcached-profile","geo","memcached-rate","user","memcached-reserve","profile","recommendation"],"orientation":"h","hovertemplate":"%{y}<br>%{x:.4f}<extra></extra>"}],"layout":{"title":{"text":"Total energy by microservice (top 40)","x":0.01,"xanchor":"left"},"margin":{"l":160,"r":18,"t":45,"b":45},"xaxis":{"title":"Energy (Wh)","showgrid":true,"zeroline":false},"yaxis":{"title":"","showgrid":false,"zeroline":false},"paper_bgcolor":"rgba(0,0,0,0)","plot_bgcolor":"rgba(0,0,0,0)"}},"bar_avg_power":{"data":[{"type":"bar","x":[2.8367061095033854,1.603995734072086,1.9753650086607084,1.9070865127014458,1.5853125797330407,0.04444403852189482,0.05582693713347,0.02011103271769436,0.05075079814354352,0.018595516039251185,0.010176306768057272,0.009286279868674422,0.017624822744935986,0.052578840362487625],"y":["cadvisor","frontend","search","prometheus","consul","reservation","rate","memcached-profile","geo","memcached-rate","user","memcached-reserve","profile","recommendation"],"orientation":"h","hovertemplate":"%{y}<br>%{x:.4f}<extra></extra>"}],"layout":{"title":{"text":"Average power by microservice (top 40)","x":0.01,"xanchor":"left"},"margin":{"l":160,"r":18,"t":45,"b":45},"xaxis":{"title":"Average power (W)","showgrid":true,"zeroline":false},"yaxis":{"title":"","showgrid":false,"zeroline":false},"paper_bgcolor":"rgba(0,0,0,0)","plot_bgcolor":"rgba(0,0,0,0)"}},"stacked_top":{"data":[{"type":"scatter","mode":"lines","x":["2026-01-05T17:46:18+00:00","2026-01-05T17:46:22+00:00","2026-01-05T17:46:23+00:00","2026-01-05T17:46:27+00:00","2026-01-05T17:46:28+00:00","2026-01-05T17:46:32+00:00","2026-01-05T17:46:33+00:00","2026-01-05T17:46:43+00:00","2026-01-05T17:46:48+00:00","2026-01-05T17:46:52+00:00","2026-01-05T17:46:53+00:00","2026-01-05T17:46:58+00:00","2026-01-05T17:47:02+00:00","2026-01-05T17:47:03+00:00","2026-01-05T17:47:07+00:00","2026-01-05T17:47:08+00:00","2026-01-05T17:47:13+00:00","2026-01-05T17:47:18+00:00"],"y":[0.0016925561932059126,0.0,0.0,0.0,0.0,0.0,0.0,0.0,2.2623497865771416,0.0,0.0,2.7370630016634285,0.0,0.0,0.0,2.613318988034786,0.0,2.0095500719639547],"name":"frontend","hovertemplate":"%{x}<br>%{y:.4f}<extra></extra>"},{"type":"scatter","mode":"lines","x":["2026-01-05T17:46:18+00:00","2026-01-05T17:46:22+00:00","2026-01-05T17:46:23+00:00","2026-01-05T17:46:27+00:00","2026-01-05T17:46:28+00:00","2026-01-05T17:46:32+00:00","2026-01-05T17:46:33+00:00","2026-01-05T17:46:43+00:00","2026-01-05T17:46:48+00:00","2026-01-05T17:46:52+00:00","2026-01-05T17:46:53+00:00","2026-01-05T17:46:58+00:00","2026-01-05T17:47:02+00:00","2026-01-05T17:47:03+00:00","2026-01-05T17:47:07+00:00","2026-01-05T17:47:08+00:00","2026-01-05T17:47:13+00:00","2026-01-05T17:47:18+00:00"],"y":[0.0024594218466793194,0.0,0.0,0.0,3.3279447294501,0.0,0.0,2.3397910655019296,0.0,0.0,2.8826019989175653,0.0,2.9,0.0,0.0,0.0,0.3993928362479763,0.0],"name":"search","hovertemplate":"%{x}<br>%{y:.4f}<extra></extra>"},{"type":"scatter","mode":"lines","x":["2026-01-05T17:46:18+00:00","2026-01-05T17:46:22+00:00","2026-01-05T17:46:23+00:00","2026-01-05T17:46:27+00:00","2026-01-05T17:46:28+00:00","2026-01-05T17:46:32+00:00","2026-01-05T17:46:33+00:00","2026-01-05T17:46:43+00:00","2026-01-05T17:46:48+00:00","2026-01-05T17:46:52+00:00","2026-01-05T17:46:53+00:00","2026-01-05T17:46:58+00:00","2026-01-05T17:47:02+00:00","2026-01-05T17:47:03+00:00","2026-01-05T17:47:07+00:00","2026-01-05T17:47:08+00:00","2026-01-05T17:47:13+00:00","2026-01-05T17:47:18+00:00"],"y":[0.0,0.0,2.6150992526553587,3.3431390160253187,0.0,0.0,0.0,0.0,0.38451901633712415,0.0,0.0,0.0,0.0,0.0,1.0971246016821874,0.4866810119652142,0.0,0.0],"name":"consul","hovertemplate":"%{x}<br>%{y:.4f}<extra></extra>"},{"type":"scatter","mode":"lines","x":["2026-01-05T17:46:18+00:00","2026-01-05T17:46:22+00:00","2026-01-05T17:46:23+00:00","2026-01-05T17:46:27+00:00","2026-01-05T17:46:28+00:00","2026-01-05T17:46:32+00:00","2026-01-05T17:46:33+00:00","2026-01-05T17:46:43+00:00","2026-01-05T17:46:48+00:00","2026-01-05T17:46:52+00:00","2026-01-05T17:46:53+00:00","2026-01-05T17:46:58+00:00","2026-01-05T17:47:02+00:00","2026-01-05T17:47:03+00:00","2026-01-05T17:47:07+00:00","2026-01-05T17:47:08+00:00","2026-01-05T17:47:13+00:00","2026-01-05T17:47:18+00:00"],"y":[0.006145271453147459,0.0,0.0,0.0,0.0,0.0,0.0,0.14165879444394866,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.029972088190483148],"name":"reservation","hovertemplate":"%{x}<br>%{y:.4f}<extra></extra>"},{"type":"scatter","mode":"lines","x":["2026-01-05T17:46:18+00:00","2026-01-05T17:46:22+00:00","2026-01-05T17:46:23+00:00","2026-01-05T17:46:27+00:00","2026-01-05T17:46:28+00:00","2026-01-05T17:46:32+00:00","2026-01-05T17:46:33+00:00","2026-01-05T17:46:43+00:00","2026-01-05T17:46:48+00:00","2026-01-05T17:46:52+00:00","2026-01-05T17:46:53+00:00","2026-01-05T17:46:58+00:00","2026-01-05T17:47:02+00:00","2026-01-05T17:47:03+00:00","2026-01-05T17:47:07+00:00","2026-01-05T17:47:08+00:00","2026-01-05T17:47:13+00:00","2026-01-05T17:47:18+00:00"],"y":[0.0,0.0,0.12345526612021872,0.0,0.0,0.0,0.01794380009395228,0.10508947033572054,0.0,0.0,0.0,0.0,0.0,0.011270380928824226,0.0,0.0,0.0,0.02137576818863422],"name":"rate","hovertemplate":"%{x}<br>%{y:.4f}<extra></extra>"},{"type":"scatter","mode":"lines","x":["2026-01-05T17:46:18+00:00","2026-01-05T17:46:22+00:00","2026-01-05T17:46:23+00:00","2026-01-05T17:46:27+00:00","2026-01-05T17:46:28+00:00","2026-01-05T17:46:32+00:00","2026-01-05T17:46:33+00:00","2026-01-05T17:46:43+00:00","2026-01-05T17:46:48+00:00","2026-01-05T17:46:52+00:00","2026-01-05T17:46:53+00:00","2026-01-05T17:46:58+00:00","2026-01-05T17:47:02+00:00","2026-01-05T17:47:03+00:00","2026-01-05T17:47:07+00:00","2026-01-05T17:47:08+00:00","2026-01-05T17:47:13+00:00","2026-01-05T17:47:18+00:00"],"y":[0.002896110838741464,0.0,0.0,0.05686098397468157,0.0,0.0,0.0,0.0,0.0,0.0,0.0173980010824345,0.0,0.0,0.0032890349749199084,0.0,0.0,0.0,0.0],"name":"memcached-profile","hovertemplate":"%{x}<br>%{y:.4f}<extra></extra>"},{"type":"scatter","mode":"lines","x":["2026-01-05T17:46:18+00:00","2026-01-05T17:46:22+00:00","2026-01-05T17:46:23+00:00","2026-01-05T17:46:27+00:00","2026-01-05T17:46:28+00:00","2026-01-05T17:46:32+00:00","2026-01-05T17:46:33+00:00","2026-01-05T17:46:43+00:00","2026-01-05T17:46:48+00:00","2026-01-05T17:46:52+00:00","2026-01-05T17:46:53+00:00","2026-01-05T17:46:58+00:00","2026-01-05T17:47:02+00:00","2026-01-05T17:47:03+00:00","2026-01-05T17:47:07+00:00","2026-01-05T17:47:08+00:00","2026-01-05T17:47:13+00:00","2026-01-05T17:47:18+00:00"],"y":[0.0,0.0,0.11218482353539816,0.0,0.0,0.0,0.010232982733736852,0.0,0.0,0.0,0.0,0.02983458816149552,0.0,0.0,0.0,0.0,0.0,0.0],"name":"geo","hovertemplate":"%{x}<br>%{y:.4f}<extra></extra>"},{"type":"scatter","mode":"lines","x":["2026-01-05T17:46:18+00:00","2026-01-05T17:46:22+00:00","2026-01-05T17:46:23+00:00","2026-01-05T17:46:27+00:00","2026-01-05T17:46:28+00:00","2026-01-05T17:46:32+00:00","2026-01-05T17:46:33+00:00","2026-01-05T17:46:43+00:00","2026-01-05T17:46:48+00:00","2026-01-05T17:46:52+00:00","2026-01-05T17:46:53+00:00","2026-01-05T17:46:58+00:00","2026-01-05T17:47:02+00:00","2026-01-05T17:47:03+00:00","2026-01-05T17:47:07+00:00","2026-01-05T17:47:08+00:00","2026-01-05T17:47:13+00:00","2026-01-05T17:47:18+00:00"],"y":[0.0,0.0,0.04926065768902419,0.0,0.0,0.0,0.0,0.013460669718400828,0.0,0.02147169216552183,0.0,0.0,0.0,0.003048879794552298,0.0,0.0,0.0,0.005735680828756783],"name":"memcached-rate","hovertemplate":"%{x}<br>%{y:.4f}<extra></extra>"}],"layout":{"title":{"text":"Stacked estimated power over experiment duration (top services)","x":0.01,"xanchor":"left"},"margin":{"l":55,"r":18,"t":45,"b":45},"xaxis":{"title":"Time (UTC)","type":"date","showgrid":true,"zeroline":false},"yaxis":{"title":"estimated_power_from_shelly_watt (W)","showgrid":true,"zeroline":false},"hovermode":"x unified","legend":{"orientation":"h"},"paper_bgcolor":"rgba(0,0,0,0)","plot_bgcolor":"rgba(0,0,0,0)"}},"scatter_cpu_pow":{"data":[{"type":"scatter","mode":"markers","x":[0.0001507205291755059,0.00762151492721443,0.08243585198315978,0.08224399916510122,0.07885386890093633,0.12239352170916623,0.00021900919076440386,0.030996133496133504,0.06299826914755516,0.034999783690244445,0.0398888606307223,0.0419403956924618,0.0002578959327425578,0.00025328250741210817,0.00021124188311688597,0.00024421708185053104,0.0005472306143001028,0.0008211361944926837,0.003814126394052045,0.0018254779902178739,0.24816249713105304,0.21734256198346666,0.22887342727730584,0.24002658582089606,0.014344173441734396,0.014891733723482101,0.014011163483006576,0.014685034965034736,0.014685034965034736,0.0006771688484579571,0.001221833449965012,0.002829506802721089,0.0008368471490177311,0.0013019111015675326,0.0006153489450498469,0.0006967866634452793,0.0008964776632302398,0.0002702013764975798,0.00036242504996669386,0.0002000469043151953,0.00022638510445050538,0.0003493369913122939,0.0010427837992013707,0.001042783799201371,0.0007008175779253948,0.0006466406787434082,0.0002507783753184257,0.0002507783753184257,0.00026805251641137337,0.00024322210636079698,0.024577301161751684,0.044853581321724935,0.044853581321724935,0.025643698321222413,0.028147029702970703,0.0324851775755794,0.0324851775755794,0.0009671326956095139,0.0009144186046511608,0.0006711153479504288,0.0009946700507614226],"y":[0.0016925561932059126,0.0,2.2623497865771416,2.7370630016634285,2.613318988034786,2.0095500719639547,0.0024594218466793194,3.3279447294501,2.3397910655019296,2.8826019989175653,2.9,0.3993928362479763,0.002896110838741464,0.05686098397468157,0.0173980010824345,0.0032890349749199084,0.006145271453147459,0.0,0.14165879444394866,0.029972088190483148,2.786806639668226,3.1918846911994723,3.0823917043017035,2.2857414028441396,2.6150992526553587,3.3431390160253187,0.38451901633712415,1.0971246016821874,0.4866810119652142,0.12345526612021872,0.01794380009395228,0.10508947033572054,0.011270380928824226,0.02137576818863422,0.11218482353539816,0.010232982733736852,0.02983458816149552,0.04926065768902419,0.013460669718400828,0.02147169216552183,0.003048879794552298,0.005735680828756783,0.0,0.015314283656759678,0.019233069831957522,0.006157873583511887,0.0,0.0036829217883409763,0.007356369088277502,0.026105828598079212,0.360941320527738,2.5,2.5,2.7524224792363987,2.102875398317813,2.6,0.5333663908281714,0.02654175816549974,0.008707887324372235,0.07205527054989942,0.03310241017507582],"hovertemplate":"cpu_cores=%{x:.4f}<br>power_w=%{y:.4f}<extra></extra>"}],"layout":{"title":{"text":"CPU cores vs estimated power (all samples)","x":0.01,"xanchor":"left"},"margin":{"l":55,"r":18,"t":45,"b":45},"xaxis":{"title":"cpu_cores_used","showgrid":true,"zeroline":false},"yaxis":{"title":"estimated_power_from_shelly_watt (W)","showgrid":true,"zeroline":false},"paper_bgcolor":"rgba(0,0,0,0)","plot_bgcolor":"rgba(0,0,0,0)"}},"svc_pow_cadvisor":{"data":[{"type":"scatter","mode":"lines","x":["2026-01-05T17:46:18+00:00","2026-01-05T17:46:33+00:00","2026-01-05T17:47:03+00:00","2026-01-05T17:47:13+00:00"],"y":[2.786806639668226,3.1918846911994723,3.0823917043017035,2.2857414028441396],"name":"estimated_power_from_shelly_watt","hovertemplate":"%{x}<br>%{y:.4f}<extra></extra>"}],"layout":{"title":{"text":"cadvisor — estimated power over time","x":0.01,"xanchor":"left"},"margin":{"l":55,"r":18,"t":45,"b":45},"xaxis":{"title":"Time (UTC)","type":"date","showgrid":true,"zeroline":false},"yaxis":{"title":"Estimated power (W)","showgrid":true,"zeroline":false},"hovermode":"x unified","paper_bgcolor":"rgba(0,0,0,0)","plot_bgcolor":"rgba(0,0,0,0)"}},"svc_cpu_cadvisor":{"data":[{"type":"scatter","mode":"lines","x":["2026-01-05T17:46:18+00:00","2026-01-05T17:46:33+00:00","2026-01-05T17:47:03+00:00","2026-01-05T17:47:13+00:00"],"y":[0.24816249713105304,0.21734256198346666,0.22887342727730584,0.24002658582089606],"name":"cpu_cores_used","hovertemplate":"%{x}<br>%{y:.4f}<extra></extra>"}],"layout":{"title":{"text":"cadvisor — CPU cores used over time","x":0.01,"xanchor":"left"},"margin":{"l":55,"r":18,"t":45,"b":45},"xaxis":{"title":"Time (UTC)","type":"date","showgrid":true,"zeroline":false},"yaxis":{"title":"CPU cores used","showgrid":true,"zeroline":false},"hovermode":"x unified","paper_bgcolor":"rgba(0,0,0,0)","plot_bgcolor":"rgba(0,0,0,0)"}},"svc_powcmp_cadvisor":{"data":[{"type":"scatter","mode":"lines","x":["2026-01-05T17:46:18+00:00","2026-01-05T17:46:33+00:00","2026-01-05T17:47:03+00:00","2026-01-05T17:47:13+00:00"],"y":[2.786806639668226,3.1918846911994723,3.0823917043017035,2.2857414028441396],"name":"estimated_power_from_shelly_watt","hovertemplate":"%{x}<br>%{y:.4f}<extra></extra>"},{"type":"scatter","mode":"lines","x":["2026-01-05T17:46:20+00:00","2026-01-05T17:46:21+00:00","2026-01-05T17:46:22+00:00","2026-01-05T17:46:23+00:00","2026-01-05T17:46:24+00:00","2026-01-05T17:46:25+00:00","2026-01-05T17:46:26+00:00","2026-01-05T17:46:27+00:00","2026-01-05T17:46:28+00:00","2026-01-05T17:46:29+00:00","2026-01-05T17:46:30+00:00","2026-01-05T17:46:31+00:00","2026-01-05T17:46:32+00:00","2026-01-05T17:46:33+00:00","2026-01-05T17:46:34+00:00","2026-01-05T17:46:35+00:00","2026-01-05T17:46:36+00:00","2026-01-05T17:46:37+00:00","2026-01-05T17:46:38+00:00","2026-01-05T17:46:39+00:00","2026-01-05T17:46:40+00:00","2026-01-05T17:46:41+00:00","2026-01-05T17:46:42+00:00","2026-01-05T17:46:43+00:00","2026-01-05T17:46:44+00:00","2026-01-05T17:46:45+00:00","2026-01-05T17:46:46+00:00","2026-01-05T17:46:47+00:00","2026-01-05T17:46:48+00:00","2026-01-05T17:46:49+00:00","2026-01-05T17:46:50+00:00","2026-01-05T17:46:51+00:00","2026-01-05T17:46:52+00:00","2026-01-05T17:46:53+00:00","2026-01-05T17:46:54+00:00","2026-01-05T17:46:55+00:00","2026-01-05T17:46:56+00:00","2026-01-05T17:46:57+00:00","2026-01-05T17:46:58+00:00","2026-01-05T17:46:59+00:00","2026-01-05T17:47:00+00:00","2026-01-05T17:47:01+00:00","2026-01-05T17:47:02+00:00","2026-01-05T17:47:03+00:00","2026-01-05T17:47:04+00:00","2026-01-05T17:47:05+00:00","2026-01-05T17:47:06+00:00","2026-01-05T17:47:07+00:00","2026-01-05T17:47:08+00:00","2026-01-05T17:47:09+00:00","2026-01-05T17:47:10+00:00","2026-01-05T17:47:11+00:00","2026-01-05T17:47:12+00:00","2026-01-05T17:47:13+00:00","2026-01-05T17:47:14+00:00","2026-01-05T17:47:15+00:00","2026-01-05T17:47:16+00:00","2026-01-05T17:47:17+00:00","2026-01-05T17:47:18+00:00"],"y":[1.24326428187068,0.45403690999405,0.31083562043814,1.19068679827811,2.55196554946487,0.37706432785115,0.23659901050768,0.71011538953263,0.31892956881101,2.32164011291621,0.26804714572592,0.209754264856,0.1540243709104,0.19519709436648,2.27932658121765,0.21566444740424,0.13413030197932,0.46758696570959,0.57344988714393,2.56313556490922,0.66042302106055,0.89435330638387,0.72027329719043,0.75101903236597,2.35666287754551,0.54138025480979,0.67675975075486,1.14667893676012,0.67674214701226,2.66338163955961,0.52538687484395,0.99240960234781,0.19035814742291,0.99291975761485,2.35874230498334,0.61793353988618,0.85062097611387,0.59534758586235,0.39120449430829,2.53462689622786,0.63855343054399,0.48726309927502,0.19311842459519,0.93052464674537,2.41553156475039,0.74419037543209,0.19789374852801,0.43533570447732,0.23358229180701,2.04833827683091,0.41830844523344,0.40441948309162,0.64751096088915,0.66294180083679,2.26509798688609,0.7132662313979,0.89460877328989,0.94106738431469,0.67571463033256],"name":"cpu_power_watt","hovertemplate":"%{x}<br>%{y:.4f}<extra></extra>"}],"layout":{"title":{"text":"cadvisor — Shelly estimate vs PowerJoular (over time)","x":0.01,"xanchor":"left"},"margin":{"l":55,"r":18,"t":45,"b":45},"xaxis":{"title":"Time (UTC)","type":"date","showgrid":true,"zeroline":false},"yaxis":{"title":"Power (W)","showgrid":true,"zeroline":false},"hovermode":"x unified","legend":{"orientation":"h","y":1.15,"x":0.0},"paper_bgcolor":"rgba(0,0,0,0)","plot_bgcolor":"rgba(0,0,0,0)"}},"svc_powcmp_bar_cadvisor":{"data":[{"type":"bar","x":["Energy (Wh)","Avg (W)","P95 (W)","Max (W)"],"y":[0.04851003959436258,2.8367061095033854,3.1754607431648068,3.1918846911994723],"name":"Shelly estimated_power","hovertemplate":"%{x}<br>%{y:.4f}<extra></extra>"},{"type":"bar","x":["Energy (Wh)","Avg (W)","P95 (W)","Max (W)"],"y":[0.014615744892869003,0.9128804389186286,2.536360761551561,2.66338163955961],"name":"PowerJoular cpu_power","hovertemplate":"%{x}<br>%{y:.4f}<extra></extra>"}],"layout":{"title":{"text":"cadvisor — summary comparison (Shelly vs PowerJoular)","x":0.01,"xanchor":"left"},"margin":{"l":55,"r":18,"t":45,"b":60},"barmode":"group","xaxis":{"title":"","showgrid":false},"yaxis":{"title":"Value","showgrid":true,"zeroline":false},"paper_bgcolor":"rgba(0,0,0,0)","plot_bgcolor":"rgba(0,0,0,0)","legend":{"orientation":"h","y":1.15,"x":0.0}}},"svc_pow_frontend":{"data":[{"type":"scatter","mode":"lines","x":["2026-01-05T17:46:18+00:00","2026-01-05T17:46:22+00:00","2026-01-05T17:46:48+00:00","2026-01-05T17:46:58+00:00","2026-01-05T17:47:08+00:00","2026-01-05T17:47:18+00:00"],"y":[0.0016925561932059126,0.0,2.2623497865771416,2.7370630016634285,2.613318988034786,2.0095500719639547],"name":"estimated_power_from_shelly_watt","hovertemplate":"%{x}<br>%{y:.4f}<extra></extra>"}],"layout":{"title":{"text":"frontend — estimated power over time","x":0.01,"xanchor":"left"},"margin":{"l":55,"r":18,"t":45,"b":45},"xaxis":{"title":"Time (UTC)","type":"date","showgrid":true,"zeroline":false},"yaxis":{"title":"Estimated power (W)","showgrid":true,"zeroline":false},"hovermode":"x unified","paper_bgcolor":"rgba(0,0,0,0)","plot_bgcolor":"rgba(0,0,0,0)"}},"svc_cpu_frontend":{"data":[{"type":"scatter","mode":"lines","x":["2026-01-05T17:46:18+00:00","2026-01-05T17:46:22+00:00","2026-01-05T17:46:48+00:00","2026-01-05T17:46:58+00:00","2026-01-05T17:47:08+00:00","2026-01-05T17:47:18+00:00"],"y":[0.0001507205291755059,0.00762151492721443,0.08243585198315978,0.08224399916510122,0.07885386890093633,0.12239352170916623],"name":"cpu_cores_used","hovertemplate":"%{x}<br>%{y:.4f}<extra></extra>"}],"layout":{"title":{"text":"frontend — CPU cores used over time","x":0.01,"xanchor":"left"},"margin":{"l":55,"r":18,"t":45,"b":45},"xaxis":{"title":"Time (UTC)","type":"date","showgrid":true,"zeroline":false},"yaxis":{"title":"CPU cores used","showgrid":true,"zeroline":false},"hovermode":"x unified","paper_bgcolor":"rgba(0,0,0,0)","plot_bgcolor":"rgba(0,0,0,0)"}},"svc_powcmp_frontend":{"data":[{"type":"scatter","mode":"lines","x":["2026-01-05T17:46:18+00:00","2026-01-05T17:46:22+00:00","2026-01-05T17:46:48+00:00","2026-01-05T17:46:58+00:00","2026-01-05T17:47:08+00:00","2026-01-05T17:47:18+00:00"],"y":[0.0016925561932059126,0.0,2.2623497865771416,2.7370630016634285,2.613318988034786,2.0095500719639547],"name":"estimated_power_from_shelly_watt","hovertemplate":"%{x}<br>%{y:.4f}<extra></extra>"},{"type":"scatter","mode":"lines","x":["2026-01-05T17:46:20+00:00","2026-01-05T17:46:21+00:00","2026-01-05T17:46:22+00:00","2026-01-05T17:46:23+00:00","2026-01-05T17:46:24+00:00","2026-01-05T17:46:25+00:00","2026-01-05T17:46:26+00:00","2026-01-05T17:46:27+00:00","2026-01-05T17:46:28+00:00","2026-01-05T17:46:29+00:00","2026-01-05T17:46:30+00:00","2026-01-05T17:46:31+00:00","2026-01-05T17:46:32+00:00","2026-01-05T17:46:33+00:00","2026-01-05T17:46:34+00:00","2026-01-05T17:46:35+00:00","2026-01-05T17:46:36+00:00","2026-01-05T17:46:37+00:00","2026-01-05T17:46:38+00:00","2026-01-05T17:46:39+00:00","2026-01-05T17:46:40+00:00","2026-01-05T17:46:41+00:00","2026-01-05T17:46:42+00:00","2026-01-05T17:46:43+00:00","2026-01-05T17:46:44+00:00","2026-01-05T17:46:45+00:00","2026-01-05T17:46:46+00:00","2026-01-05T17:46:47+00:00","2026-01-05T17:46:48+00:00","2026-01-05T17:46:49+00:00","2026-01-05T17:46:50+00:00","2026-01-05T17:46:51+00:00","2026-01-05T17:46:52+00:00","2026-01-05T17:46:53+00:00","2026-01-05T17:46:54+00:00","2026-01-05T17:46:55+00:00","2026-01-05T17:46:56+00:00","2026-01-05T17:46:57+00:00","2026-01-05T17:46:58+00:00","2026-01-05T17:46:59+00:00","2026-01-05T17:47:00+00:00","2026-01-05T17:47:01+00:00","2026-01-05T17:47:02+00:00","2026-01-05T17:47:03+00:00","2026-01-05T17:47:04+00:00","2026-01-05T17:47:05+00:00","2026-01-05T17:47:06+00:00","2026-01-05T17:47:07+00:00","2026-01-05T17:47:08+00:00","2026-01-05T17:47:09+00:00","2026-01-05T17:47:10+00:00","2026-01-05T17:47:11+00:00","2026-01-05T17:47:12+00:00","2026-01-05T17:47:13+00:00","2026-01-05T17:47:14+00:00","2026-01-05T17:47:15+00:00","2026-01-05T17:47:16+00:00","2026-01-05T17:47:17+00:00","2026-01-05T17:47:18+00:00"],"y":[0.17513318758136,0.289556557719,0.1763617123699,0.44650612480017,0.19395031528903,0.40652423017449,0.36677532844751,0.5586183668759,0.32758887479622,0.32429935481152,0.22612592348558,0.31773940031368,0.33885361600288,0.29410055137675,0.22377504916032,0.40231549302676,0.22770915344222,0.46785070780463,1.11733429823798,0.30363194794514,0.84116407472502,1.21968786472823,1.08027721200471,1.11496869877603,0.29268608972055,1.08277381909949,0.90648336548905,1.60531953955844,1.08277381909949,0.26954811276078,1.0507737496879,1.0418970472007,0.50754422481243,1.0507655649238,0.27772214293906,0.74817658137699,1.19072077997696,1.13412266918904,0.50288084285537,0.29462104419655,1.39004852218063,0.73083298347982,0.33329195907856,1.48882376552397,0.2107499918871,1.13413188957543,0.35154336602143,0.49642697697234,0.37373166689121,0.31327526586826,0.66929351237351,0.40441948309162,1.16551972960047,0.99441270125518,0.27548489029696,1.26802885581849,1.13859298418714,0.63547296936813,1.33964278213651],"name":"cpu_power_watt","hovertemplate":"%{x}<br>%{y:.4f}<extra></extra>"}],"layout":{"title":{"text":"frontend — Shelly estimate vs PowerJoular (over time)","x":0.01,"xanchor":"left"},"margin":{"l":55,"r":18,"t":45,"b":45},"xaxis":{"title":"Time (UTC)","type":"date","showgrid":true,"zeroline":false},"yaxis":{"title":"Power (W)","showgrid":true,"zeroline":false},"hovermode":"x unified","legend":{"orientation":"h","y":1.15,"x":0.0},"paper_bgcolor":"rgba(0,0,0,0)","plot_bgcolor":"rgba(0,0,0,0)"}},"svc_powcmp_bar_frontend":{"data":[{"type":"bar","x":["Energy (Wh)","Avg (W)","P95 (W)","Max (W)"],"y":[0.03678344862989649,1.603995734072086,2.706126998256268,2.7370630016634285],"name":"Shelly estimated_power","hovertemplate":"%{x}<br>%{y:.4f}<extra></extra>"},{"type":"bar","x":["Energy (Wh)","Avg (W)","P95 (W)","Max (W)"],"y":[0.010838402373557507,0.6642946056337016,1.3446833561409217,1.60531953955844],"name":"PowerJoular cpu_power","hovertemplate":"%{x}<br>%{y:.4f}<extra></extra>"}],"layout":{"title":{"text":"frontend — summary comparison (Shelly vs PowerJoular)","x":0.01,"xanchor":"left"},"margin":{"l":55,"r":18,"t":45,"b":60},"barmode":"group","xaxis":{"title":"","showgrid":false},"yaxis":{"title":"Value","showgrid":true,"zeroline":false},"paper_bgcolor":"rgba(0,0,0,0)","plot_bgcolor":"rgba(0,0,0,0)","legend":{"orientation":"h","y":1.15,"x":0.0}}},"svc_pow_search":{"data":[{"type":"scatter","mode":"lines","x":["2026-01-05T17:46:18+00:00","2026-01-05T17:46:28+00:00","2026-01-05T17:46:43+00:00","2026-01-05T17:46:53+00:00","2026-01-05T17:47:02+00:00","2026-01-05T17:47:13+00:00"],"y":[0.0024594218466793194,3.3279447294501,2.3397910655019296,2.8826019989175653,2.9,0.3993928362479763],"name":"estimated_power_from_shelly_watt","hovertemplate":"%{x}<br>%{y:.4f}<extra></extra>"}],"layout":{"title":{"text":"search — estimated power over time","x":0.01,"xanchor":"left"},"margin":{"l":55,"r":18,"t":45,"b":45},"xaxis":{"title":"Time (UTC)","type":"date","showgrid":true,"zeroline":false},"yaxis":{"title":"Estimated power (W)","showgrid":true,"zeroline":false},"hovermode":"x unified","paper_bgcolor":"rgba(0,0,0,0)","plot_bgcolor":"rgba(0,0,0,0)"}},"svc_cpu_search":{"data":[{"type":"scatter","mode":"lines","x":["2026-01-05T17:46:18+00:00","2026-01-05T17:46:28+00:00","2026-01-05T17:46:43+00:00","2026-01-05T17:46:53+00:00","2026-01-05T17:47:02+00:00","2026-01-05T17:47:13+00:00"],"y":[0.00021900919076440386,0.030996133496133504,0.06299826914755516,0.034999783690244445,0.0398888606307223,0.0419403956924618],"name":"cpu_cores_used","hovertemplate":"%{x}<br>%{y:.4f}<extra></extra>"}],"layout":{"title":{"text":"search — CPU cores used over time","x":0.01,"xanchor":"left"},"margin":{"l":55,"r":18,"t":45,"b":45},"xaxis":{"title":"Time (UTC)","type":"date","showgrid":true,"zeroline":false},"yaxis":{"title":"CPU cores used","showgrid":true,"zeroline":false},"hovermode":"x unified","paper_bgcolor":"rgba(0,0,0,0)","plot_bgcolor":"rgba(0,0,0,0)"}},"svc_powcmp_search":{"data":[{"type":"scatter","mode":"lines","x":["2026-01-05T17:46:18+00:00","2026-01-05T17:46:28+00:00","2026-01-05T17:46:43+00:00","2026-01-05T17:46:53+00:00","2026-01-05T17:47:02+00:00","2026-01-05T17:47:13+00:00"],"y":[0.0024594218466793194,3.3279447294501,2.3397910655019296,2.8826019989175653,2.9,0.3993928362479763],"name":"estimated_power_from_shelly_watt","hovertemplate":"%{x}<br>%{y:.4f}<extra></extra>"},{"type":"scatter","mode":"lines","x":["2026-01-05T17:46:20+00:00","2026-01-05T17:46:21+00:00","2026-01-05T17:46:22+00:00","2026-01-05T17:46:23+00:00","2026-01-05T17:46:24+00:00","2026-01-05T17:46:25+00:00","2026-01-05T17:46:26+00:00","2026-01-05T17:46:27+00:00","2026-01-05T17:46:28+00:00","2026-01-05T17:46:29+00:00","2026-01-05T17:46:30+00:00","2026-01-05T17:46:31+00:00","2026-01-05T17:46:32+00:00","2026-01-05T17:46:33+00:00","2026-01-05T17:46:34+00:00","2026-01-05T17:46:35+00:00","2026-01-05T17:46:36+00:00","2026-01-05T17:46:37+00:00","2026-01-05T17:46:38+00:00","2026-01-05T17:46:39+00:00","2026-01-05T17:46:40+00:00","2026-01-05T17:46:41+00:00","2026-01-05T17:46:42+00:00","2026-01-05T17:46:43+00:00","2026-01-05T17:46:44+00:00","2026-01-05T17:46:45+00:00","2026-01-05T17:46:46+00:00","2026-01-05T17:46:47+00:00","2026-01-05T17:46:48+00:00","2026-01-05T17:46:49+00:00","2026-01-05T17:46:50+00:00","2026-01-05T17:46:51+00:00","2026-01-05T17:46:52+00:00","2026-01-05T17:46:53+00:00","2026-01-05T17:46:54+00:00","2026-01-05T17:46:55+00:00","2026-01-05T17:46:56+00:00","2026-01-05T17:46:57+00:00","2026-01-05T17:46:58+00:00","2026-01-05T17:46:59+00:00","2026-01-05T17:47:00+00:00","2026-01-05T17:47:01+00:00","2026-01-05T17:47:02+00:00","2026-01-05T17:47:03+00:00","2026-01-05T17:47:04+00:00","2026-01-05T17:47:05+00:00","2026-01-05T17:47:06+00:00","2026-01-05T17:47:07+00:00","2026-01-05T17:47:08+00:00","2026-01-05T17:47:09+00:00","2026-01-05T17:47:10+00:00","2026-01-05T17:47:11+00:00","2026-01-05T17:47:12+00:00","2026-01-05T17:47:13+00:00","2026-01-05T17:47:14+00:00","2026-01-05T17:47:15+00:00","2026-01-05T17:47:16+00:00","2026-01-05T17:47:17+00:00","2026-01-05T17:47:18+00:00"],"y":[0.0,0.0,0.11759398964165,0.14883537493339,0.09691008415689,0.16260969206979,0.15931326205444,0.23944546169048,0.14039523205552,0.14727114219068,0.09761934541682,0.17532286171929,0.1540243709104,0.13039430487427,0.10001079680316,0.18269388605973,0.09905935229438,0.23392535390231,0.4965930214391,0.17864009739686,0.46223086527426,0.40656262157608,0.5041913080333,0.60031920126037,0.11697228667442,0.64746609772096,0.40605051053495,0.91732545117625,0.40604018216231,0.11979916122701,0.52539103635193,0.44652730594316,0.25377211240622,0.55833891466533,0.12623733769957,0.46761036336062,0.29768019499424,0.56706133459452,0.27937824603076,0.13094268630958,0.79431344124608,0.32481465932436,0.14283941103367,0.55830891207149,0.10537499594355,0.56706594478771,0.10044096172041,0.28367255826991,0.23358229180701,0.12049048687241,0.33464675618676,0.20220974154581,0.51800876871132,0.41191825891812,0.15304716127609,0.47551082093193,0.48796842179449,0.35296003250457,0.57918396885648],"name":"cpu_power_watt","hovertemplate":"%{x}<br>%{y:.4f}<extra></extra>"}],"layout":{"title":{"text":"search — Shelly estimate vs PowerJoular (over time)","x":0.01,"xanchor":"left"},"margin":{"l":55,"r":18,"t":45,"b":45},"xaxis":{"title":"Time (UTC)","type":"date","showgrid":true,"zeroline":false},"yaxis":{"title":"Power (W)","showgrid":true,"zeroline":false},"hovermode":"x unified","legend":{"orientation":"h","y":1.15,"x":0.0},"paper_bgcolor":"rgba(0,0,0,0)","plot_bgcolor":"rgba(0,0,0,0)"}},"svc_powcmp_bar_search":{"data":[{"type":"bar","x":["Energy (Wh)","Avg (W)","P95 (W)","Max (W)"],"y":[0.035360072674634827,1.9753650086607084,3.220958547087575,3.3279447294501],"name":"Shelly estimated_power","hovertemplate":"%{x}<br>%{y:.4f}<extra></extra>"},{"type":"bar","x":["Energy (Wh)","Avg (W)","P95 (W)","Max (W)"],"y":[0.005013031233724213,0.30587987188825716,0.6050338909064287,0.91732545117625],"name":"PowerJoular cpu_power","hovertemplate":"%{x}<br>%{y:.4f}<extra></extra>"}],"layout":{"title":{"text":"search — summary comparison (Shelly vs PowerJoular)","x":0.01,"xanchor":"left"},"margin":{"l":55,"r":18,"t":45,"b":60},"barmode":"group","xaxis":{"title":"","showgrid":false},"yaxis":{"title":"Value","showgrid":true,"zeroline":false},"paper_bgcolor":"rgba(0,0,0,0)","plot_bgcolor":"rgba(0,0,0,0)","legend":{"orientation":"h","y":1.15,"x":0.0}}},"svc_pow_prometheus":{"data":[{"type":"scatter","mode":"lines","x":["2026-01-05T17:46:33+00:00","2026-01-05T17:46:41+00:00","2026-01-05T17:46:42+00:00","2026-01-05T17:46:52+00:00","2026-01-05T17:47:07+00:00","2026-01-05T17:47:17+00:00","2026-01-05T17:47:18+00:00"],"y":[0.360941320527738,2.5,2.5,2.7524224792363987,2.102875398317813,2.6,0.5333663908281714],"name":"estimated_power_from_shelly_watt","hovertemplate":"%{x}<br>%{y:.4f}<extra></extra>"}],"layout":{"title":{"text":"prometheus — estimated power over time","x":0.01,"xanchor":"left"},"margin":{"l":55,"r":18,"t":45,"b":45},"xaxis":{"title":"Time (UTC)","type":"date","showgrid":true,"zeroline":false},"yaxis":{"title":"Estimated power (W)","showgrid":true,"zeroline":false},"hovermode":"x unified","paper_bgcolor":"rgba(0,0,0,0)","plot_bgcolor":"rgba(0,0,0,0)"}},"svc_cpu_prometheus":{"data":[{"type":"scatter","mode":"lines","x":["2026-01-05T17:46:33+00:00","2026-01-05T17:46:41+00:00","2026-01-05T17:46:42+00:00","2026-01-05T17:46:52+00:00","2026-01-05T17:47:07+00:00","2026-01-05T17:47:17+00:00","2026-01-05T17:47:18+00:00"],"y":[0.024577301161751684,0.044853581321724935,0.044853581321724935,0.025643698321222413,0.028147029702970703,0.0324851775755794,0.0324851775755794],"name":"cpu_cores_used","hovertemplate":"%{x}<br>%{y:.4f}<extra></extra>"}],"layout":{"title":{"text":"prometheus — CPU cores used over time","x":0.01,"xanchor":"left"},"margin":{"l":55,"r":18,"t":45,"b":45},"xaxis":{"title":"Time (UTC)","type":"date","showgrid":true,"zeroline":false},"yaxis":{"title":"CPU cores used","showgrid":true,"zeroline":false},"hovermode":"x unified","paper_bgcolor":"rgba(0,0,0,0)","plot_bgcolor":"rgba(0,0,0,0)"}},"svc_powcmp_prometheus":{"data":[{"type":"scatter","mode":"lines","x":["2026-01-05T17:46:33+00:00","2026-01-05T17:46:41+00:00","2026-01-05T17:46:42+00:00","2026-01-05T17:46:52+00:00","2026-01-05T17:47:07+00:00","2026-01-05T17:47:17+00:00","2026-01-05T17:47:18+00:00"],"y":[0.360941320527738,2.5,2.5,2.7524224792363987,2.102875398317813,2.6,0.5333663908281714],"name":"estimated_power_from_shelly_watt","hovertemplate":"%{x}<br>%{y:.4f}<extra></extra>"},{"type":"scatter","mode":"lines","x":["2026-01-05T17:46:20+00:00","2026-01-05T17:46:21+00:00","2026-01-05T17:46:22+00:00","2026-01-05T17:46:23+00:00","2026-01-05T17:46:24+00:00","2026-01-05T17:46:25+00:00","2026-01-05T17:46:26+00:00","2026-01-05T17:46:27+00:00","2026-01-05T17:46:28+00:00","2026-01-05T17:46:29+00:00","2026-01-05T17:46:30+00:00","2026-01-05T17:46:31+00:00","2026-01-05T17:46:32+00:00","2026-01-05T17:46:33+00:00","2026-01-05T17:46:34+00:00","2026-01-05T17:46:35+00:00","2026-01-05T17:46:36+00:00","2026-01-05T17:46:37+00:00","2026-01-05T17:46:38+00:00","2026-01-05T17:46:39+00:00","2026-01-05T17:46:40+00:00","2026-01-05T17:46:41+00:00","2026-01-05T17:46:42+00:00","2026-01-05T17:46:43+00:00","2026-01-05T17:46:44+00:00","2026-01-05T17:46:45+00:00","2026-01-05T17:46:46+00:00","2026-01-05T17:46:47+00:00","2026-01-05T17:46:48+00:00","2026-01-05T17:46:49+00:00","2026-01-05T17:46:50+00:00","2026-01-05T17:46:51+00:00","2026-01-05T17:46:52+00:00","2026-01-05T17:46:53+00:00","2026-01-05T17:46:54+00:00","2026-01-05T17:46:55+00:00","2026-01-05T17:46:56+00:00","2026-01-05T17:46:57+00:00","2026-01-05T17:46:58+00:00","2026-01-05T17:46:59+00:00","2026-01-05T17:47:00+00:00","2026-01-05T17:47:01+00:00","2026-01-05T17:47:02+00:00","2026-01-05T17:47:03+00:00","2026-01-05T17:47:04+00:00","2026-01-05T17:47:05+00:00","2026-01-05T17:47:06+00:00","2026-01-05T17:47:07+00:00","2026-01-05T17:47:08+00:00","2026-01-05T17:47:09+00:00","2026-01-05T17:47:10+00:00","2026-01-05T17:47:11+00:00","2026-01-05T17:47:12+00:00","2026-01-05T17:47:13+00:00","2026-01-05T17:47:14+00:00","2026-01-05T17:47:15+00:00","2026-01-05T17:47:16+00:00","2026-01-05T17:47:17+00:00","2026-01-05T17:47:18+00:00"],"y":[0.29886514319351,0.0,0.0,0.0,0.35533697524194,0.0,0.0,0.0,0.0,0.34614041606826,0.0,0.0,0.0,0.0,0.15000239205835,0.10783222370212,0.0,0.0,0.11922693718318,0.33169989663531,0.0,0.0,0.0,0.0,0.50079086147842,0.0,0.0,0.0,0.0,0.26933072759592,0.0,0.0,0.0,0.0,0.27602303568954,0.0,0.0,0.0,0.0,0.32474453862342,0.0,0.0,0.0,0.0,0.31464468475303,0.0,0.0,0.0,0.0,0.26507907111929,0.0,0.0,0.0,0.0,0.33670375480739,0.0,0.0,0.0,0.0],"name":"cpu_power_watt","hovertemplate":"%{x}<br>%{y:.4f}<extra></extra>"}],"layout":{"title":{"text":"prometheus — Shelly estimate vs PowerJoular (over time)","x":0.01,"xanchor":"left"},"margin":{"l":55,"r":18,"t":45,"b":45},"xaxis":{"title":"Time (UTC)","type":"date","showgrid":true,"zeroline":false},"yaxis":{"title":"Power (W)","showgrid":true,"zeroline":false},"hovermode":"x unified","legend":{"orientation":"h","y":1.15,"x":0.0},"paper_bgcolor":"rgba(0,0,0,0)","plot_bgcolor":"rgba(0,0,0,0)"}},"svc_powcmp_bar_prometheus":{"data":[{"type":"bar","x":["Energy (Wh)","Avg (W)","P95 (W)","Max (W)"],"y":[0.03121323702349576,1.9070865127014458,2.706695735465479,2.7524224792363987],"name":"Shelly estimated_power","hovertemplate":"%{x}<br>%{y:.4f}<extra></extra>"},{"type":"bar","x":["Energy (Wh)","Avg (W)","P95 (W)","Max (W)"],"y":[0.0010270987541544916,0.06773594335846915,0.33764742093347694,0.50079086147842],"name":"PowerJoular cpu_power","hovertemplate":"%{x}<br>%{y:.4f}<extra></extra>"}],"layout":{"title":{"text":"prometheus — summary comparison (Shelly vs PowerJoular)","x":0.01,"xanchor":"left"},"margin":{"l":55,"r":18,"t":45,"b":60},"barmode":"group","xaxis":{"title":"","showgrid":false},"yaxis":{"title":"Value","showgrid":true,"zeroline":false},"paper_bgcolor":"rgba(0,0,0,0)","plot_bgcolor":"rgba(0,0,0,0)","legend":{"orientation":"h","y":1.15,"x":0.0}}},"svc_pow_consul":{"data":[{"type":"scatter","mode":"lines","x":["2026-01-05T17:46:23+00:00","2026-01-05T17:46:27+00:00","2026-01-05T17:46:48+00:00","2026-01-05T17:47:07+00:00","2026-01-05T17:47:08+00:00"],"y":[2.6150992526553587,3.3431390160253187,0.38451901633712415,1.0971246016821874,0.4866810119652142],"name":"estimated_power_from_shelly_watt","hovertemplate":"%{x}<br>%{y:.4f}<extra></extra>"}],"layout":{"title":{"text":"consul — estimated power over time","x":0.01,"xanchor":"left"},"margin":{"l":55,"r":18,"t":45,"b":45},"xaxis":{"title":"Time (UTC)","type":"date","showgrid":true,"zeroline":false},"yaxis":{"title":"Estimated power (W)","showgrid":true,"zeroline":false},"hovermode":"x unified","paper_bgcolor":"rgba(0,0,0,0)","plot_bgcolor":"rgba(0,0,0,0)"}},"svc_cpu_consul":{"data":[{"type":"scatter","mode":"lines","x":["2026-01-05T17:46:23+00:00","2026-01-05T17:46:27+00:00","2026-01-05T17:46:48+00:00","2026-01-05T17:47:07+00:00","2026-01-05T17:47:08+00:00"],"y":[0.014344173441734396,0.014891733723482101,0.014011163483006576,0.014685034965034736,0.014685034965034736],"name":"cpu_cores_used","hovertemplate":"%{x}<br>%{y:.4f}<extra></extra>"}],"layout":{"title":{"text":"consul — CPU cores used over time","x":0.01,"xanchor":"left"},"margin":{"l":55,"r":18,"t":45,"b":45},"xaxis":{"title":"Time (UTC)","type":"date","showgrid":true,"zeroline":false},"yaxis":{"title":"CPU cores used","showgrid":true,"zeroline":false},"hovermode":"x unified","paper_bgcolor":"rgba(0,0,0,0)","plot_bgcolor":"rgba(0,0,0,0)"}},"svc_powcmp_consul":{"data":[{"type":"scatter","mode":"lines","x":["2026-01-05T17:46:23+00:00","2026-01-05T17:46:27+00:00","2026-01-05T17:46:48+00:00","2026-01-05T17:47:07+00:00","2026-01-05T17:47:08+00:00"],"y":[2.6150992526553587,3.3431390160253187,0.38451901633712415,1.0971246016821874,0.4866810119652142],"name":"estimated_power_from_shelly_watt","hovertemplate":"%{x}<br>%{y:.4f}<extra></extra>"},{"type":"scatter","mode":"lines","x":["2026-01-05T17:46:20+00:00","2026-01-05T17:46:21+00:00","2026-01-05T17:46:22+00:00","2026-01-05T17:46:23+00:00","2026-01-05T17:46:24+00:00","2026-01-05T17:46:25+00:00","2026-01-05T17:46:26+00:00","2026-01-05T17:46:27+00:00","2026-01-05T17:46:28+00:00","2026-01-05T17:46:29+00:00","2026-01-05T17:46:30+00:00","2026-01-05T17:46:31+00:00","2026-01-05T17:46:32+00:00","2026-01-05T17:46:33+00:00","2026-01-05T17:46:34+00:00","2026-01-05T17:46:35+00:00","2026-01-05T17:46:36+00:00","2026-01-05T17:46:37+00:00","2026-01-05T17:46:38+00:00","2026-01-05T17:46:39+00:00","2026-01-05T17:46:40+00:00","2026-01-05T17:46:41+00:00","2026-01-05T17:46:42+00:00","2026-01-05T17:46:43+00:00","2026-01-05T17:46:44+00:00","2026-01-05T17:46:45+00:00","2026-01-05T17:46:46+00:00","2026-01-05T17:46:47+00:00","2026-01-05T17:46:48+00:00","2026-01-05T17:46:49+00:00","2026-01-05T17:46:50+00:00","2026-01-05T17:46:51+00:00","2026-01-05T17:46:52+00:00","2026-01-05T17:46:53+00:00","2026-01-05T17:46:54+00:00","2026-01-05T17:46:55+00:00","2026-01-05T17:46:56+00:00","2026-01-05T17:46:57+00:00","2026-01-05T17:46:58+00:00","2026-01-05T17:46:59+00:00","2026-01-05T17:47:00+00:00","2026-01-05T17:47:01+00:00","2026-01-05T17:47:02+00:00","2026-01-05T17:47:03+00:00","2026-01-05T17:47:04+00:00","2026-01-05T17:47:05+00:00","2026-01-05T17:47:06+00:00","2026-01-05T17:47:07+00:00","2026-01-05T17:47:08+00:00","2026-01-05T17:47:09+00:00","2026-01-05T17:47:10+00:00","2026-01-05T17:47:11+00:00","2026-01-05T17:47:12+00:00","2026-01-05T17:47:13+00:00","2026-01-05T17:47:14+00:00","2026-01-05T17:47:15+00:00","2026-01-05T17:47:16+00:00","2026-01-05T17:47:17+00:00","2026-01-05T17:47:18+00:00"],"y":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],"name":"cpu_power_watt","hovertemplate":"%{x}<br>%{y:.4f}<extra></extra>"}],"layout":{"title":{"text":"consul — Shelly estimate vs PowerJoular (over time)","x":0.01,"xanchor":"left"},"margin":{"l":55,"r":18,"t":45,"b":45},"xaxis":{"title":"Time (UTC)","type":"date","showgrid":true,"zeroline":false},"yaxis":{"title":"Power (W)","showgrid":true,"zeroline":false},"hovermode":"x unified","legend":{"orientation":"h","y":1.15,"x":0.0},"paper_bgcolor":"rgba(0,0,0,0)","plot_bgcolor":"rgba(0,0,0,0)"}},"svc_powcmp_bar_consul":{"data":[{"type":"bar","x":["Energy (Wh)","Avg (W)","P95 (W)","Max (W)"],"y":[0.013302681799095113,1.5853125797330407,3.1975310633513265,3.3431390160253187],"name":"Shelly estimated_power","hovertemplate":"%{x}<br>%{y:.4f}<extra></extra>"},{"type":"bar","x":["Energy (Wh)","Avg (W)","P95 (W)","Max (W)"],"y":[0.0,0.0,0.0,0.0],"name":"PowerJoular cpu_power","hovertemplate":"%{x}<br>%{y:.4f}<extra></extra>"}],"layout":{"title":{"text":"consul — summary comparison (Shelly vs PowerJoular)","x":0.01,"xanchor":"left"},"margin":{"l":55,"r":18,"t":45,"b":60},"barmode":"group","xaxis":{"title":"","showgrid":false},"yaxis":{"title":"Value","showgrid":true,"zeroline":false},"paper_bgcolor":"rgba(0,0,0,0)","plot_bgcolor":"rgba(0,0,0,0)","legend":{"orientation":"h","y":1.15,"x":0.0}}},"svc_pow_reservation":{"data":[{"type":"scatter","mode":"lines","x":["2026-01-05T17:46:18+00:00","2026-01-05T17:46:32+00:00","2026-01-05T17:46:43+00:00","2026-01-05T17:47:18+00:00"],"y":[0.006145271453147459,0.0,0.14165879444394866,0.029972088190483148],"name":"estimated_power_from_shelly_watt","hovertemplate":"%{x}<br>%{y:.4f}<extra></extra>"}],"layout":{"title":{"text":"reservation — estimated power over time","x":0.01,"xanchor":"left"},"margin":{"l":55,"r":18,"t":45,"b":45},"xaxis":{"title":"Time (UTC)","type":"date","showgrid":true,"zeroline":false},"yaxis":{"title":"Estimated power (W)","showgrid":true,"zeroline":false},"hovermode":"x unified","paper_bgcolor":"rgba(0,0,0,0)","plot_bgcolor":"rgba(0,0,0,0)"}},"svc_cpu_reservation":{"data":[{"type":"scatter","mode":"lines","x":["2026-01-05T17:46:18+00:00","2026-01-05T17:46:32+00:00","2026-01-05T17:46:43+00:00","2026-01-05T17:47:18+00:00"],"y":[0.0005472306143001028,0.0008211361944926837,0.003814126394052045,0.0018254779902178739],"name":"cpu_cores_used","hovertemplate":"%{x}<br>%{y:.4f}<extra></extra>"}],"layout":{"title":{"text":"reservation — CPU cores used over time","x":0.01,"xanchor":"left"},"margin":{"l":55,"r":18,"t":45,"b":45},"xaxis":{"title":"Time (UTC)","type":"date","showgrid":true,"zeroline":false},"yaxis":{"title":"CPU cores used","showgrid":true,"zeroline":false},"hovermode":"x unified","paper_bgcolor":"rgba(0,0,0,0)","plot_bgcolor":"rgba(0,0,0,0)"}},"svc_powcmp_reservation":{"data":[{"type":"scatter","mode":"lines","x":["2026-01-05T17:46:18+00:00","2026-01-05T17:46:32+00:00","2026-01-05T17:46:43+00:00","2026-01-05T17:47:18+00:00"],"y":[0.006145271453147459,0.0,0.14165879444394866,0.029972088190483148],"name":"estimated_power_from_shelly_watt","hovertemplate":"%{x}<br>%{y:.4f}<extra></extra>"},{"type":"scatter","mode":"lines","x":["2026-01-05T17:46:20+00:00","2026-01-05T17:46:21+00:00","2026-01-05T17:46:22+00:00","2026-01-05T17:46:23+00:00","2026-01-05T17:46:24+00:00"],"y":[0.0,0.0,0.05675294134235,0.0,0.0],"name":"cpu_power_watt","hovertemplate":"%{x}<br>%{y:.4f}<extra></extra>"}],"layout":{"title":{"text":"reservation — Shelly estimate vs PowerJoular (over time)","x":0.01,"xanchor":"left"},"margin":{"l":55,"r":18,"t":45,"b":45},"xaxis":{"title":"Time (UTC)","type":"date","showgrid":true,"zeroline":false},"yaxis":{"title":"Power (W)","showgrid":true,"zeroline":false},"hovermode":"x unified","legend":{"orientation":"h","y":1.15,"x":0.0},"paper_bgcolor":"rgba(0,0,0,0)","plot_bgcolor":"rgba(0,0,0,0)"}},"svc_powcmp_bar_reservation":{"data":[{"type":"bar","x":["Energy (Wh)","Avg (W)","P95 (W)","Max (W)"],"y":[0.0005494044370972776,0.04444403852189482,0.12490578850592879,0.14165879444394866],"name":"Shelly estimated_power","hovertemplate":"%{x}<br>%{y:.4f}<extra></extra>"},{"type":"bar","x":["Energy (Wh)","Avg (W)","P95 (W)","Max (W)"],"y":[1.5764705928430556e-05,0.01135058826847,0.045402353073879985,0.05675294134235],"name":"PowerJoular cpu_power","hovertemplate":"%{x}<br>%{y:.4f}<extra></extra>"}],"layout":{"title":{"text":"reservation — summary comparison (Shelly vs PowerJoular)","x":0.01,"xanchor":"left"},"margin":{"l":55,"r":18,"t":45,"b":60},"barmode":"group","xaxis":{"title":"","showgrid":false},"yaxis":{"title":"Value","showgrid":true,"zeroline":false},"paper_bgcolor":"rgba(0,0,0,0)","plot_bgcolor":"rgba(0,0,0,0)","legend":{"orientation":"h","y":1.15,"x":0.0}}},"svc_pow_rate":{"data":[{"type":"scatter","mode":"lines","x":["2026-01-05T17:46:23+00:00","2026-01-05T17:46:33+00:00","2026-01-05T17:46:43+00:00","2026-01-05T17:47:03+00:00","2026-01-05T17:47:18+00:00"],"y":[0.12345526612021872,0.01794380009395228,0.10508947033572054,0.011270380928824226,0.02137576818863422],"name":"estimated_power_from_shelly_watt","hovertemplate":"%{x}<br>%{y:.4f}<extra></extra>"}],"layout":{"title":{"text":"rate — estimated power over time","x":0.01,"xanchor":"left"},"margin":{"l":55,"r":18,"t":45,"b":45},"xaxis":{"title":"Time (UTC)","type":"date","showgrid":true,"zeroline":false},"yaxis":{"title":"Estimated power (W)","showgrid":true,"zeroline":false},"hovermode":"x unified","paper_bgcolor":"rgba(0,0,0,0)","plot_bgcolor":"rgba(0,0,0,0)"}},"svc_cpu_rate":{"data":[{"type":"scatter","mode":"lines","x":["2026-01-05T17:46:23+00:00","2026-01-05T17:46:33+00:00","2026-01-05T17:46:43+00:00","2026-01-05T17:47:03+00:00","2026-01-05T17:47:18+00:00"],"y":[0.0006771688484579571,0.001221833449965012,0.002829506802721089,0.0008368471490177311,0.0013019111015675326],"name":"cpu_cores_used","hovertemplate":"%{x}<br>%{y:.4f}<extra></extra>"}],"layout":{"title":{"text":"rate — CPU cores used over time","x":0.01,"xanchor":"left"},"margin":{"l":55,"r":18,"t":45,"b":45},"xaxis":{"title":"Time (UTC)","type":"date","showgrid":true,"zeroline":false},"yaxis":{"title":"CPU cores used","showgrid":true,"zeroline":false},"hovermode":"x unified","paper_bgcolor":"rgba(0,0,0,0)","plot_bgcolor":"rgba(0,0,0,0)"}},"svc_powcmp_rate":{"data":[{"type":"scatter","mode":"lines","x":["2026-01-05T17:46:23+00:00","2026-01-05T17:46:33+00:00","2026-01-05T17:46:43+00:00","2026-01-05T17:47:03+00:00","2026-01-05T17:47:18+00:00"],"y":[0.12345526612021872,0.01794380009395228,0.10508947033572054,0.011270380928824226,0.02137576818863422],"name":"estimated_power_from_shelly_watt","hovertemplate":"%{x}<br>%{y:.4f}<extra></extra>"},{"type":"scatter","mode":"lines","x":["2026-01-05T17:46:20+00:00","2026-01-05T17:46:21+00:00","2026-01-05T17:46:22+00:00","2026-01-05T17:46:23+00:00","2026-01-05T17:46:24+00:00","2026-01-05T17:46:25+00:00","2026-01-05T17:46:26+00:00","2026-01-05T17:46:27+00:00","2026-01-05T17:46:28+00:00","2026-01-05T17:46:29+00:00","2026-01-05T17:46:30+00:00","2026-01-05T17:46:31+00:00","2026-01-05T17:46:32+00:00"],"y":[0.0,0.0,0.0,0.0,0.06460672277126,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],"name":"cpu_power_watt","hovertemplate":"%{x}<br>%{y:.4f}<extra></extra>"}],"layout":{"title":{"text":"rate — Shelly estimate vs PowerJoular (over time)","x":0.01,"xanchor":"left"},"margin":{"l":55,"r":18,"t":45,"b":45},"xaxis":{"title":"Time (UTC)","type":"date","showgrid":true,"zeroline":false},"yaxis":{"title":"Power (W)","showgrid":true,"zeroline":false},"hovermode":"x unified","legend":{"orientation":"h","y":1.15,"x":0.0},"paper_bgcolor":"rgba(0,0,0,0)","plot_bgcolor":"rgba(0,0,0,0)"}},"svc_powcmp_bar_rate":{"data":[{"type":"bar","x":["Energy (Wh)","Avg (W)","P95 (W)","Max (W)"],"y":[0.00047859372923087233,0.05582693713347,0.11978210696331908,0.12345526612021872],"name":"Shelly estimated_power","hovertemplate":"%{x}<br>%{y:.4f}<extra></extra>"},{"type":"bar","x":["Energy (Wh)","Avg (W)","P95 (W)","Max (W)"],"y":[1.7946311880905556e-05,0.004969747905481539,0.02584268910850391,0.06460672277126],"name":"PowerJoular cpu_power","hovertemplate":"%{x}<br>%{y:.4f}<extra></extra>"}],"layout":{"title":{"text":"rate — summary comparison (Shelly vs PowerJoular)","x":0.01,"xanchor":"left"},"margin":{"l":55,"r":18,"t":45,"b":60},"barmode":"group","xaxis":{"title":"","showgrid":false},"yaxis":{"title":"Value","showgrid":true,"zeroline":false},"paper_bgcolor":"rgba(0,0,0,0)","plot_bgcolor":"rgba(0,0,0,0)","legend":{"orientation":"h","y":1.15,"x":0.0}}},"svc_pow_memcached_profile":{"data":[{"type":"scatter","mode":"lines","x":["2026-01-05T17:46:18+00:00","2026-01-05T17:46:27+00:00","2026-01-05T17:46:53+00:00","2026-01-05T17:47:03+00:00"],"y":[0.002896110838741464,0.05686098397468157,0.0173980010824345,0.0032890349749199084],"name":"estimated_power_from_shelly_watt","hovertemplate":"%{x}<br>%{y:.4f}<extra></extra>"}],"layout":{"title":{"text":"memcached-profile — estimated power over time","x":0.01,"xanchor":"left"},"margin":{"l":55,"r":18,"t":45,"b":45},"xaxis":{"title":"Time (UTC)","type":"date","showgrid":true,"zeroline":false},"yaxis":{"title":"Estimated power (W)","showgrid":true,"zeroline":false},"hovermode":"x unified","paper_bgcolor":"rgba(0,0,0,0)","plot_bgcolor":"rgba(0,0,0,0)"}},"svc_cpu_memcached_profile":{"data":[{"type":"scatter","mode":"lines","x":["2026-01-05T17:46:18+00:00","2026-01-05T17:46:27+00:00","2026-01-05T17:46:53+00:00","2026-01-05T17:47:03+00:00"],"y":[0.0002578959327425578,0.00025328250741210817,0.00021124188311688597,0.00024421708185053104],"name":"cpu_cores_used","hovertemplate":"%{x}<br>%{y:.4f}<extra></extra>"}],"layout":{"title":{"text":"memcached-profile — CPU cores used over time","x":0.01,"xanchor":"left"},"margin":{"l":55,"r":18,"t":45,"b":45},"xaxis":{"title":"Time (UTC)","type":"date","showgrid":true,"zeroline":false},"yaxis":{"title":"CPU cores used","showgrid":true,"zeroline":false},"hovermode":"x unified","paper_bgcolor":"rgba(0,0,0,0)","plot_bgcolor":"rgba(0,0,0,0)"}},"svc_powcmp_memcached_profile":{"data":[{"type":"scatter","mode":"lines","x":["2026-01-05T17:46:18+00:00","2026-01-05T17:46:27+00:00","2026-01-05T17:46:53+00:00","2026-01-05T17:47:03+00:00"],"y":[0.002896110838741464,0.05686098397468157,0.0173980010824345,0.0032890349749199084],"name":"estimated_power_from_shelly_watt","hovertemplate":"%{x}<br>%{y:.4f}<extra></extra>"},{"type":"scatter","mode":"lines","x":["2026-01-05T17:46:20+00:00","2026-01-05T17:46:21+00:00","2026-01-05T17:46:22+00:00","2026-01-05T17:46:23+00:00","2026-01-05T17:46:24+00:00","2026-01-05T17:46:25+00:00","2026-01-05T17:46:26+00:00","2026-01-05T17:46:27+00:00","2026-01-05T17:46:28+00:00","2026-01-05T17:46:29+00:00","2026-01-05T17:46:30+00:00","2026-01-05T17:46:31+00:00","2026-01-05T17:46:32+00:00","2026-01-05T17:46:33+00:00","2026-01-05T17:46:34+00:00","2026-01-05T17:46:35+00:00","2026-01-05T17:46:36+00:00","2026-01-05T17:46:37+00:00","2026-01-05T17:46:38+00:00","2026-01-05T17:46:39+00:00","2026-01-05T17:46:40+00:00","2026-01-05T17:46:41+00:00","2026-01-05T17:46:42+00:00","2026-01-05T17:46:43+00:00","2026-01-05T17:46:44+00:00","2026-01-05T17:46:45+00:00","2026-01-05T17:46:46+00:00","2026-01-05T17:46:47+00:00","2026-01-05T17:46:48+00:00","2026-01-05T17:46:49+00:00","2026-01-05T17:46:50+00:00","2026-01-05T17:46:51+00:00","2026-01-05T17:46:52+00:00","2026-01-05T17:46:53+00:00","2026-01-05T17:46:54+00:00","2026-01-05T17:46:55+00:00","2026-01-05T17:46:56+00:00","2026-01-05T17:46:57+00:00","2026-01-05T17:46:58+00:00","2026-01-05T17:46:59+00:00","2026-01-05T17:47:00+00:00","2026-01-05T17:47:01+00:00","2026-01-05T17:47:02+00:00","2026-01-05T17:47:03+00:00","2026-01-05T17:47:04+00:00","2026-01-05T17:47:05+00:00","2026-01-05T17:47:06+00:00","2026-01-05T17:47:07+00:00","2026-01-05T17:47:08+00:00","2026-01-05T17:47:09+00:00","2026-01-05T17:47:10+00:00","2026-01-05T17:47:11+00:00","2026-01-05T17:47:12+00:00","2026-01-05T17:47:13+00:00","2026-01-05T17:47:14+00:00","2026-01-05T17:47:15+00:00","2026-01-05T17:47:16+00:00","2026-01-05T17:47:17+00:00","2026-01-05T17:47:18+00:00"],"y":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.03597985046111,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.03017799281214,0.0,0.0,0.0,0.0],"name":"cpu_power_watt","hovertemplate":"%{x}<br>%{y:.4f}<extra></extra>"}],"layout":{"title":{"text":"memcached-profile — Shelly estimate vs PowerJoular (over time)","x":0.01,"xanchor":"left"},"margin":{"l":55,"r":18,"t":45,"b":45},"xaxis":{"title":"Time (UTC)","type":"date","showgrid":true,"zeroline":false},"yaxis":{"title":"Power (W)","showgrid":true,"zeroline":false},"hovermode":"x unified","legend":{"orientation":"h","y":1.15,"x":0.0},"paper_bgcolor":"rgba(0,0,0,0)","plot_bgcolor":"rgba(0,0,0,0)"}},"svc_powcmp_bar_memcached_profile":{"data":[{"type":"bar","x":["Energy (Wh)","Avg (W)","P95 (W)","Max (W)"],"y":[0.00027694089824017504,0.02011103271769436,0.0509415365408445,0.05686098397468157],"name":"Shelly estimated_power","hovertemplate":"%{x}<br>%{y:.4f}<extra></extra>"},{"type":"bar","x":["Energy (Wh)","Avg (W)","P95 (W)","Max (W)"],"y":[1.837717868701389e-05,0.0011213193775127118,0.0,0.03597985046111],"name":"PowerJoular cpu_power","hovertemplate":"%{x}<br>%{y:.4f}<extra></extra>"}],"layout":{"title":{"text":"memcached-profile — summary comparison (Shelly vs PowerJoular)","x":0.01,"xanchor":"left"},"margin":{"l":55,"r":18,"t":45,"b":60},"barmode":"group","xaxis":{"title":"","showgrid":false},"yaxis":{"title":"Value","showgrid":true,"zeroline":false},"paper_bgcolor":"rgba(0,0,0,0)","plot_bgcolor":"rgba(0,0,0,0)","legend":{"orientation":"h","y":1.15,"x":0.0}}},"svc_pow_geo":{"data":[{"type":"scatter","mode":"lines","x":["2026-01-05T17:46:23+00:00","2026-01-05T17:46:33+00:00","2026-01-05T17:46:58+00:00"],"y":[0.11218482353539816,0.010232982733736852,0.02983458816149552],"name":"estimated_power_from_shelly_watt","hovertemplate":"%{x}<br>%{y:.4f}<extra></extra>"}],"layout":{"title":{"text":"geo — estimated power over time","x":0.01,"xanchor":"left"},"margin":{"l":55,"r":18,"t":45,"b":45},"xaxis":{"title":"Time (UTC)","type":"date","showgrid":true,"zeroline":false},"yaxis":{"title":"Estimated power (W)","showgrid":true,"zeroline":false},"hovermode":"x unified","paper_bgcolor":"rgba(0,0,0,0)","plot_bgcolor":"rgba(0,0,0,0)"}},"svc_cpu_geo":{"data":[{"type":"scatter","mode":"lines","x":["2026-01-05T17:46:23+00:00","2026-01-05T17:46:33+00:00","2026-01-05T17:46:58+00:00"],"y":[0.0006153489450498469,0.0006967866634452793,0.0008964776632302398],"name":"cpu_cores_used","hovertemplate":"%{x}<br>%{y:.4f}<extra></extra>"}],"layout":{"title":{"text":"geo — CPU cores used over time","x":0.01,"xanchor":"left"},"margin":{"l":55,"r":18,"t":45,"b":45},"xaxis":{"title":"Time (UTC)","type":"date","showgrid":true,"zeroline":false},"yaxis":{"title":"CPU cores used","showgrid":true,"zeroline":false},"hovermode":"x unified","paper_bgcolor":"rgba(0,0,0,0)","plot_bgcolor":"rgba(0,0,0,0)"}},"svc_powcmp_geo":{"data":[{"type":"scatter","mode":"lines","x":["2026-01-05T17:46:23+00:00","2026-01-05T17:46:33+00:00","2026-01-05T17:46:58+00:00"],"y":[0.11218482353539816,0.010232982733736852,0.02983458816149552],"name":"estimated_power_from_shelly_watt","hovertemplate":"%{x}<br>%{y:.4f}<extra></extra>"},{"type":"scatter","mode":"lines","x":["2026-01-05T17:46:20+00:00","2026-01-05T17:46:21+00:00","2026-01-05T17:46:22+00:00","2026-01-05T17:46:23+00:00","2026-01-05T17:46:24+00:00","2026-01-05T17:46:25+00:00","2026-01-05T17:46:26+00:00","2026-01-05T17:46:27+00:00","2026-01-05T17:46:28+00:00","2026-01-05T17:46:29+00:00","2026-01-05T17:46:30+00:00","2026-01-05T17:46:31+00:00","2026-01-05T17:46:32+00:00"],"y":[0.0,0.0,0.0,0.0,0.0,0.0,0.04027768890734,0.0,0.0,0.0,0.0,0.0,0.0],"name":"cpu_power_watt","hovertemplate":"%{x}<br>%{y:.4f}<extra></extra>"}],"layout":{"title":{"text":"geo — Shelly estimate vs PowerJoular (over time)","x":0.01,"xanchor":"left"},"margin":{"l":55,"r":18,"t":45,"b":45},"xaxis":{"title":"Time (UTC)","type":"date","showgrid":true,"zeroline":false},"yaxis":{"title":"Power (W)","showgrid":true,"zeroline":false},"hovermode":"x unified","legend":{"orientation":"h","y":1.15,"x":0.0},"paper_bgcolor":"rgba(0,0,0,0)","plot_bgcolor":"rgba(0,0,0,0)"}},"svc_powcmp_bar_geo":{"data":[{"type":"bar","x":["Energy (Wh)","Avg (W)","P95 (W)","Max (W)"],"y":[0.0001734542000454278,0.05075079814354352,0.1039497999980079,0.11218482353539816],"name":"Shelly estimated_power","hovertemplate":"%{x}<br>%{y:.4f}<extra></extra>"},{"type":"bar","x":["Energy (Wh)","Avg (W)","P95 (W)","Max (W)"],"y":[1.1188246918705556e-05,0.003098283762103077,0.016111075562935943,0.04027768890734],"name":"PowerJoular cpu_power","hovertemplate":"%{x}<br>%{y:.4f}<extra></extra>"}],"layout":{"title":{"text":"geo — summary comparison (Shelly vs PowerJoular)","x":0.01,"xanchor":"left"},"margin":{"l":55,"r":18,"t":45,"b":60},"barmode":"group","xaxis":{"title":"","showgrid":false},"yaxis":{"title":"Value","showgrid":true,"zeroline":false},"paper_bgcolor":"rgba(0,0,0,0)","plot_bgcolor":"rgba(0,0,0,0)","legend":{"orientation":"h","y":1.15,"x":0.0}}},"svc_pow_memcached_rate":{"data":[{"type":"scatter","mode":"lines","x":["2026-01-05T17:46:23+00:00","2026-01-05T17:46:43+00:00","2026-01-05T17:46:52+00:00","2026-01-05T17:47:03+00:00","2026-01-05T17:47:18+00:00"],"y":[0.04926065768902419,0.013460669718400828,0.02147169216552183,0.003048879794552298,0.005735680828756783],"name":"estimated_power_from_shelly_watt","hovertemplate":"%{x}<br>%{y:.4f}<extra></extra>"}],"layout":{"title":{"text":"memcached-rate — estimated power over time","x":0.01,"xanchor":"left"},"margin":{"l":55,"r":18,"t":45,"b":45},"xaxis":{"title":"Time (UTC)","type":"date","showgrid":true,"zeroline":false},"yaxis":{"title":"Estimated power (W)","showgrid":true,"zeroline":false},"hovermode":"x unified","paper_bgcolor":"rgba(0,0,0,0)","plot_bgcolor":"rgba(0,0,0,0)"}},"svc_cpu_memcached_rate":{"data":[{"type":"scatter","mode":"lines","x":["2026-01-05T17:46:23+00:00","2026-01-05T17:46:43+00:00","2026-01-05T17:46:52+00:00","2026-01-05T17:47:03+00:00","2026-01-05T17:47:18+00:00"],"y":[0.0002702013764975798,0.00036242504996669386,0.0002000469043151953,0.00022638510445050538,0.0003493369913122939],"name":"cpu_cores_used","hovertemplate":"%{x}<br>%{y:.4f}<extra></extra>"}],"layout":{"title":{"text":"memcached-rate — CPU cores used over time","x":0.01,"xanchor":"left"},"margin":{"l":55,"r":18,"t":45,"b":45},"xaxis":{"title":"Time (UTC)","type":"date","showgrid":true,"zeroline":false},"yaxis":{"title":"CPU cores used","showgrid":true,"zeroline":false},"hovermode":"x unified","paper_bgcolor":"rgba(0,0,0,0)","plot_bgcolor":"rgba(0,0,0,0)"}},"svc_powcmp_memcached_rate":{"data":[{"type":"scatter","mode":"lines","x":["2026-01-05T17:46:23+00:00","2026-01-05T17:46:43+00:00","2026-01-05T17:46:52+00:00","2026-01-05T17:47:03+00:00","2026-01-05T17:47:18+00:00"],"y":[0.04926065768902419,0.013460669718400828,0.02147169216552183,0.003048879794552298,0.005735680828756783],"name":"estimated_power_from_shelly_watt","hovertemplate":"%{x}<br>%{y:.4f}<extra></extra>"},{"type":"scatter","mode":"lines","x":["2026-01-05T17:46:20+00:00","2026-01-05T17:46:21+00:00","2026-01-05T17:46:22+00:00","2026-01-05T17:46:23+00:00","2026-01-05T17:46:24+00:00","2026-01-05T17:46:25+00:00","2026-01-05T17:46:26+00:00","2026-01-05T17:46:27+00:00","2026-01-05T17:46:28+00:00","2026-01-05T17:46:29+00:00","2026-01-05T17:46:30+00:00","2026-01-05T17:46:31+00:00","2026-01-05T17:46:32+00:00","2026-01-05T17:46:33+00:00","2026-01-05T17:46:34+00:00","2026-01-05T17:46:35+00:00","2026-01-05T17:46:36+00:00","2026-01-05T17:46:37+00:00","2026-01-05T17:46:38+00:00","2026-01-05T17:46:39+00:00","2026-01-05T17:46:40+00:00","2026-01-05T17:46:41+00:00","2026-01-05T17:46:42+00:00","2026-01-05T17:46:43+00:00","2026-01-05T17:46:44+00:00","2026-01-05T17:46:45+00:00","2026-01-05T17:46:46+00:00","2026-01-05T17:46:47+00:00","2026-01-05T17:46:48+00:00","2026-01-05T17:46:49+00:00","2026-01-05T17:46:50+00:00","2026-01-05T17:46:51+00:00","2026-01-05T17:46:52+00:00","2026-01-05T17:46:53+00:00","2026-01-05T17:46:54+00:00","2026-01-05T17:46:55+00:00","2026-01-05T17:46:56+00:00","2026-01-05T17:46:57+00:00","2026-01-05T17:46:58+00:00","2026-01-05T17:46:59+00:00","2026-01-05T17:47:00+00:00","2026-01-05T17:47:01+00:00","2026-01-05T17:47:02+00:00","2026-01-05T17:47:03+00:00","2026-01-05T17:47:04+00:00","2026-01-05T17:47:05+00:00","2026-01-05T17:47:06+00:00","2026-01-05T17:47:07+00:00","2026-01-05T17:47:08+00:00","2026-01-05T17:47:09+00:00","2026-01-05T17:47:10+00:00","2026-01-05T17:47:11+00:00","2026-01-05T17:47:12+00:00","2026-01-05T17:47:13+00:00","2026-01-05T17:47:14+00:00","2026-01-05T17:47:15+00:00","2026-01-05T17:47:16+00:00","2026-01-05T17:47:17+00:00","2026-01-05T17:47:18+00:00"],"y":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.11922693718318,0.0,0.0,0.0,0.0,0.0,0.0,0.13534506370245,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],"name":"cpu_power_watt","hovertemplate":"%{x}<br>%{y:.4f}<extra></extra>"}],"layout":{"title":{"text":"memcached-rate — Shelly estimate vs PowerJoular (over time)","x":0.01,"xanchor":"left"},"margin":{"l":55,"r":18,"t":45,"b":45},"xaxis":{"title":"Time (UTC)","type":"date","showgrid":true,"zeroline":false},"yaxis":{"title":"Power (W)","showgrid":true,"zeroline":false},"hovermode":"x unified","legend":{"orientation":"h","y":1.15,"x":0.0},"paper_bgcolor":"rgba(0,0,0,0)","plot_bgcolor":"rgba(0,0,0,0)"}},"svc_powcmp_bar_memcached_rate":{"data":[{"type":"bar","x":["Energy (Wh)","Avg (W)","P95 (W)","Max (W)"],"y":[0.0001584889312143407,0.018595516039251185,0.043702864584323715,0.04926065768902419],"name":"Shelly estimated_power","hovertemplate":"%{x}<br>%{y:.4f}<extra></extra>"},{"type":"bar","x":["Energy (Wh)","Avg (W)","P95 (W)","Max (W)"],"y":[7.071444469045277e-05,0.0043147796760276275,0.0,0.13534506370245],"name":"PowerJoular cpu_power","hovertemplate":"%{x}<br>%{y:.4f}<extra></extra>"}],"layout":{"title":{"text":"memcached-rate — summary comparison (Shelly vs PowerJoular)","x":0.01,"xanchor":"left"},"margin":{"l":55,"r":18,"t":45,"b":60},"barmode":"group","xaxis":{"title":"","showgrid":false},"yaxis":{"title":"Value","showgrid":true,"zeroline":false},"paper_bgcolor":"rgba(0,0,0,0)","plot_bgcolor":"rgba(0,0,0,0)","legend":{"orientation":"h","y":1.15,"x":0.0}}},"svc_pow_user":{"data":[{"type":"scatter","mode":"lines","x":["2026-01-05T17:46:32+00:00","2026-01-05T17:46:33+00:00","2026-01-05T17:46:48+00:00","2026-01-05T17:47:13+00:00"],"y":[0.0,0.015314283656759678,0.019233069831957522,0.006157873583511887],"name":"estimated_power_from_shelly_watt","hovertemplate":"%{x}<br>%{y:.4f}<extra></extra>"}],"layout":{"title":{"text":"user — estimated power over time","x":0.01,"xanchor":"left"},"margin":{"l":55,"r":18,"t":45,"b":45},"xaxis":{"title":"Time (UTC)","type":"date","showgrid":true,"zeroline":false},"yaxis":{"title":"Estimated power (W)","showgrid":true,"zeroline":false},"hovermode":"x unified","paper_bgcolor":"rgba(0,0,0,0)","plot_bgcolor":"rgba(0,0,0,0)"}},"svc_cpu_user":{"data":[{"type":"scatter","mode":"lines","x":["2026-01-05T17:46:32+00:00","2026-01-05T17:46:33+00:00","2026-01-05T17:46:48+00:00","2026-01-05T17:47:13+00:00"],"y":[0.0010427837992013707,0.001042783799201371,0.0007008175779253948,0.0006466406787434082],"name":"cpu_cores_used","hovertemplate":"%{x}<br>%{y:.4f}<extra></extra>"}],"layout":{"title":{"text":"user — CPU cores used over time","x":0.01,"xanchor":"left"},"margin":{"l":55,"r":18,"t":45,"b":45},"xaxis":{"title":"Time (UTC)","type":"date","showgrid":true,"zeroline":false},"yaxis":{"title":"CPU cores used","showgrid":true,"zeroline":false},"hovermode":"x unified","paper_bgcolor":"rgba(0,0,0,0)","plot_bgcolor":"rgba(0,0,0,0)"}},"svc_pow_memcached_reserve":{"data":[{"type":"scatter","mode":"lines","x":["2026-01-05T17:46:32+00:00","2026-01-05T17:46:33+00:00","2026-01-05T17:46:48+00:00","2026-01-05T17:46:52+00:00"],"y":[0.0,0.0036829217883409763,0.007356369088277502,0.026105828598079212],"name":"estimated_power_from_shelly_watt","hovertemplate":"%{x}<br>%{y:.4f}<extra></extra>"}],"layout":{"title":{"text":"memcached-reserve — estimated power over time","x":0.01,"xanchor":"left"},"margin":{"l":55,"r":18,"t":45,"b":45},"xaxis":{"title":"Time (UTC)","type":"date","showgrid":true,"zeroline":false},"yaxis":{"title":"Estimated power (W)","showgrid":true,"zeroline":false},"hovermode":"x unified","paper_bgcolor":"rgba(0,0,0,0)","plot_bgcolor":"rgba(0,0,0,0)"}},"svc_cpu_memcached_reserve":{"data":[{"type":"scatter","mode":"lines","x":["2026-01-05T17:46:32+00:00","2026-01-05T17:46:33+00:00","2026-01-05T17:46:48+00:00","2026-01-05T17:46:52+00:00"],"y":[0.0002507783753184257,0.0002507783753184257,0.00026805251641137337,0.00024322210636079698],"name":"cpu_cores_used","hovertemplate":"%{x}<br>%{y:.4f}<extra></extra>"}],"layout":{"title":{"text":"memcached-reserve — CPU cores used over time","x":0.01,"xanchor":"left"},"margin":{"l":55,"r":18,"t":45,"b":45},"xaxis":{"title":"Time (UTC)","type":"date","showgrid":true,"zeroline":false},"yaxis":{"title":"CPU cores used","showgrid":true,"zeroline":false},"hovermode":"x unified","paper_bgcolor":"rgba(0,0,0,0)","plot_bgcolor":"rgba(0,0,0,0)"}},"svc_powcmp_memcached_reserve":{"data":[{"type":"scatter","mode":"lines","x":["2026-01-05T17:46:32+00:00","2026-01-05T17:46:33+00:00","2026-01-05T17:46:48+00:00","2026-01-05T17:46:52+00:00"],"y":[0.0,0.0036829217883409763,0.007356369088277502,0.026105828598079212],"name":"estimated_power_from_shelly_watt","hovertemplate":"%{x}<br>%{y:.4f}<extra></extra>"},{"type":"scatter","mode":"lines","x":["2026-01-05T17:46:20+00:00","2026-01-05T17:46:21+00:00","2026-01-05T17:46:22+00:00","2026-01-05T17:46:23+00:00","2026-01-05T17:46:24+00:00","2026-01-05T17:46:25+00:00","2026-01-05T17:46:26+00:00","2026-01-05T17:46:27+00:00","2026-01-05T17:46:28+00:00","2026-01-05T17:46:29+00:00","2026-01-05T17:46:30+00:00","2026-01-05T17:46:31+00:00","2026-01-05T17:46:32+00:00","2026-01-05T17:46:33+00:00","2026-01-05T17:46:34+00:00","2026-01-05T17:46:35+00:00","2026-01-05T17:46:36+00:00","2026-01-05T17:46:37+00:00","2026-01-05T17:46:38+00:00","2026-01-05T17:46:39+00:00","2026-01-05T17:46:40+00:00","2026-01-05T17:46:41+00:00","2026-01-05T17:46:42+00:00","2026-01-05T17:46:43+00:00","2026-01-05T17:46:44+00:00","2026-01-05T17:46:45+00:00","2026-01-05T17:46:46+00:00","2026-01-05T17:46:47+00:00","2026-01-05T17:46:48+00:00","2026-01-05T17:46:49+00:00","2026-01-05T17:46:50+00:00","2026-01-05T17:46:51+00:00","2026-01-05T17:46:52+00:00","2026-01-05T17:46:53+00:00","2026-01-05T17:46:54+00:00","2026-01-05T17:46:55+00:00","2026-01-05T17:46:56+00:00","2026-01-05T17:46:57+00:00","2026-01-05T17:46:58+00:00","2026-01-05T17:46:59+00:00","2026-01-05T17:47:00+00:00","2026-01-05T17:47:01+00:00","2026-01-05T17:47:02+00:00","2026-01-05T17:47:03+00:00","2026-01-05T17:47:04+00:00","2026-01-05T17:47:05+00:00","2026-01-05T17:47:06+00:00","2026-01-05T17:47:07+00:00","2026-01-05T17:47:08+00:00","2026-01-05T17:47:09+00:00","2026-01-05T17:47:10+00:00","2026-01-05T17:47:11+00:00","2026-01-05T17:47:12+00:00","2026-01-05T17:47:13+00:00","2026-01-05T17:47:14+00:00","2026-01-05T17:47:15+00:00","2026-01-05T17:47:16+00:00","2026-01-05T17:47:17+00:00","2026-01-05T17:47:18+00:00"],"y":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.14883689646559,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.03063159749838,0.0,0.0,0.0,0.0],"name":"cpu_power_watt","hovertemplate":"%{x}<br>%{y:.4f}<extra></extra>"}],"layout":{"title":{"text":"memcached-reserve — Shelly estimate vs PowerJoular (over time)","x":0.01,"xanchor":"left"},"margin":{"l":55,"r":18,"t":45,"b":45},"xaxis":{"title":"Time (UTC)","type":"date","showgrid":true,"zeroline":false},"yaxis":{"title":"Power (W)","showgrid":true,"zeroline":false},"hovermode":"x unified","legend":{"orientation":"h","y":1.15,"x":0.0},"paper_bgcolor":"rgba(0,0,0,0)","plot_bgcolor":"rgba(0,0,0,0)"}},"svc_powcmp_bar_memcached_reserve":{"data":[{"type":"bar","x":["Energy (Wh)","Avg (W)","P95 (W)","Max (W)"],"y":[6.068104791800566e-05,0.009286279868674422,0.02329340967160895,0.026105828598079212],"name":"Shelly estimated_power","hovertemplate":"%{x}<br>%{y:.4f}<extra></extra>"},{"type":"bar","x":["Energy (Wh)","Avg (W)","P95 (W)","Max (W)"],"y":[4.985235943443611e-05,0.0030418388807452548,0.0,0.14883689646559],"name":"PowerJoular cpu_power","hovertemplate":"%{x}<br>%{y:.4f}<extra></extra>"}],"layout":{"title":{"text":"memcached-reserve — summary comparison (Shelly vs PowerJoular)","x":0.01,"xanchor":"left"},"margin":{"l":55,"r":18,"t":45,"b":60},"barmode":"group","xaxis":{"title":"","showgrid":false},"yaxis":{"title":"Value","showgrid":true,"zeroline":false},"paper_bgcolor":"rgba(0,0,0,0)","plot_bgcolor":"rgba(0,0,0,0)","legend":{"orientation":"h","y":1.15,"x":0.0}}},"svc_pow_profile":{"data":[{"type":"scatter","mode":"lines","x":["2026-01-05T17:46:48+00:00","2026-01-05T17:47:13+00:00"],"y":[0.02654175816549974,0.008707887324372235],"name":"estimated_power_from_shelly_watt","hovertemplate":"%{x}<br>%{y:.4f}<extra></extra>"}],"layout":{"title":{"text":"profile — estimated power over time","x":0.01,"xanchor":"left"},"margin":{"l":55,"r":18,"t":45,"b":45},"xaxis":{"title":"Time (UTC)","type":"date","showgrid":true,"zeroline":false},"yaxis":{"title":"Estimated power (W)","showgrid":true,"zeroline":false},"hovermode":"x unified","paper_bgcolor":"rgba(0,0,0,0)","plot_bgcolor":"rgba(0,0,0,0)"}},"svc_cpu_profile":{"data":[{"type":"scatter","mode":"lines","x":["2026-01-05T17:46:48+00:00","2026-01-05T17:47:13+00:00"],"y":[0.0009671326956095139,0.0009144186046511608],"name":"cpu_cores_used","hovertemplate":"%{x}<br>%{y:.4f}<extra></extra>"}],"layout":{"title":{"text":"profile — CPU cores used over time","x":0.01,"xanchor":"left"},"margin":{"l":55,"r":18,"t":45,"b":45},"xaxis":{"title":"Time (UTC)","type":"date","showgrid":true,"zeroline":false},"yaxis":{"title":"CPU cores used","showgrid":true,"zeroline":false},"hovermode":"x unified","paper_bgcolor":"rgba(0,0,0,0)","plot_bgcolor":"rgba(0,0,0,0)"}},"svc_powcmp_profile":{"data":[{"type":"scatter","mode":"lines","x":["2026-01-05T17:46:48+00:00","2026-01-05T17:47:13+00:00"],"y":[0.02654175816549974,0.008707887324372235],"name":"estimated_power_from_shelly_watt","hovertemplate":"%{x}<br>%{y:.4f}<extra></extra>"},{"type":"scatter","mode":"lines","x":["2026-01-05T17:46:20+00:00","2026-01-05T17:46:21+00:00","2026-01-05T17:46:22+00:00","2026-01-05T17:46:23+00:00","2026-01-05T17:46:24+00:00","2026-01-05T17:46:25+00:00","2026-01-05T17:46:26+00:00","2026-01-05T17:46:27+00:00","2026-01-05T17:46:28+00:00"],"y":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.08186195631221,0.0],"name":"cpu_power_watt","hovertemplate":"%{x}<br>%{y:.4f}<extra></extra>"}],"layout":{"title":{"text":"profile — Shelly estimate vs PowerJoular (over time)","x":0.01,"xanchor":"left"},"margin":{"l":55,"r":18,"t":45,"b":45},"xaxis":{"title":"Time (UTC)","type":"date","showgrid":true,"zeroline":false},"yaxis":{"title":"Power (W)","showgrid":true,"zeroline":false},"hovermode":"x unified","legend":{"orientation":"h","y":1.15,"x":0.0},"paper_bgcolor":"rgba(0,0,0,0)","plot_bgcolor":"rgba(0,0,0,0)"}},"svc_powcmp_bar_profile":{"data":[{"type":"bar","x":["Energy (Wh)","Avg (W)","P95 (W)","Max (W)"],"y":[0.0,0.017624822744935986,0.025650064623443367,0.02654175816549974],"name":"Shelly estimated_power","hovertemplate":"%{x}<br>%{y:.4f}<extra></extra>"},{"type":"bar","x":["Energy (Wh)","Avg (W)","P95 (W)","Max (W)"],"y":[2.273943230894722e-05,0.009095772923578889,0.04911717378732597,0.08186195631221],"name":"PowerJoular cpu_power","hovertemplate":"%{x}<br>%{y:.4f}<extra></extra>"}],"layout":{"title":{"text":"profile — summary comparison (Shelly vs PowerJoular)","x":0.01,"xanchor":"left"},"margin":{"l":55,"r":18,"t":45,"b":60},"barmode":"group","xaxis":{"title":"","showgrid":false},"yaxis":{"title":"Value","showgrid":true,"zeroline":false},"paper_bgcolor":"rgba(0,0,0,0)","plot_bgcolor":"rgba(0,0,0,0)","legend":{"orientation":"h","y":1.15,"x":0.0}}},"svc_pow_recommendation":{"data":[{"type":"scatter","mode":"lines","x":["2026-01-05T17:46:28+00:00","2026-01-05T17:46:58+00:00"],"y":[0.07205527054989942,0.03310241017507582],"name":"estimated_power_from_shelly_watt","hovertemplate":"%{x}<br>%{y:.4f}<extra></extra>"}],"layout":{"title":{"text":"recommendation — estimated power over time","x":0.01,"xanchor":"left"},"margin":{"l":55,"r":18,"t":45,"b":45},"xaxis":{"title":"Time (UTC)","type":"date","showgrid":true,"zeroline":false},"yaxis":{"title":"Estimated power (W)","showgrid":true,"zeroline":false},"hovermode":"x unified","paper_bgcolor":"rgba(0,0,0,0)","plot_bgcolor":"rgba(0,0,0,0)"}},"svc_cpu_recommendation":{"data":[{"type":"scatter","mode":"lines","x":["2026-01-05T17:46:28+00:00","2026-01-05T17:46:58+00:00"],"y":[0.0006711153479504288,0.0009946700507614226],"name":"cpu_cores_used","hovertemplate":"%{x}<br>%{y:.4f}<extra></extra>"}],"layout":{"title":{"text":"recommendation — CPU cores used over time","x":0.01,"xanchor":"left"},"margin":{"l":55,"r":18,"t":45,"b":45},"xaxis":{"title":"Time (UTC)","type":"date","showgrid":true,"zeroline":false},"yaxis":{"title":"CPU cores used","showgrid":true,"zeroline":false},"hovermode":"x unified","paper_bgcolor":"rgba(0,0,0,0)","plot_bgcolor":"rgba(0,0,0,0)"}},"svc_powcmp_recommendation":{"data":[{"type":"scatter","mode":"lines","x":["2026-01-05T17:46:28+00:00","2026-01-05T17:46:58+00:00"],"y":[0.07205527054989942,0.03310241017507582],"name":"estimated_power_from_shelly_watt","hovertemplate":"%{x}<br>%{y:.4f}<extra></extra>"},{"type":"scatter","mode":"lines","x":["2026-01-05T17:46:20+00:00","2026-01-05T17:46:21+00:00","2026-01-05T17:46:22+00:00","2026-01-05T17:46:23+00:00","2026-01-05T17:46:24+00:00","2026-01-05T17:46:25+00:00","2026-01-05T17:46:26+00:00","2026-01-05T17:46:27+00:00","2026-01-05T17:46:28+00:00","2026-01-05T17:46:29+00:00","2026-01-05T17:46:30+00:00","2026-01-05T17:46:31+00:00","2026-01-05T17:46:32+00:00"],"y":[0.21287653319115,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0352693944366,0.0],"name":"cpu_power_watt","hovertemplate":"%{x}<br>%{y:.4f}<extra></extra>"}],"layout":{"title":{"text":"recommendation — Shelly estimate vs PowerJoular (over time)","x":0.01,"xanchor":"left"},"margin":{"l":55,"r":18,"t":45,"b":45},"xaxis":{"title":"Time (UTC)","type":"date","showgrid":true,"zeroline":false},"yaxis":{"title":"Power (W)","showgrid":true,"zeroline":false},"hovermode":"x unified","legend":{"orientation":"h","y":1.15,"x":0.0},"paper_bgcolor":"rgba(0,0,0,0)","plot_bgcolor":"rgba(0,0,0,0)"}},"svc_powcmp_bar_recommendation":{"data":[{"type":"bar","x":["Energy (Wh)","Avg (W)","P95 (W)","Max (W)"],"y":[0.0,0.052578840362487625,0.07010762753115823,0.07205527054989942],"name":"Shelly estimated_power","hovertemplate":"%{x}<br>%{y:.4f}<extra></extra>"},{"type":"bar","x":["Energy (Wh)","Avg (W)","P95 (W)","Max (W)"],"y":[9.797054010166668e-06,0.019088148279057693,0.10631224993841974,0.21287653319115],"name":"PowerJoular cpu_power","hovertemplate":"%{x}<br>%{y:.4f}<extra></extra>"}],"layout":{"title":{"text":"recommendation — summary comparison (Shelly vs PowerJoular)","x":0.01,"xanchor":"left"},"margin":{"l":55,"r":18,"t":45,"b":60},"barmode":"group","xaxis":{"title":"","showgrid":false},"yaxis":{"title":"Value","showgrid":true,"zeroline":false},"paper_bgcolor":"rgba(0,0,0,0)","plot_bgcolor":"rgba(0,0,0,0)","legend":{"orientation":"h","y":1.15,"x":0.0}}}};
+      for (const [divId, fig] of Object.entries(figs)) {
+        try {
+          Plotly.newPlot(divId, fig.data, fig.layout, {responsive:true, displaylogo:false});
+        } catch (e) {
+          console.error("Plotly render failed for", divId, e);
+        }
+      }
+    })();
+
+    // UI: filter services by name + toggle tech-stack.
+    (function() {
+      const search = document.getElementById("svcSearch");
+      const toggleTech = document.getElementById("toggleTech");
+
+      function applyFilter() {
+        const q = (search.value || "").trim().toLowerCase();
+        const showTech = !!toggleTech.checked;
+
+        document.querySelectorAll(".service-card").forEach(card => {
+          const name = (card.getAttribute("data-service") || "");
+          const badge = (card.getAttribute("data-badge") || "");
+          const matchName = !q || name.includes(q);
+          const matchTech = showTech || badge !== "TECH STACK";
+          card.style.display = (matchName && matchTech) ? "" : "none";
+        });
+      }
+
+      search.addEventListener("input", applyFilter);
+      toggleTech.addEventListener("change", applyFilter);
+      applyFilter();
+    })();
+
+    // Buttons.
+    document.getElementById("btnTop").addEventListener("click", () => window.scrollTo({top: 0, behavior: "smooth"}));
+
+    document.getElementById("btnExpandAll").addEventListener("click", () => {
+      document.querySelectorAll(".plotly-chart").forEach(div => {
+        div.style.minHeight = "480px";
+      });
+      window.dispatchEvent(new Event("resize"));
+    });
+  </script>
+</body>
+</html>

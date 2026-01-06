@@ -1,0 +1,3522 @@
+{
+  "consul": [
+    {
+      "ts": "2026-01-06T17:29:08",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:09",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:10",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:11",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:12",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:13",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:14",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:15",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:16",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:17",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:18",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:19",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:20",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:21",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:22",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:23",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:24",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:25",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:26",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:27",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:28",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:29",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:30",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:31",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:32",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:33",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:34",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:35",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:36",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    }
+  ],
+  "mongodb-reservation": [
+    {
+      "ts": "2026-01-06T17:29:08",
+      "cpu_cores_used": 0.00252525252525,
+      "cpu_percent_host": 0.06313131313125,
+      "cpu_power_watt": 0.11921430136323
+    },
+    {
+      "ts": "2026-01-06T17:29:09",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:10",
+      "cpu_cores_used": 0.0025641025641,
+      "cpu_percent_host": 0.06410256410250001,
+      "cpu_power_watt": 0.05777026994256
+    },
+    {
+      "ts": "2026-01-06T17:29:11",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:12",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:13",
+      "cpu_cores_used": 0.00255102040816,
+      "cpu_percent_host": 0.06377551020399999,
+      "cpu_power_watt": 0.06736775839134
+    },
+    {
+      "ts": "2026-01-06T17:29:14",
+      "cpu_cores_used": 0.0026525198939,
+      "cpu_percent_host": 0.0663129973475,
+      "cpu_power_watt": 0.02910807362832
+    },
+    {
+      "ts": "2026-01-06T17:29:15",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:16",
+      "cpu_cores_used": 0.0025641025641,
+      "cpu_percent_host": 0.06410256410250001,
+      "cpu_power_watt": 0.04071148185669
+    },
+    {
+      "ts": "2026-01-06T17:29:17",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:18",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:19",
+      "cpu_cores_used": 0.00261780104712,
+      "cpu_percent_host": 0.06544502617800001,
+      "cpu_power_watt": 0.0258431092654
+    },
+    {
+      "ts": "2026-01-06T17:29:20",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:21",
+      "cpu_cores_used": 0.00259067357513,
+      "cpu_percent_host": 0.06476683937825,
+      "cpu_power_watt": 0.03487143262449
+    },
+    {
+      "ts": "2026-01-06T17:29:22",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:23",
+      "cpu_cores_used": 0.00534759358289,
+      "cpu_percent_host": 0.13368983957225,
+      "cpu_power_watt": 0.07690798560632
+    },
+    {
+      "ts": "2026-01-06T17:29:24",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:25",
+      "cpu_cores_used": 0.00261780104712,
+      "cpu_percent_host": 0.06544502617800001,
+      "cpu_power_watt": 0.03555212857421
+    },
+    {
+      "ts": "2026-01-06T17:29:26",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:27",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:28",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:29",
+      "cpu_cores_used": 0.00261096605744,
+      "cpu_percent_host": 0.065274151436,
+      "cpu_power_watt": 0.02477930759495
+    },
+    {
+      "ts": "2026-01-06T17:29:30",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:31",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:32",
+      "cpu_cores_used": 0.00255102040816,
+      "cpu_percent_host": 0.06377551020399999,
+      "cpu_power_watt": 0.03122472451951
+    },
+    {
+      "ts": "2026-01-06T17:29:33",
+      "cpu_cores_used": 0.00267379679144,
+      "cpu_percent_host": 0.066844919786,
+      "cpu_power_watt": 0.03570168288436
+    },
+    {
+      "ts": "2026-01-06T17:29:34",
+      "cpu_cores_used": 0.0026525198939,
+      "cpu_percent_host": 0.0663129973475,
+      "cpu_power_watt": 0.02398926040453
+    },
+    {
+      "ts": "2026-01-06T17:29:35",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:36",
+      "cpu_cores_used": 0.00261780104712,
+      "cpu_percent_host": 0.06544502617800001,
+      "cpu_power_watt": 0.04797310871651
+    }
+  ],
+  "memcached-rate": [
+    {
+      "ts": "2026-01-06T17:29:08",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:09",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:10",
+      "cpu_cores_used": 0.0025706940874,
+      "cpu_percent_host": 0.064267352185,
+      "cpu_power_watt": 0.06101696693673
+    },
+    {
+      "ts": "2026-01-06T17:29:11",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:12",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:13",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:14",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:15",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:16",
+      "cpu_cores_used": 0.0025641025641,
+      "cpu_percent_host": 0.06410256410250001,
+      "cpu_power_watt": 0.03982831551361
+    },
+    {
+      "ts": "2026-01-06T17:29:17",
+      "cpu_cores_used": 0.00261780104712,
+      "cpu_percent_host": 0.06544502617800001,
+      "cpu_power_watt": 0.04378285433741
+    },
+    {
+      "ts": "2026-01-06T17:29:18",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:19",
+      "cpu_cores_used": 0.00261096605744,
+      "cpu_percent_host": 0.065274151436,
+      "cpu_power_watt": 0.02558577819081
+    },
+    {
+      "ts": "2026-01-06T17:29:20",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:21",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:22",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:23",
+      "cpu_cores_used": 0.00534759358289,
+      "cpu_percent_host": 0.13368983957225,
+      "cpu_power_watt": 0.07690798560632
+    },
+    {
+      "ts": "2026-01-06T17:29:24",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:25",
+      "cpu_cores_used": 0.00261096605744,
+      "cpu_percent_host": 0.065274151436,
+      "cpu_power_watt": 0.03617426866501
+    },
+    {
+      "ts": "2026-01-06T17:29:26",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:27",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:28",
+      "cpu_cores_used": 0.00536193029491,
+      "cpu_percent_host": 0.13404825737275,
+      "cpu_power_watt": 0.06965900334273
+    },
+    {
+      "ts": "2026-01-06T17:29:29",
+      "cpu_cores_used": 0.00260416666667,
+      "cpu_percent_host": 0.06510416666675,
+      "cpu_power_watt": 0.0244282625109
+    },
+    {
+      "ts": "2026-01-06T17:29:30",
+      "cpu_cores_used": 0.00261780104712,
+      "cpu_percent_host": 0.06544502617800001,
+      "cpu_power_watt": 0.02729990042979
+    },
+    {
+      "ts": "2026-01-06T17:29:31",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:32",
+      "cpu_cores_used": 0.00257731958763,
+      "cpu_percent_host": 0.06443298969075,
+      "cpu_power_watt": 0.03219791164476
+    },
+    {
+      "ts": "2026-01-06T17:29:33",
+      "cpu_cores_used": 0.00265957446809,
+      "cpu_percent_host": 0.06648936170225,
+      "cpu_power_watt": 0.03566325124913
+    },
+    {
+      "ts": "2026-01-06T17:29:34",
+      "cpu_cores_used": 0.00265957446809,
+      "cpu_percent_host": 0.06648936170225,
+      "cpu_power_watt": 0.02387694506005
+    },
+    {
+      "ts": "2026-01-06T17:29:35",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:36",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    }
+  ],
+  "mongodb-user": [
+    {
+      "ts": "2026-01-06T17:29:08",
+      "cpu_cores_used": 0.00252525252525,
+      "cpu_percent_host": 0.06313131313125,
+      "cpu_power_watt": 0.09961550251785
+    },
+    {
+      "ts": "2026-01-06T17:29:09",
+      "cpu_cores_used": 0.00255754475703,
+      "cpu_percent_host": 0.06393861892575001,
+      "cpu_power_watt": 0.02786830850529
+    },
+    {
+      "ts": "2026-01-06T17:29:10",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:11",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:12",
+      "cpu_cores_used": 0.00255754475703,
+      "cpu_percent_host": 0.06393861892575001,
+      "cpu_power_watt": 0.06338631297589
+    },
+    {
+      "ts": "2026-01-06T17:29:13",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:14",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:15",
+      "cpu_cores_used": 0.00511508951407,
+      "cpu_percent_host": 0.12787723785175,
+      "cpu_power_watt": 0.08733353137491
+    },
+    {
+      "ts": "2026-01-06T17:29:16",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:17",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:18",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:19",
+      "cpu_cores_used": 0.00261780104712,
+      "cpu_percent_host": 0.06544502617800001,
+      "cpu_power_watt": 0.0258431092654
+    },
+    {
+      "ts": "2026-01-06T17:29:20",
+      "cpu_cores_used": 0.00257731958763,
+      "cpu_percent_host": 0.06443298969075,
+      "cpu_power_watt": 0.03784911085406
+    },
+    {
+      "ts": "2026-01-06T17:29:21",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:22",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:23",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:24",
+      "cpu_cores_used": 0.00537634408602,
+      "cpu_percent_host": 0.1344086021505,
+      "cpu_power_watt": 0.05049493507983
+    },
+    {
+      "ts": "2026-01-06T17:29:25",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:26",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:27",
+      "cpu_cores_used": 0.00254452926209,
+      "cpu_percent_host": 0.06361323155225,
+      "cpu_power_watt": 0.03668769203891
+    },
+    {
+      "ts": "2026-01-06T17:29:28",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:29",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:30",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:31",
+      "cpu_cores_used": 0.00263157894737,
+      "cpu_percent_host": 0.06578947368425,
+      "cpu_power_watt": 0.03149266822186
+    },
+    {
+      "ts": "2026-01-06T17:29:32",
+      "cpu_cores_used": 0.00255754475703,
+      "cpu_percent_host": 0.06393861892575001,
+      "cpu_power_watt": 0.03124592144821
+    },
+    {
+      "ts": "2026-01-06T17:29:33",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:34",
+      "cpu_cores_used": 0.00265957446809,
+      "cpu_percent_host": 0.06648936170225,
+      "cpu_power_watt": 0.02419406319949
+    },
+    {
+      "ts": "2026-01-06T17:29:35",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:36",
+      "cpu_cores_used": 0.00261096605744,
+      "cpu_percent_host": 0.065274151436,
+      "cpu_power_watt": 0.04730498809849
+    }
+  ],
+  "mongodb-rate": [
+    {
+      "ts": "2026-01-06T17:29:08",
+      "cpu_cores_used": 0.00251889168766,
+      "cpu_percent_host": 0.0629722921915,
+      "cpu_power_watt": 0.12413209029272
+    },
+    {
+      "ts": "2026-01-06T17:29:09",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:10",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:11",
+      "cpu_cores_used": 0.00257731958763,
+      "cpu_percent_host": 0.06443298969075,
+      "cpu_power_watt": 0.09965740466402
+    },
+    {
+      "ts": "2026-01-06T17:29:12",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:13",
+      "cpu_cores_used": 0.00255102040816,
+      "cpu_percent_host": 0.06377551020399999,
+      "cpu_power_watt": 0.06736775839134
+    },
+    {
+      "ts": "2026-01-06T17:29:14",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:15",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:16",
+      "cpu_cores_used": 0.00511508951407,
+      "cpu_percent_host": 0.12787723785175,
+      "cpu_power_watt": 0.08050015123217
+    },
+    {
+      "ts": "2026-01-06T17:29:17",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:18",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:19",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:20",
+      "cpu_cores_used": 0.00257731958763,
+      "cpu_percent_host": 0.06443298969075,
+      "cpu_power_watt": 0.03861998720454
+    },
+    {
+      "ts": "2026-01-06T17:29:21",
+      "cpu_cores_used": 0.00259067357513,
+      "cpu_percent_host": 0.06476683937825,
+      "cpu_power_watt": 0.03487143262449
+    },
+    {
+      "ts": "2026-01-06T17:29:22",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:23",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:24",
+      "cpu_cores_used": 0.00268096514745,
+      "cpu_percent_host": 0.06702412868625,
+      "cpu_power_watt": 0.02499872528898
+    },
+    {
+      "ts": "2026-01-06T17:29:25",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:26",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:27",
+      "cpu_cores_used": 0.00508905852417,
+      "cpu_percent_host": 0.12722646310425,
+      "cpu_power_watt": 0.07136393833967
+    },
+    {
+      "ts": "2026-01-06T17:29:28",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:29",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:30",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:31",
+      "cpu_cores_used": 0.00263852242744,
+      "cpu_percent_host": 0.065963060686,
+      "cpu_power_watt": 0.03091446972887
+    },
+    {
+      "ts": "2026-01-06T17:29:32",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:33",
+      "cpu_cores_used": 0.00265957446809,
+      "cpu_percent_host": 0.06648936170225,
+      "cpu_power_watt": 0.03535737190448
+    },
+    {
+      "ts": "2026-01-06T17:29:34",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:35",
+      "cpu_cores_used": 0.00263852242744,
+      "cpu_percent_host": 0.065963060686,
+      "cpu_power_watt": 0.0282237397518
+    },
+    {
+      "ts": "2026-01-06T17:29:36",
+      "cpu_cores_used": 0.00261096605744,
+      "cpu_percent_host": 0.065274151436,
+      "cpu_power_watt": 0.0479609530309
+    }
+  ],
+  "memcached-reserve": [
+    {
+      "ts": "2026-01-06T17:29:08",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:09",
+      "cpu_cores_used": 0.00255754475703,
+      "cpu_percent_host": 0.06393861892575001,
+      "cpu_power_watt": 0.02761018458665
+    },
+    {
+      "ts": "2026-01-06T17:29:10",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:11",
+      "cpu_cores_used": 0.00514138817481,
+      "cpu_percent_host": 0.12853470437025,
+      "cpu_power_watt": 0.1993039590774
+    },
+    {
+      "ts": "2026-01-06T17:29:12",
+      "cpu_cores_used": 0.0025641025641,
+      "cpu_percent_host": 0.06410256410250001,
+      "cpu_power_watt": 0.06466770157202
+    },
+    {
+      "ts": "2026-01-06T17:29:13",
+      "cpu_cores_used": 0.00255102040816,
+      "cpu_percent_host": 0.06377551020399999,
+      "cpu_power_watt": 0.06736775839134
+    },
+    {
+      "ts": "2026-01-06T17:29:14",
+      "cpu_cores_used": 0.00263852242744,
+      "cpu_percent_host": 0.065963060686,
+      "cpu_power_watt": 0.02862159539643
+    },
+    {
+      "ts": "2026-01-06T17:29:15",
+      "cpu_cores_used": 0.0025641025641,
+      "cpu_percent_host": 0.06410256410250001,
+      "cpu_power_watt": 0.04722131138894
+    },
+    {
+      "ts": "2026-01-06T17:29:16",
+      "cpu_cores_used": 0.00769230769231,
+      "cpu_percent_host": 0.19230769230775,
+      "cpu_power_watt": 0.11948494654083
+    },
+    {
+      "ts": "2026-01-06T17:29:17",
+      "cpu_cores_used": 0.01047120418848,
+      "cpu_percent_host": 0.26178010471200003,
+      "cpu_power_watt": 0.17513141734963
+    },
+    {
+      "ts": "2026-01-06T17:29:18",
+      "cpu_cores_used": 0.00257731958763,
+      "cpu_percent_host": 0.06443298969075,
+      "cpu_power_watt": 0.04927998312413
+    },
+    {
+      "ts": "2026-01-06T17:29:19",
+      "cpu_cores_used": 0.00785340314136,
+      "cpu_percent_host": 0.196335078534,
+      "cpu_power_watt": 0.0770868246063
+    },
+    {
+      "ts": "2026-01-06T17:29:20",
+      "cpu_cores_used": 0.00512820512821,
+      "cpu_percent_host": 0.12820512820525,
+      "cpu_power_watt": 0.07563743476153
+    },
+    {
+      "ts": "2026-01-06T17:29:21",
+      "cpu_cores_used": 0.01041666666667,
+      "cpu_percent_host": 0.26041666666675,
+      "cpu_power_watt": 0.14206567661273
+    },
+    {
+      "ts": "2026-01-06T17:29:22",
+      "cpu_cores_used": 0.0025706940874,
+      "cpu_percent_host": 0.064267352185,
+      "cpu_power_watt": 0.05778029034515
+    },
+    {
+      "ts": "2026-01-06T17:29:23",
+      "cpu_cores_used": 0.01069518716578,
+      "cpu_percent_host": 0.2673796791445,
+      "cpu_power_watt": 0.15381597121263
+    },
+    {
+      "ts": "2026-01-06T17:29:24",
+      "cpu_cores_used": 0.00806451612903,
+      "cpu_percent_host": 0.20161290322574998,
+      "cpu_power_watt": 0.07483756988727
+    },
+    {
+      "ts": "2026-01-06T17:29:25",
+      "cpu_cores_used": 0.00522193211488,
+      "cpu_percent_host": 0.130548302872,
+      "cpu_power_watt": 0.07234853733001
+    },
+    {
+      "ts": "2026-01-06T17:29:26",
+      "cpu_cores_used": 0.00519480519481,
+      "cpu_percent_host": 0.12987012987025,
+      "cpu_power_watt": 0.07579135657944
+    },
+    {
+      "ts": "2026-01-06T17:29:27",
+      "cpu_cores_used": 0.00765306122449,
+      "cpu_percent_host": 0.19132653061225,
+      "cpu_power_watt": 0.10520814761557
+    },
+    {
+      "ts": "2026-01-06T17:29:28",
+      "cpu_cores_used": 0.00804289544236,
+      "cpu_percent_host": 0.20107238605900002,
+      "cpu_power_watt": 0.1044885050141
+    },
+    {
+      "ts": "2026-01-06T17:29:29",
+      "cpu_cores_used": 0.01041666666667,
+      "cpu_percent_host": 0.26041666666675,
+      "cpu_power_watt": 0.09771305004359
+    },
+    {
+      "ts": "2026-01-06T17:29:30",
+      "cpu_cores_used": 0.00785340314136,
+      "cpu_percent_host": 0.196335078534,
+      "cpu_power_watt": 0.08189970128936
+    },
+    {
+      "ts": "2026-01-06T17:29:31",
+      "cpu_cores_used": 0.01315789473684,
+      "cpu_percent_host": 0.32894736842100003,
+      "cpu_power_watt": 0.15444823647893
+    },
+    {
+      "ts": "2026-01-06T17:29:32",
+      "cpu_cores_used": 0.01030927835052,
+      "cpu_percent_host": 0.257731958763,
+      "cpu_power_watt": 0.12879164657904
+    },
+    {
+      "ts": "2026-01-06T17:29:33",
+      "cpu_cores_used": 0.00797872340426,
+      "cpu_percent_host": 0.19946808510650002,
+      "cpu_power_watt": 0.1069897537474
+    },
+    {
+      "ts": "2026-01-06T17:29:34",
+      "cpu_cores_used": 0.01329787234043,
+      "cpu_percent_host": 0.33244680851075004,
+      "cpu_power_watt": 0.11938472530023
+    },
+    {
+      "ts": "2026-01-06T17:29:35",
+      "cpu_cores_used": 0.00527704485488,
+      "cpu_percent_host": 0.131926121372,
+      "cpu_power_watt": 0.0567063336635
+    },
+    {
+      "ts": "2026-01-06T17:29:36",
+      "cpu_cores_used": 0.00261780104712,
+      "cpu_percent_host": 0.06544502617800001,
+      "cpu_power_watt": 0.05007295317254
+    }
+  ],
+  "mongodb-profile": [
+    {
+      "ts": "2026-01-06T17:29:08",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:09",
+      "cpu_cores_used": 0.00255754475703,
+      "cpu_percent_host": 0.06393861892575001,
+      "cpu_power_watt": 0.02761018458665
+    },
+    {
+      "ts": "2026-01-06T17:29:10",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:11",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:12",
+      "cpu_cores_used": 0.0025641025641,
+      "cpu_percent_host": 0.06410256410250001,
+      "cpu_power_watt": 0.06466770157202
+    },
+    {
+      "ts": "2026-01-06T17:29:13",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:14",
+      "cpu_cores_used": 0.00527704485488,
+      "cpu_percent_host": 0.131926121372,
+      "cpu_power_watt": 0.05724319079287
+    },
+    {
+      "ts": "2026-01-06T17:29:15",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:16",
+      "cpu_cores_used": 0.0025641025641,
+      "cpu_percent_host": 0.06410256410250001,
+      "cpu_power_watt": 0.04026382708516
+    },
+    {
+      "ts": "2026-01-06T17:29:17",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:18",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:19",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:20",
+      "cpu_cores_used": 0.0025706940874,
+      "cpu_percent_host": 0.064267352185,
+      "cpu_power_watt": 0.03821440443546
+    },
+    {
+      "ts": "2026-01-06T17:29:21",
+      "cpu_cores_used": 0.00260416666667,
+      "cpu_percent_host": 0.06510416666675,
+      "cpu_power_watt": 0.03520816362367
+    },
+    {
+      "ts": "2026-01-06T17:29:22",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:23",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:24",
+      "cpu_cores_used": 0.00269541778976,
+      "cpu_percent_host": 0.067385444744,
+      "cpu_power_watt": 0.0250389783824
+    },
+    {
+      "ts": "2026-01-06T17:29:25",
+      "cpu_cores_used": 0.00261096605744,
+      "cpu_percent_host": 0.065274151436,
+      "cpu_power_watt": 0.03617426866501
+    },
+    {
+      "ts": "2026-01-06T17:29:26",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:27",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:28",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:29",
+      "cpu_cores_used": 0.0025974025974,
+      "cpu_percent_host": 0.06493506493500001,
+      "cpu_power_watt": 0.02443646912012
+    },
+    {
+      "ts": "2026-01-06T17:29:30",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:31",
+      "cpu_cores_used": 0.00263157894737,
+      "cpu_percent_host": 0.06578947368425,
+      "cpu_power_watt": 0.03088964729579
+    },
+    {
+      "ts": "2026-01-06T17:29:32",
+      "cpu_cores_used": 0.00257731958763,
+      "cpu_percent_host": 0.06443298969075,
+      "cpu_power_watt": 0.03219791164476
+    },
+    {
+      "ts": "2026-01-06T17:29:33",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:34",
+      "cpu_cores_used": 0.00266666666667,
+      "cpu_percent_host": 0.06666666666675,
+      "cpu_power_watt": 0.02395939420735
+    },
+    {
+      "ts": "2026-01-06T17:29:35",
+      "cpu_cores_used": 0.00263852242744,
+      "cpu_percent_host": 0.065963060686,
+      "cpu_power_watt": 0.0284857584085
+    },
+    {
+      "ts": "2026-01-06T17:29:36",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    }
+  ],
+  "mongodb-recommendation": [
+    {
+      "ts": "2026-01-06T17:29:08",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:09",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:10",
+      "cpu_cores_used": 0.0025641025641,
+      "cpu_percent_host": 0.06410256410250001,
+      "cpu_power_watt": 0.05988500302498
+    },
+    {
+      "ts": "2026-01-06T17:29:11",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:12",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:13",
+      "cpu_cores_used": 0.00255102040816,
+      "cpu_percent_host": 0.06377551020399999,
+      "cpu_power_watt": 0.06736775839134
+    },
+    {
+      "ts": "2026-01-06T17:29:14",
+      "cpu_cores_used": 0.0026455026455,
+      "cpu_percent_host": 0.06613756613749999,
+      "cpu_power_watt": 0.02865191024602
+    },
+    {
+      "ts": "2026-01-06T17:29:15",
+      "cpu_cores_used": 0.0025641025641,
+      "cpu_percent_host": 0.06410256410250001,
+      "cpu_power_watt": 0.04722131138894
+    },
+    {
+      "ts": "2026-01-06T17:29:16",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:17",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:18",
+      "cpu_cores_used": 0.0025706940874,
+      "cpu_percent_host": 0.064267352185,
+      "cpu_power_watt": 0.04926861667141
+    },
+    {
+      "ts": "2026-01-06T17:29:19",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:20",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:21",
+      "cpu_cores_used": 0.0025974025974,
+      "cpu_percent_host": 0.06493506493500001,
+      "cpu_power_watt": 0.03519026772732
+    },
+    {
+      "ts": "2026-01-06T17:29:22",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:23",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:24",
+      "cpu_cores_used": 0.00539083557951,
+      "cpu_percent_host": 0.13477088948775,
+      "cpu_power_watt": 0.05007795676481
+    },
+    {
+      "ts": "2026-01-06T17:29:25",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:26",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:27",
+      "cpu_cores_used": 0.00255102040816,
+      "cpu_percent_host": 0.06377551020399999,
+      "cpu_power_watt": 0.03506938253852
+    },
+    {
+      "ts": "2026-01-06T17:29:28",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:29",
+      "cpu_cores_used": 0.0025974025974,
+      "cpu_percent_host": 0.06493506493500001,
+      "cpu_power_watt": 0.02438688166895
+    },
+    {
+      "ts": "2026-01-06T17:29:30",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:31",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:32",
+      "cpu_cores_used": 0.00257731958763,
+      "cpu_percent_host": 0.06443298969075,
+      "cpu_power_watt": 0.03219791164476
+    },
+    {
+      "ts": "2026-01-06T17:29:33",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:34",
+      "cpu_cores_used": 0.0026455026455,
+      "cpu_percent_host": 0.06613756613749999,
+      "cpu_power_watt": 0.02375182887097
+    },
+    {
+      "ts": "2026-01-06T17:29:35",
+      "cpu_cores_used": 0.00263852242744,
+      "cpu_percent_host": 0.065963060686,
+      "cpu_power_watt": 0.0284857584085
+    },
+    {
+      "ts": "2026-01-06T17:29:36",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    }
+  ],
+  "cadvisor": [
+    {
+      "ts": "2026-01-06T17:29:08",
+      "cpu_cores_used": 0.0176322418136,
+      "cpu_percent_host": 0.44080604534,
+      "cpu_power_watt": 0.86892463204902
+    },
+    {
+      "ts": "2026-01-06T17:29:09",
+      "cpu_cores_used": 0.26342710997442,
+      "cpu_percent_host": 6.585677749360499,
+      "cpu_power_watt": 2.85698645331736
+    },
+    {
+      "ts": "2026-01-06T17:29:10",
+      "cpu_cores_used": 0.02820512820513,
+      "cpu_percent_host": 0.70512820512825,
+      "cpu_power_watt": 0.64687501235383
+    },
+    {
+      "ts": "2026-01-06T17:29:11",
+      "cpu_cores_used": 0.02061855670103,
+      "cpu_percent_host": 0.51546391752575,
+      "cpu_power_watt": 0.79725923731212
+    },
+    {
+      "ts": "2026-01-06T17:29:12",
+      "cpu_cores_used": 0.01275510204082,
+      "cpu_percent_host": 0.31887755102049997,
+      "cpu_power_watt": 0.31688545096137
+    },
+    {
+      "ts": "2026-01-06T17:29:13",
+      "cpu_cores_used": 0.01785714285714,
+      "cpu_percent_host": 0.4464285714285,
+      "cpu_power_watt": 0.47157430873937
+    },
+    {
+      "ts": "2026-01-06T17:29:14",
+      "cpu_cores_used": 0.23076923076923,
+      "cpu_percent_host": 5.7692307692307505,
+      "cpu_power_watt": 2.53240240566389
+    },
+    {
+      "ts": "2026-01-06T17:29:15",
+      "cpu_cores_used": 0.0383631713555,
+      "cpu_percent_host": 0.9590792838875,
+      "cpu_power_watt": 0.68036132767321
+    },
+    {
+      "ts": "2026-01-06T17:29:16",
+      "cpu_cores_used": 0.01794871794872,
+      "cpu_percent_host": 0.448717948718,
+      "cpu_power_watt": 0.28184678959612
+    },
+    {
+      "ts": "2026-01-06T17:29:17",
+      "cpu_cores_used": 0.01837270341207,
+      "cpu_percent_host": 0.45931758530175,
+      "cpu_power_watt": 0.31038974990033
+    },
+    {
+      "ts": "2026-01-06T17:29:18",
+      "cpu_cores_used": 0.02820512820513,
+      "cpu_percent_host": 0.70512820512825,
+      "cpu_power_watt": 0.52666114007882
+    },
+    {
+      "ts": "2026-01-06T17:29:19",
+      "cpu_cores_used": 0.22513089005236,
+      "cpu_percent_host": 5.628272251309,
+      "cpu_power_watt": 2.21609484890404
+    },
+    {
+      "ts": "2026-01-06T17:29:20",
+      "cpu_cores_used": 0.03350515463918,
+      "cpu_percent_host": 0.8376288659795,
+      "cpu_power_watt": 0.50205983365898
+    },
+    {
+      "ts": "2026-01-06T17:29:21",
+      "cpu_cores_used": 0.01295336787565,
+      "cpu_percent_host": 0.32383419689125004,
+      "cpu_power_watt": 0.17435716312247
+    },
+    {
+      "ts": "2026-01-06T17:29:22",
+      "cpu_cores_used": 0.02061855670103,
+      "cpu_percent_host": 0.51546391752575,
+      "cpu_power_watt": 0.46232303871777
+    },
+    {
+      "ts": "2026-01-06T17:29:23",
+      "cpu_cores_used": 0.02144772117962,
+      "cpu_percent_host": 0.5361930294905,
+      "cpu_power_watt": 0.30776888602842
+    },
+    {
+      "ts": "2026-01-06T17:29:24",
+      "cpu_cores_used": 0.23056300268097,
+      "cpu_percent_host": 5.76407506702425,
+      "cpu_power_watt": 2.14989037485196
+    },
+    {
+      "ts": "2026-01-06T17:29:25",
+      "cpu_cores_used": 0.05759162303665,
+      "cpu_percent_host": 1.43979057591625,
+      "cpu_power_watt": 0.78214682863266
+    },
+    {
+      "ts": "2026-01-06T17:29:26",
+      "cpu_cores_used": 0.01813471502591,
+      "cpu_percent_host": 0.45336787564775,
+      "cpu_power_watt": 0.26257042360201
+    },
+    {
+      "ts": "2026-01-06T17:29:27",
+      "cpu_cores_used": 0.01781170483461,
+      "cpu_percent_host": 0.44529262086525,
+      "cpu_power_watt": 0.24977378418884
+    },
+    {
+      "ts": "2026-01-06T17:29:28",
+      "cpu_cores_used": 0.01340482573727,
+      "cpu_percent_host": 0.33512064343175,
+      "cpu_power_watt": 0.17136059564426
+    },
+    {
+      "ts": "2026-01-06T17:29:29",
+      "cpu_cores_used": 0.22916666666667,
+      "cpu_percent_host": 5.72916666666675,
+      "cpu_power_watt": 2.17222917214963
+    },
+    {
+      "ts": "2026-01-06T17:29:30",
+      "cpu_cores_used": 0.06005221932115,
+      "cpu_percent_host": 1.50130548302875,
+      "cpu_power_watt": 0.61985216873904
+    },
+    {
+      "ts": "2026-01-06T17:29:31",
+      "cpu_cores_used": 0.01583113456464,
+      "cpu_percent_host": 0.39577836411600004,
+      "cpu_power_watt": 0.18548681837322
+    },
+    {
+      "ts": "2026-01-06T17:29:32",
+      "cpu_cores_used": 0.01799485861183,
+      "cpu_percent_host": 0.44987146529574995,
+      "cpu_power_watt": 0.22205693743268
+    },
+    {
+      "ts": "2026-01-06T17:29:33",
+      "cpu_cores_used": 0.02127659574468,
+      "cpu_percent_host": 0.5319148936170001,
+      "cpu_power_watt": 0.28285897523587
+    },
+    {
+      "ts": "2026-01-06T17:29:34",
+      "cpu_cores_used": 0.1968085106383,
+      "cpu_percent_host": 4.9202127659574995,
+      "cpu_power_watt": 1.7784473951035
+    },
+    {
+      "ts": "2026-01-06T17:29:35",
+      "cpu_cores_used": 0.07915567282322,
+      "cpu_percent_host": 1.9788918205805,
+      "cpu_power_watt": 0.84671219255388
+    },
+    {
+      "ts": "2026-01-06T17:29:36",
+      "cpu_cores_used": 0.02088772845953,
+      "cpu_percent_host": 0.5221932114882499,
+      "cpu_power_watt": 0.38368762424724
+    }
+  ],
+  "mongodb-geo": [
+    {
+      "ts": "2026-01-06T17:29:08",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:09",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:10",
+      "cpu_cores_used": 0.0025641025641,
+      "cpu_percent_host": 0.06410256410250001,
+      "cpu_power_watt": 0.05988500302498
+    },
+    {
+      "ts": "2026-01-06T17:29:11",
+      "cpu_cores_used": 0.00257731958763,
+      "cpu_percent_host": 0.06443298969075,
+      "cpu_power_watt": 0.09965740466402
+    },
+    {
+      "ts": "2026-01-06T17:29:12",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:13",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:14",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:15",
+      "cpu_cores_used": 0.0025641025641,
+      "cpu_percent_host": 0.06410256410250001,
+      "cpu_power_watt": 0.0459677584343
+    },
+    {
+      "ts": "2026-01-06T17:29:16",
+      "cpu_cores_used": 0.0025641025641,
+      "cpu_percent_host": 0.06410256410250001,
+      "cpu_power_watt": 0.04026382708516
+    },
+    {
+      "ts": "2026-01-06T17:29:17",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:18",
+      "cpu_cores_used": 0.0025641025641,
+      "cpu_percent_host": 0.06410256410250001,
+      "cpu_power_watt": 0.04787828546171
+    },
+    {
+      "ts": "2026-01-06T17:29:19",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:20",
+      "cpu_cores_used": 0.00257731958763,
+      "cpu_percent_host": 0.06443298969075,
+      "cpu_power_watt": 0.03861998720454
+    },
+    {
+      "ts": "2026-01-06T17:29:21",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:22",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:23",
+      "cpu_cores_used": 0.00268096514745,
+      "cpu_percent_host": 0.06702412868625,
+      "cpu_power_watt": 0.03885795832761
+    },
+    {
+      "ts": "2026-01-06T17:29:24",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:25",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:26",
+      "cpu_cores_used": 0.00259067357513,
+      "cpu_percent_host": 0.06476683937825,
+      "cpu_power_watt": 0.03751006051457
+    },
+    {
+      "ts": "2026-01-06T17:29:27",
+      "cpu_cores_used": 0.00255102040816,
+      "cpu_percent_host": 0.06377551020399999,
+      "cpu_power_watt": 0.03569812918251
+    },
+    {
+      "ts": "2026-01-06T17:29:28",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:29",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:30",
+      "cpu_cores_used": 0.00261096605744,
+      "cpu_percent_host": 0.065274151436,
+      "cpu_power_watt": 0.026950094293
+    },
+    {
+      "ts": "2026-01-06T17:29:31",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:32",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:33",
+      "cpu_cores_used": 0.00265957446809,
+      "cpu_percent_host": 0.06648936170225,
+      "cpu_power_watt": 0.03535737190448
+    },
+    {
+      "ts": "2026-01-06T17:29:34",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:35",
+      "cpu_cores_used": 0.00263852242744,
+      "cpu_percent_host": 0.065963060686,
+      "cpu_power_watt": 0.0282237397518
+    },
+    {
+      "ts": "2026-01-06T17:29:36",
+      "cpu_cores_used": 0.00261096605744,
+      "cpu_percent_host": 0.065274151436,
+      "cpu_power_watt": 0.0479609530309
+    }
+  ],
+  "prometheus": [
+    {
+      "ts": "2026-01-06T17:29:08",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:09",
+      "cpu_cores_used": 0.00511508951407,
+      "cpu_percent_host": 0.12787723785175,
+      "cpu_power_watt": 0.05547546511296
+    },
+    {
+      "ts": "2026-01-06T17:29:10",
+      "cpu_cores_used": 0.02820512820513,
+      "cpu_percent_host": 0.70512820512825,
+      "cpu_power_watt": 0.64687501235383
+    },
+    {
+      "ts": "2026-01-06T17:29:11",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:12",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:13",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:14",
+      "cpu_cores_used": 0.0053050397878,
+      "cpu_percent_host": 0.132625994695,
+      "cpu_power_watt": 0.05821614725664
+    },
+    {
+      "ts": "2026-01-06T17:29:15",
+      "cpu_cores_used": 0.02557544757033,
+      "cpu_percent_host": 0.63938618925825,
+      "cpu_power_watt": 0.45357421844881
+    },
+    {
+      "ts": "2026-01-06T17:29:16",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:17",
+      "cpu_cores_used": 0.00262467191601,
+      "cpu_percent_host": 0.06561679790025,
+      "cpu_power_watt": 0.0443413928429
+    },
+    {
+      "ts": "2026-01-06T17:29:18",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:19",
+      "cpu_cores_used": 0.00524934383202,
+      "cpu_percent_host": 0.1312335958005,
+      "cpu_power_watt": 0.05176222247897
+    },
+    {
+      "ts": "2026-01-06T17:29:20",
+      "cpu_cores_used": 0.02835051546392,
+      "cpu_percent_host": 0.708762886598,
+      "cpu_power_watt": 0.4248198592499
+    },
+    {
+      "ts": "2026-01-06T17:29:21",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:22",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:23",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:24",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:25",
+      "cpu_cores_used": 0.03141361256545,
+      "cpu_percent_host": 0.78534031413625,
+      "cpu_power_watt": 0.42662554289054
+    },
+    {
+      "ts": "2026-01-06T17:29:26",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:27",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:28",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:29",
+      "cpu_cores_used": 0.00260416666667,
+      "cpu_percent_host": 0.06510416666675,
+      "cpu_power_watt": 0.02468442241079
+    },
+    {
+      "ts": "2026-01-06T17:29:30",
+      "cpu_cores_used": 0.03141361256545,
+      "cpu_percent_host": 0.78534031413625,
+      "cpu_power_watt": 0.32380630691786
+    },
+    {
+      "ts": "2026-01-06T17:29:31",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:32",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:33",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:34",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:35",
+      "cpu_cores_used": 0.04485488126649,
+      "cpu_percent_host": 1.12137203166225,
+      "cpu_power_watt": 0.47980357578053
+    },
+    {
+      "ts": "2026-01-06T17:29:36",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    }
+  ],
+  "memcached-profile": [
+    {
+      "ts": "2026-01-06T17:29:08",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:09",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:10",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:11",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:12",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:13",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:14",
+      "cpu_cores_used": 0.0026455026455,
+      "cpu_percent_host": 0.06613756613749999,
+      "cpu_power_watt": 0.02893290461196
+    },
+    {
+      "ts": "2026-01-06T17:29:15",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:16",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:17",
+      "cpu_cores_used": 0.00263157894737,
+      "cpu_percent_host": 0.06578947368425,
+      "cpu_power_watt": 0.04435471854867
+    },
+    {
+      "ts": "2026-01-06T17:29:18",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:19",
+      "cpu_cores_used": 0.00262467191601,
+      "cpu_percent_host": 0.06561679790025,
+      "cpu_power_watt": 0.02580681129026
+    },
+    {
+      "ts": "2026-01-06T17:29:20",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:21",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:22",
+      "cpu_cores_used": 0.0025706940874,
+      "cpu_percent_host": 0.064267352185,
+      "cpu_power_watt": 0.05678317517941
+    },
+    {
+      "ts": "2026-01-06T17:29:23",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:24",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:25",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:26",
+      "cpu_cores_used": 0.00518134715026,
+      "cpu_percent_host": 0.1295336787565,
+      "cpu_power_watt": 0.07502012102915
+    },
+    {
+      "ts": "2026-01-06T17:29:27",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:28",
+      "cpu_cores_used": 0.00268096514745,
+      "cpu_percent_host": 0.06702412868625,
+      "cpu_power_watt": 0.03427211912885
+    },
+    {
+      "ts": "2026-01-06T17:29:29",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:30",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:31",
+      "cpu_cores_used": 0.0026455026455,
+      "cpu_percent_host": 0.06613756613749999,
+      "cpu_power_watt": 0.03113490088395
+    },
+    {
+      "ts": "2026-01-06T17:29:32",
+      "cpu_cores_used": 0.0025641025641,
+      "cpu_percent_host": 0.06410256410250001,
+      "cpu_power_watt": 0.03170147024169
+    },
+    {
+      "ts": "2026-01-06T17:29:33",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:34",
+      "cpu_cores_used": 0.00265957446809,
+      "cpu_percent_host": 0.06648936170225,
+      "cpu_power_watt": 0.0240330729068
+    },
+    {
+      "ts": "2026-01-06T17:29:35",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:36",
+      "cpu_cores_used": 0.00261096605744,
+      "cpu_percent_host": 0.065274151436,
+      "cpu_power_watt": 0.0479609530309
+    }
+  ],
+  "frontend": [
+    {
+      "ts": "2026-01-06T17:29:08",
+      "cpu_cores_used": 0.00506329113924,
+      "cpu_percent_host": 0.126582278481,
+      "cpu_power_watt": 0.15442596976219
+    },
+    {
+      "ts": "2026-01-06T17:29:09",
+      "cpu_cores_used": 0.00510204081633,
+      "cpu_percent_host": 0.12755102040825,
+      "cpu_power_watt": 0.05650416518611
+    },
+    {
+      "ts": "2026-01-06T17:29:10",
+      "cpu_cores_used": 0.01538461538462,
+      "cpu_percent_host": 0.3846153846155,
+      "cpu_power_watt": 0.31881799901505
+    },
+    {
+      "ts": "2026-01-06T17:29:11",
+      "cpu_cores_used": 0.01028277634961,
+      "cpu_percent_host": 0.25706940874024997,
+      "cpu_power_watt": 0.44205990426345
+    },
+    {
+      "ts": "2026-01-06T17:29:12",
+      "cpu_cores_used": 0.02307692307692,
+      "cpu_percent_host": 0.576923076923,
+      "cpu_power_watt": 0.5490660421909
+    },
+    {
+      "ts": "2026-01-06T17:29:13",
+      "cpu_cores_used": 0.01530612244898,
+      "cpu_percent_host": 0.3826530612245,
+      "cpu_power_watt": 0.47514162392711
+    },
+    {
+      "ts": "2026-01-06T17:29:14",
+      "cpu_cores_used": 0.02659574468085,
+      "cpu_percent_host": 0.6648936170212499,
+      "cpu_power_watt": 0.29286349422587
+    },
+    {
+      "ts": "2026-01-06T17:29:15",
+      "cpu_cores_used": 0.02290076335878,
+      "cpu_percent_host": 0.5725190839695,
+      "cpu_power_watt": 0.37883844627259
+    },
+    {
+      "ts": "2026-01-06T17:29:16",
+      "cpu_cores_used": 0.02827763496144,
+      "cpu_percent_host": 0.706940874036,
+      "cpu_power_watt": 0.45303727239218
+    },
+    {
+      "ts": "2026-01-06T17:29:17",
+      "cpu_cores_used": 0.03421052631579,
+      "cpu_percent_host": 0.85526315789475,
+      "cpu_power_watt": 0.56952691300068
+    },
+    {
+      "ts": "2026-01-06T17:29:18",
+      "cpu_cores_used": 0.0306905370844,
+      "cpu_percent_host": 0.7672634271100001,
+      "cpu_power_watt": 0.58254341796968
+    },
+    {
+      "ts": "2026-01-06T17:29:19",
+      "cpu_cores_used": 0.03394255874674,
+      "cpu_percent_host": 0.8485639686685,
+      "cpu_power_watt": 0.33646499924784
+    },
+    {
+      "ts": "2026-01-06T17:29:20",
+      "cpu_cores_used": 0.03617571059432,
+      "cpu_percent_host": 0.904392764858,
+      "cpu_power_watt": 0.53010301926996
+    },
+    {
+      "ts": "2026-01-06T17:29:21",
+      "cpu_cores_used": 0.03886010362694,
+      "cpu_percent_host": 0.9715025906735,
+      "cpu_power_watt": 0.53222020759687
+    },
+    {
+      "ts": "2026-01-06T17:29:22",
+      "cpu_cores_used": 0.03350515463918,
+      "cpu_percent_host": 0.8376288659795,
+      "cpu_power_watt": 0.71381537289265
+    },
+    {
+      "ts": "2026-01-06T17:29:23",
+      "cpu_cores_used": 0.04266666666667,
+      "cpu_percent_host": 1.0666666666667501,
+      "cpu_power_watt": 0.63410365650563
+    },
+    {
+      "ts": "2026-01-06T17:29:24",
+      "cpu_cores_used": 0.0510752688172,
+      "cpu_percent_host": 1.27688172043,
+      "cpu_power_watt": 0.47970188325838
+    },
+    {
+      "ts": "2026-01-06T17:29:25",
+      "cpu_cores_used": 0.04199475065617,
+      "cpu_percent_host": 1.0498687664042499,
+      "cpu_power_watt": 0.54573540691642
+    },
+    {
+      "ts": "2026-01-06T17:29:26",
+      "cpu_cores_used": 0.0440414507772,
+      "cpu_percent_host": 1.10103626943,
+      "cpu_power_watt": 0.64396039598167
+    },
+    {
+      "ts": "2026-01-06T17:29:27",
+      "cpu_cores_used": 0.04325699745547,
+      "cpu_percent_host": 1.08142493638675,
+      "cpu_power_watt": 0.62369076466148
+    },
+    {
+      "ts": "2026-01-06T17:29:28",
+      "cpu_cores_used": 0.05913978494624,
+      "cpu_percent_host": 1.478494623656,
+      "cpu_power_watt": 0.73721889931026
+    },
+    {
+      "ts": "2026-01-06T17:29:29",
+      "cpu_cores_used": 0.0390625,
+      "cpu_percent_host": 0.9765625,
+      "cpu_power_watt": 0.37628106975399
+    },
+    {
+      "ts": "2026-01-06T17:29:30",
+      "cpu_cores_used": 0.06020942408377,
+      "cpu_percent_host": 1.5052356020942501,
+      "cpu_power_watt": 0.60553137620635
+    },
+    {
+      "ts": "2026-01-06T17:29:31",
+      "cpu_cores_used": 0.04973821989529,
+      "cpu_percent_host": 1.24345549738225,
+      "cpu_power_watt": 0.60149544555995
+    },
+    {
+      "ts": "2026-01-06T17:29:32",
+      "cpu_cores_used": 0.05927835051546,
+      "cpu_percent_host": 1.4819587628865,
+      "cpu_power_watt": 0.72014625108102
+    },
+    {
+      "ts": "2026-01-06T17:29:33",
+      "cpu_cores_used": 0.056,
+      "cpu_percent_host": 1.4000000000000001,
+      "cpu_power_watt": 0.72462262787236
+    },
+    {
+      "ts": "2026-01-06T17:29:34",
+      "cpu_cores_used": 0.06702412868633,
+      "cpu_percent_host": 1.6756032171582498,
+      "cpu_power_watt": 0.61236817093891
+    },
+    {
+      "ts": "2026-01-06T17:29:35",
+      "cpu_cores_used": 0.05804749340369,
+      "cpu_percent_host": 1.45118733509225,
+      "cpu_power_watt": 0.60767002987389
+    },
+    {
+      "ts": "2026-01-06T17:29:36",
+      "cpu_cores_used": 0.03664921465969,
+      "cpu_percent_host": 0.9162303664922501,
+      "cpu_power_watt": 0.66244212727683
+    }
+  ],
+  "search": [
+    {
+      "ts": "2026-01-06T17:29:08",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:09",
+      "cpu_cores_used": 0.00765306122449,
+      "cpu_percent_host": 0.19132653061225,
+      "cpu_power_watt": 0.08475624777916
+    },
+    {
+      "ts": "2026-01-06T17:29:10",
+      "cpu_cores_used": 0.00769230769231,
+      "cpu_percent_host": 0.19230769230775,
+      "cpu_power_watt": 0.15940899950752
+    },
+    {
+      "ts": "2026-01-06T17:29:11",
+      "cpu_cores_used": 0.00771208226221,
+      "cpu_percent_host": 0.19280205655524998,
+      "cpu_power_watt": 0.33154492819759
+    },
+    {
+      "ts": "2026-01-06T17:29:12",
+      "cpu_cores_used": 0.01282051282051,
+      "cpu_percent_host": 0.32051282051275,
+      "cpu_power_watt": 0.31088275494826
+    },
+    {
+      "ts": "2026-01-06T17:29:13",
+      "cpu_cores_used": 0.00761421319797,
+      "cpu_percent_host": 0.19035532994925,
+      "cpu_power_watt": 0.2316614992957
+    },
+    {
+      "ts": "2026-01-06T17:29:14",
+      "cpu_cores_used": 0.016,
+      "cpu_percent_host": 0.4,
+      "cpu_power_watt": 0.17500710607531
+    },
+    {
+      "ts": "2026-01-06T17:29:15",
+      "cpu_cores_used": 0.01526717557252,
+      "cpu_percent_host": 0.381679389313,
+      "cpu_power_watt": 0.24963459972519
+    },
+    {
+      "ts": "2026-01-06T17:29:16",
+      "cpu_cores_used": 0.01794871794872,
+      "cpu_percent_host": 0.448717948718,
+      "cpu_power_watt": 0.28820209460618
+    },
+    {
+      "ts": "2026-01-06T17:29:17",
+      "cpu_cores_used": 0.01851851851852,
+      "cpu_percent_host": 0.462962962963,
+      "cpu_power_watt": 0.30685967297126
+    },
+    {
+      "ts": "2026-01-06T17:29:18",
+      "cpu_cores_used": 0.01278772378517,
+      "cpu_percent_host": 0.31969309462925,
+      "cpu_power_watt": 0.24985195195774
+    },
+    {
+      "ts": "2026-01-06T17:29:19",
+      "cpu_cores_used": 0.02094240837696,
+      "cpu_percent_host": 0.5235602094240001,
+      "cpu_power_watt": 0.20735479999491
+    },
+    {
+      "ts": "2026-01-06T17:29:20",
+      "cpu_cores_used": 0.0180412371134,
+      "cpu_percent_host": 0.451030927835,
+      "cpu_power_watt": 0.25982465906148
+    },
+    {
+      "ts": "2026-01-06T17:29:21",
+      "cpu_cores_used": 0.02319587628866,
+      "cpu_percent_host": 0.5798969072165,
+      "cpu_power_watt": 0.32187775930674
+    },
+    {
+      "ts": "2026-01-06T17:29:22",
+      "cpu_cores_used": 0.01291989664083,
+      "cpu_percent_host": 0.32299741602075,
+      "cpu_power_watt": 0.26584247112699
+    },
+    {
+      "ts": "2026-01-06T17:29:23",
+      "cpu_cores_used": 0.02925531914894,
+      "cpu_percent_host": 0.7313829787235,
+      "cpu_power_watt": 0.45004611940515
+    },
+    {
+      "ts": "2026-01-06T17:29:24",
+      "cpu_cores_used": 0.03234501347709,
+      "cpu_percent_host": 0.8086253369272499,
+      "cpu_power_watt": 0.30287447582278
+    },
+    {
+      "ts": "2026-01-06T17:29:25",
+      "cpu_cores_used": 0.02094240837696,
+      "cpu_percent_host": 0.5235602094240001,
+      "cpu_power_watt": 0.26842571575451
+    },
+    {
+      "ts": "2026-01-06T17:29:26",
+      "cpu_cores_used": 0.02604166666667,
+      "cpu_percent_host": 0.65104166666675,
+      "cpu_power_watt": 0.38290855273812
+    },
+    {
+      "ts": "2026-01-06T17:29:27",
+      "cpu_cores_used": 0.0253807106599,
+      "cpu_percent_host": 0.6345177664975,
+      "cpu_power_watt": 0.37025396286673
+    },
+    {
+      "ts": "2026-01-06T17:29:28",
+      "cpu_cores_used": 0.03475935828877,
+      "cpu_percent_host": 0.8689839572192499,
+      "cpu_power_watt": 0.4255816980028
+    },
+    {
+      "ts": "2026-01-06T17:29:29",
+      "cpu_cores_used": 0.02610966057441,
+      "cpu_percent_host": 0.65274151436025,
+      "cpu_power_watt": 0.25515710346566
+    },
+    {
+      "ts": "2026-01-06T17:29:30",
+      "cpu_cores_used": 0.03655352480418,
+      "cpu_percent_host": 0.9138381201044999,
+      "cpu_power_watt": 0.3623469222669
+    },
+    {
+      "ts": "2026-01-06T17:29:31",
+      "cpu_cores_used": 0.03412073490814,
+      "cpu_percent_host": 0.8530183727035,
+      "cpu_power_watt": 0.40909908813974
+    },
+    {
+      "ts": "2026-01-06T17:29:32",
+      "cpu_cores_used": 0.03092783505155,
+      "cpu_percent_host": 0.7731958762887501,
+      "cpu_power_watt": 0.37829423216655
+    },
+    {
+      "ts": "2026-01-06T17:29:33",
+      "cpu_cores_used": 0.03457446808511,
+      "cpu_percent_host": 0.86436170212775,
+      "cpu_power_watt": 0.44472079104037
+    },
+    {
+      "ts": "2026-01-06T17:29:34",
+      "cpu_cores_used": 0.0427807486631,
+      "cpu_percent_host": 1.0695187165775,
+      "cpu_power_watt": 0.39188758918485
+    },
+    {
+      "ts": "2026-01-06T17:29:35",
+      "cpu_cores_used": 0.03412073490814,
+      "cpu_percent_host": 0.8530183727035,
+      "cpu_power_watt": 0.35822514095302
+    },
+    {
+      "ts": "2026-01-06T17:29:36",
+      "cpu_cores_used": 0.02368421052632,
+      "cpu_percent_host": 0.5921052631579999,
+      "cpu_power_watt": 0.41482505039806
+    }
+  ],
+  "user": [
+    {
+      "ts": "2026-01-06T17:29:08",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:09",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:10",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:11",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:12",
+      "cpu_cores_used": 0.00255102040816,
+      "cpu_percent_host": 0.06377551020399999,
+      "cpu_power_watt": 0.06337709019227
+    },
+    {
+      "ts": "2026-01-06T17:29:13",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:14",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:15",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:16",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:17",
+      "cpu_cores_used": 0.00263157894737,
+      "cpu_percent_host": 0.06578947368425,
+      "cpu_power_watt": 0.04380976253851
+    },
+    {
+      "ts": "2026-01-06T17:29:18",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:19",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:20",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:21",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:22",
+      "cpu_cores_used": 0.00259067357513,
+      "cpu_percent_host": 0.06476683937825,
+      "cpu_power_watt": 0.05681403804509
+    },
+    {
+      "ts": "2026-01-06T17:29:23",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:24",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:25",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:26",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:27",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:28",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:29",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:30",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:31",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:32",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:33",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:34",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:35",
+      "cpu_cores_used": 0.0026455026455,
+      "cpu_percent_host": 0.06613756613749999,
+      "cpu_power_watt": 0.02776900376192
+    },
+    {
+      "ts": "2026-01-06T17:29:36",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    }
+  ],
+  "recommendation": [
+    {
+      "ts": "2026-01-06T17:29:08",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:09",
+      "cpu_cores_used": 0.00255102040816,
+      "cpu_percent_host": 0.06377551020399999,
+      "cpu_power_watt": 0.02758161141098
+    },
+    {
+      "ts": "2026-01-06T17:29:10",
+      "cpu_cores_used": 0.0025706940874,
+      "cpu_percent_host": 0.064267352185,
+      "cpu_power_watt": 0.0598947649216
+    },
+    {
+      "ts": "2026-01-06T17:29:11",
+      "cpu_cores_used": 0.0025706940874,
+      "cpu_percent_host": 0.064267352185,
+      "cpu_power_watt": 0.0996519795387
+    },
+    {
+      "ts": "2026-01-06T17:29:12",
+      "cpu_cores_used": 0.00255754475703,
+      "cpu_percent_host": 0.06393861892575001,
+      "cpu_power_watt": 0.06338631297589
+    },
+    {
+      "ts": "2026-01-06T17:29:13",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:14",
+      "cpu_cores_used": 0.0053050397878,
+      "cpu_percent_host": 0.132625994695,
+      "cpu_power_watt": 0.05821614725664
+    },
+    {
+      "ts": "2026-01-06T17:29:15",
+      "cpu_cores_used": 0.00255754475703,
+      "cpu_percent_host": 0.06393861892575001,
+      "cpu_power_watt": 0.04535742184488
+    },
+    {
+      "ts": "2026-01-06T17:29:16",
+      "cpu_cores_used": 0.00511508951407,
+      "cpu_percent_host": 0.12787723785175,
+      "cpu_power_watt": 0.08050015123217
+    },
+    {
+      "ts": "2026-01-06T17:29:17",
+      "cpu_cores_used": 0.00263157894737,
+      "cpu_percent_host": 0.06578947368425,
+      "cpu_power_watt": 0.04435471854867
+    },
+    {
+      "ts": "2026-01-06T17:29:18",
+      "cpu_cores_used": 0.00769230769231,
+      "cpu_percent_host": 0.19230769230775,
+      "cpu_power_watt": 0.14363485638513
+    },
+    {
+      "ts": "2026-01-06T17:29:19",
+      "cpu_cores_used": 0.00261780104712,
+      "cpu_percent_host": 0.06544502617800001,
+      "cpu_power_watt": 0.0257685447547
+    },
+    {
+      "ts": "2026-01-06T17:29:20",
+      "cpu_cores_used": 0.00515463917526,
+      "cpu_percent_host": 0.1288659793815,
+      "cpu_power_watt": 0.07723997440907
+    },
+    {
+      "ts": "2026-01-06T17:29:21",
+      "cpu_cores_used": 0.00777202072539,
+      "cpu_percent_host": 0.19430051813475,
+      "cpu_power_watt": 0.10461429787348
+    },
+    {
+      "ts": "2026-01-06T17:29:22",
+      "cpu_cores_used": 0.00515463917526,
+      "cpu_percent_host": 0.1288659793815,
+      "cpu_power_watt": 0.11558075967944
+    },
+    {
+      "ts": "2026-01-06T17:29:23",
+      "cpu_cores_used": 0.00536193029491,
+      "cpu_percent_host": 0.13404825737275,
+      "cpu_power_watt": 0.07694222150711
+    },
+    {
+      "ts": "2026-01-06T17:29:24",
+      "cpu_cores_used": 0.00804289544236,
+      "cpu_percent_host": 0.20107238605900002,
+      "cpu_power_watt": 0.07499617586693
+    },
+    {
+      "ts": "2026-01-06T17:29:25",
+      "cpu_cores_used": 0.00523560209424,
+      "cpu_percent_host": 0.13089005235600001,
+      "cpu_power_watt": 0.07110425714842
+    },
+    {
+      "ts": "2026-01-06T17:29:26",
+      "cpu_cores_used": 0.00779220779221,
+      "cpu_percent_host": 0.19480519480525,
+      "cpu_power_watt": 0.11368703486916
+    },
+    {
+      "ts": "2026-01-06T17:29:27",
+      "cpu_cores_used": 0.00508905852417,
+      "cpu_percent_host": 0.12722646310425,
+      "cpu_power_watt": 0.07136393833967
+    },
+    {
+      "ts": "2026-01-06T17:29:28",
+      "cpu_cores_used": 0.01072386058981,
+      "cpu_percent_host": 0.26809651474525,
+      "cpu_power_watt": 0.13708847651541
+    },
+    {
+      "ts": "2026-01-06T17:29:29",
+      "cpu_cores_used": 0.00520833333333,
+      "cpu_percent_host": 0.13020833333325,
+      "cpu_power_watt": 0.04936884482158
+    },
+    {
+      "ts": "2026-01-06T17:29:30",
+      "cpu_cores_used": 0.00783289817232,
+      "cpu_percent_host": 0.195822454308,
+      "cpu_power_watt": 0.08085028287901
+    },
+    {
+      "ts": "2026-01-06T17:29:31",
+      "cpu_cores_used": 0.00529100529101,
+      "cpu_percent_host": 0.13227513227524998,
+      "cpu_power_watt": 0.06187906303067
+    },
+    {
+      "ts": "2026-01-06T17:29:32",
+      "cpu_cores_used": 0.00512820512821,
+      "cpu_percent_host": 0.12820512820525,
+      "cpu_power_watt": 0.06340294048337
+    },
+    {
+      "ts": "2026-01-06T17:29:33",
+      "cpu_cores_used": 0.01063829787234,
+      "cpu_percent_host": 0.26595744680850003,
+      "cpu_power_watt": 0.14142948761793
+    },
+    {
+      "ts": "2026-01-06T17:29:34",
+      "cpu_cores_used": 0.00531914893617,
+      "cpu_percent_host": 0.13297872340425002,
+      "cpu_power_watt": 0.04806614581361
+    },
+    {
+      "ts": "2026-01-06T17:29:35",
+      "cpu_cores_used": 0.00791556728232,
+      "cpu_percent_host": 0.19788918205800002,
+      "cpu_power_watt": 0.08467121925539
+    },
+    {
+      "ts": "2026-01-06T17:29:36",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    }
+  ],
+  "rate": [
+    {
+      "ts": "2026-01-06T17:29:08",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:09",
+      "cpu_cores_used": 0.00510204081633,
+      "cpu_percent_host": 0.12755102040825,
+      "cpu_power_watt": 0.05516322282195
+    },
+    {
+      "ts": "2026-01-06T17:29:10",
+      "cpu_cores_used": 0.00771208226221,
+      "cpu_percent_host": 0.19280205655524998,
+      "cpu_power_watt": 0.17968429476481
+    },
+    {
+      "ts": "2026-01-06T17:29:11",
+      "cpu_cores_used": 0.00515463917526,
+      "cpu_percent_host": 0.1288659793815,
+      "cpu_power_watt": 0.19931480932803
+    },
+    {
+      "ts": "2026-01-06T17:29:12",
+      "cpu_cores_used": 0.01275510204082,
+      "cpu_percent_host": 0.31887755102049997,
+      "cpu_power_watt": 0.31688545096137
+    },
+    {
+      "ts": "2026-01-06T17:29:13",
+      "cpu_cores_used": 0.01020408163265,
+      "cpu_percent_host": 0.25510204081625,
+      "cpu_power_watt": 0.26947103356536
+    },
+    {
+      "ts": "2026-01-06T17:29:14",
+      "cpu_cores_used": 0.0079575596817,
+      "cpu_percent_host": 0.19893899204249998,
+      "cpu_power_watt": 0.08732422088496
+    },
+    {
+      "ts": "2026-01-06T17:29:15",
+      "cpu_cores_used": 0.01278772378517,
+      "cpu_percent_host": 0.31969309462925,
+      "cpu_power_watt": 0.2267871092244
+    },
+    {
+      "ts": "2026-01-06T17:29:16",
+      "cpu_cores_used": 0.01790281329923,
+      "cpu_percent_host": 0.44757033248074996,
+      "cpu_power_watt": 0.2817505293126
+    },
+    {
+      "ts": "2026-01-06T17:29:17",
+      "cpu_cores_used": 0.01578947368421,
+      "cpu_percent_host": 0.39473684210525,
+      "cpu_power_watt": 0.26612831129199
+    },
+    {
+      "ts": "2026-01-06T17:29:18",
+      "cpu_cores_used": 0.01282051282051,
+      "cpu_percent_host": 0.32051282051275,
+      "cpu_power_watt": 0.23939142730856
+    },
+    {
+      "ts": "2026-01-06T17:29:19",
+      "cpu_cores_used": 0.01832460732984,
+      "cpu_percent_host": 0.458115183246,
+      "cpu_power_watt": 0.18037981328289
+    },
+    {
+      "ts": "2026-01-06T17:29:20",
+      "cpu_cores_used": 0.01288659793814,
+      "cpu_percent_host": 0.32216494845349997,
+      "cpu_power_watt": 0.19309993602268
+    },
+    {
+      "ts": "2026-01-06T17:29:21",
+      "cpu_cores_used": 0.0259067357513,
+      "cpu_percent_host": 0.6476683937825001,
+      "cpu_power_watt": 0.34871432624494
+    },
+    {
+      "ts": "2026-01-06T17:29:22",
+      "cpu_cores_used": 0.01030927835052,
+      "cpu_percent_host": 0.257731958763,
+      "cpu_power_watt": 0.23116151935889
+    },
+    {
+      "ts": "2026-01-06T17:29:23",
+      "cpu_cores_used": 0.02144772117962,
+      "cpu_percent_host": 0.5361930294905,
+      "cpu_power_watt": 0.30776888602842
+    },
+    {
+      "ts": "2026-01-06T17:29:24",
+      "cpu_cores_used": 0.03217158176944,
+      "cpu_percent_host": 0.8042895442360001,
+      "cpu_power_watt": 0.29998470346772
+    },
+    {
+      "ts": "2026-01-06T17:29:25",
+      "cpu_cores_used": 0.01832460732984,
+      "cpu_percent_host": 0.458115183246,
+      "cpu_power_watt": 0.24886490001948
+    },
+    {
+      "ts": "2026-01-06T17:29:26",
+      "cpu_cores_used": 0.02857142857143,
+      "cpu_percent_host": 0.71428571428575,
+      "cpu_power_watt": 0.41685246118694
+    },
+    {
+      "ts": "2026-01-06T17:29:27",
+      "cpu_cores_used": 0.02035623409669,
+      "cpu_percent_host": 0.5089058524172501,
+      "cpu_power_watt": 0.28545575335867
+    },
+    {
+      "ts": "2026-01-06T17:29:28",
+      "cpu_cores_used": 0.02949061662198,
+      "cpu_percent_host": 0.7372654155495,
+      "cpu_power_watt": 0.37699331041738
+    },
+    {
+      "ts": "2026-01-06T17:29:29",
+      "cpu_cores_used": 0.02604166666667,
+      "cpu_percent_host": 0.65104166666675,
+      "cpu_power_watt": 0.24684422410791
+    },
+    {
+      "ts": "2026-01-06T17:29:30",
+      "cpu_cores_used": 0.0313315926893,
+      "cpu_percent_host": 0.7832898172324999,
+      "cpu_power_watt": 0.32340113151602
+    },
+    {
+      "ts": "2026-01-06T17:29:31",
+      "cpu_cores_used": 0.02902374670185,
+      "cpu_percent_host": 0.72559366754625,
+      "cpu_power_watt": 0.34005916701757
+    },
+    {
+      "ts": "2026-01-06T17:29:32",
+      "cpu_cores_used": 0.02564102564103,
+      "cpu_percent_host": 0.64102564102575,
+      "cpu_power_watt": 0.31701470241687
+    },
+    {
+      "ts": "2026-01-06T17:29:33",
+      "cpu_cores_used": 0.02666666666667,
+      "cpu_percent_host": 0.66666666666675,
+      "cpu_power_watt": 0.35376811572655
+    },
+    {
+      "ts": "2026-01-06T17:29:34",
+      "cpu_cores_used": 0.03723404255319,
+      "cpu_percent_host": 0.93085106382975,
+      "cpu_power_watt": 0.33646302069526
+    },
+    {
+      "ts": "2026-01-06T17:29:35",
+      "cpu_cores_used": 0.02902374670185,
+      "cpu_percent_host": 0.72559366754625,
+      "cpu_power_watt": 0.31046113726976
+    },
+    {
+      "ts": "2026-01-06T17:29:36",
+      "cpu_cores_used": 0.01566579634465,
+      "cpu_percent_host": 0.39164490861624995,
+      "cpu_power_watt": 0.28776571818543
+    }
+  ],
+  "geo": [
+    {
+      "ts": "2026-01-06T17:29:08",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:09",
+      "cpu_cores_used": 0.00511508951407,
+      "cpu_percent_host": 0.12787723785175,
+      "cpu_power_watt": 0.05522036917329
+    },
+    {
+      "ts": "2026-01-06T17:29:10",
+      "cpu_cores_used": 0.0025641025641,
+      "cpu_percent_host": 0.06410256410250001,
+      "cpu_power_watt": 0.05988500302498
+    },
+    {
+      "ts": "2026-01-06T17:29:11",
+      "cpu_cores_used": 0.0025706940874,
+      "cpu_percent_host": 0.064267352185,
+      "cpu_power_watt": 0.0996519795387
+    },
+    {
+      "ts": "2026-01-06T17:29:12",
+      "cpu_cores_used": 0.00512820512821,
+      "cpu_percent_host": 0.12820512820525,
+      "cpu_power_watt": 0.12933540314403
+    },
+    {
+      "ts": "2026-01-06T17:29:13",
+      "cpu_cores_used": 0.00510204081633,
+      "cpu_percent_host": 0.12755102040825,
+      "cpu_power_watt": 0.13473551678268
+    },
+    {
+      "ts": "2026-01-06T17:29:14",
+      "cpu_cores_used": 0.00527704485488,
+      "cpu_percent_host": 0.131926121372,
+      "cpu_power_watt": 0.05724319079287
+    },
+    {
+      "ts": "2026-01-06T17:29:15",
+      "cpu_cores_used": 0.00512820512821,
+      "cpu_percent_host": 0.12820512820525,
+      "cpu_power_watt": 0.09444262277787
+    },
+    {
+      "ts": "2026-01-06T17:29:16",
+      "cpu_cores_used": 0.00771208226221,
+      "cpu_percent_host": 0.19280205655524998,
+      "cpu_power_watt": 0.12083306672202
+    },
+    {
+      "ts": "2026-01-06T17:29:17",
+      "cpu_cores_used": 0.00787401574803,
+      "cpu_percent_host": 0.19685039370075003,
+      "cpu_power_watt": 0.13138876772614
+    },
+    {
+      "ts": "2026-01-06T17:29:18",
+      "cpu_cores_used": 0.0025641025641,
+      "cpu_percent_host": 0.06410256410250001,
+      "cpu_power_watt": 0.04855662481309
+    },
+    {
+      "ts": "2026-01-06T17:29:19",
+      "cpu_cores_used": 0.00785340314136,
+      "cpu_percent_host": 0.196335078534,
+      "cpu_power_watt": 0.0770868246063
+    },
+    {
+      "ts": "2026-01-06T17:29:20",
+      "cpu_cores_used": 0.00771208226221,
+      "cpu_percent_host": 0.19280205655524998,
+      "cpu_power_watt": 0.11464321330637
+    },
+    {
+      "ts": "2026-01-06T17:29:21",
+      "cpu_cores_used": 0.00779220779221,
+      "cpu_percent_host": 0.19480519480525,
+      "cpu_power_watt": 0.10557080318195
+    },
+    {
+      "ts": "2026-01-06T17:29:22",
+      "cpu_cores_used": 0.00515463917526,
+      "cpu_percent_host": 0.1288659793815,
+      "cpu_power_watt": 0.11558075967944
+    },
+    {
+      "ts": "2026-01-06T17:29:23",
+      "cpu_cores_used": 0.01069518716578,
+      "cpu_percent_host": 0.2673796791445,
+      "cpu_power_watt": 0.15381597121263
+    },
+    {
+      "ts": "2026-01-06T17:29:24",
+      "cpu_cores_used": 0.01347708894879,
+      "cpu_percent_host": 0.33692722371975,
+      "cpu_power_watt": 0.12519489191201
+    },
+    {
+      "ts": "2026-01-06T17:29:25",
+      "cpu_cores_used": 0.00783289817232,
+      "cpu_percent_host": 0.195822454308,
+      "cpu_power_watt": 0.10852280599502
+    },
+    {
+      "ts": "2026-01-06T17:29:26",
+      "cpu_cores_used": 0.01036269430052,
+      "cpu_percent_host": 0.259067357513,
+      "cpu_power_watt": 0.15004024205829
+    },
+    {
+      "ts": "2026-01-06T17:29:27",
+      "cpu_cores_used": 0.00765306122449,
+      "cpu_percent_host": 0.19132653061225,
+      "cpu_power_watt": 0.10613938869436
+    },
+    {
+      "ts": "2026-01-06T17:29:28",
+      "cpu_cores_used": 0.01072386058981,
+      "cpu_percent_host": 0.26809651474525,
+      "cpu_power_watt": 0.13818898373394
+    },
+    {
+      "ts": "2026-01-06T17:29:29",
+      "cpu_cores_used": 0.01036269430052,
+      "cpu_percent_host": 0.259067357513,
+      "cpu_power_watt": 0.09738306640222
+    },
+    {
+      "ts": "2026-01-06T17:29:30",
+      "cpu_cores_used": 0.01570680628272,
+      "cpu_percent_host": 0.392670157068,
+      "cpu_power_watt": 0.16315231394992
+    },
+    {
+      "ts": "2026-01-06T17:29:31",
+      "cpu_cores_used": 0.01315789473684,
+      "cpu_percent_host": 0.32894736842100003,
+      "cpu_power_watt": 0.15444823647893
+    },
+    {
+      "ts": "2026-01-06T17:29:32",
+      "cpu_cores_used": 0.01030927835052,
+      "cpu_percent_host": 0.257731958763,
+      "cpu_power_watt": 0.12879164657904
+    },
+    {
+      "ts": "2026-01-06T17:29:33",
+      "cpu_cores_used": 0.01063829787234,
+      "cpu_percent_host": 0.26595744680850003,
+      "cpu_power_watt": 0.14265300499653
+    },
+    {
+      "ts": "2026-01-06T17:29:34",
+      "cpu_cores_used": 0.01866666666667,
+      "cpu_percent_host": 0.46666666666675,
+      "cpu_power_watt": 0.16771575945143
+    },
+    {
+      "ts": "2026-01-06T17:29:35",
+      "cpu_cores_used": 0.01315789473684,
+      "cpu_percent_host": 0.32894736842100003,
+      "cpu_power_watt": 0.14161197510354
+    },
+    {
+      "ts": "2026-01-06T17:29:36",
+      "cpu_cores_used": 0.01049868766404,
+      "cpu_percent_host": 0.262467191601,
+      "cpu_power_watt": 0.20033903883167
+    }
+  ],
+  "profile": [
+    {
+      "ts": "2026-01-06T17:29:08",
+      "cpu_cores_used": 0.0,
+      "cpu_percent_host": 0.0,
+      "cpu_power_watt": 0.0
+    },
+    {
+      "ts": "2026-01-06T17:29:09",
+      "cpu_cores_used": 0.00510204081633,
+      "cpu_percent_host": 0.12755102040825,
+      "cpu_power_watt": 0.0556808215022
+    },
+    {
+      "ts": "2026-01-06T17:29:10",
+      "cpu_cores_used": 0.00512820512821,
+      "cpu_percent_host": 0.12820512820525,
+      "cpu_power_watt": 0.11162588023703
+    },
+    {
+      "ts": "2026-01-06T17:29:11",
+      "cpu_cores_used": 0.00514138817481,
+      "cpu_percent_host": 0.12853470437025,
+      "cpu_power_watt": 0.20603644773895
+    },
+    {
+      "ts": "2026-01-06T17:29:12",
+      "cpu_cores_used": 0.0076726342711,
+      "cpu_percent_host": 0.19181585677750002,
+      "cpu_power_watt": 0.18650137226289
+    },
+    {
+      "ts": "2026-01-06T17:29:13",
+      "cpu_cores_used": 0.00512820512821,
+      "cpu_percent_host": 0.12820512820525,
+      "cpu_power_watt": 0.15079353374509
+    },
+    {
+      "ts": "2026-01-06T17:29:14",
+      "cpu_cores_used": 0.0131926121372,
+      "cpu_percent_host": 0.32981530343000004,
+      "cpu_power_watt": 0.14451669449348
+    },
+    {
+      "ts": "2026-01-06T17:29:15",
+      "cpu_cores_used": 0.00765306122449,
+      "cpu_percent_host": 0.19132653061225,
+      "cpu_power_watt": 0.12936960985713
+    },
+    {
+      "ts": "2026-01-06T17:29:16",
+      "cpu_cores_used": 0.00771208226221,
+      "cpu_percent_host": 0.19280205655524998,
+      "cpu_power_watt": 0.12217544902879
+    },
+    {
+      "ts": "2026-01-06T17:29:17",
+      "cpu_cores_used": 0.01315789473684,
+      "cpu_percent_host": 0.32894736842100003,
+      "cpu_power_watt": 0.22177359274333
+    },
+    {
+      "ts": "2026-01-06T17:29:18",
+      "cpu_cores_used": 0.01282051282051,
+      "cpu_percent_host": 0.32051282051275,
+      "cpu_power_watt": 0.24278312406545
+    },
+    {
+      "ts": "2026-01-06T17:29:19",
+      "cpu_cores_used": 0.01047120418848,
+      "cpu_percent_host": 0.26178010471200003,
+      "cpu_power_watt": 0.10367739999745
+    },
+    {
+      "ts": "2026-01-06T17:29:20",
+      "cpu_cores_used": 0.01542416452442,
+      "cpu_percent_host": 0.38560411311049997,
+      "cpu_power_watt": 0.2247790810233
+    },
+    {
+      "ts": "2026-01-06T17:29:21",
+      "cpu_cores_used": 0.01808785529716,
+      "cpu_percent_host": 0.452196382429,
+      "cpu_power_watt": 0.24608469131494
+    },
+    {
+      "ts": "2026-01-06T17:29:22",
+      "cpu_cores_used": 0.01291989664083,
+      "cpu_percent_host": 0.32299741602075,
+      "cpu_power_watt": 0.27921985106602
+    },
+    {
+      "ts": "2026-01-06T17:29:23",
+      "cpu_cores_used": 0.01333333333333,
+      "cpu_percent_host": 0.33333333333325,
+      "cpu_power_watt": 0.19412205269157
+    },
+    {
+      "ts": "2026-01-06T17:29:24",
+      "cpu_cores_used": 0.02156334231806,
+      "cpu_percent_host": 0.5390835579515,
+      "cpu_power_watt": 0.20275937802475
+    },
+    {
+      "ts": "2026-01-06T17:29:25",
+      "cpu_cores_used": 0.01832460732984,
+      "cpu_percent_host": 0.458115183246,
+      "cpu_power_watt": 0.24056840301728
+    },
+    {
+      "ts": "2026-01-06T17:29:26",
+      "cpu_cores_used": 0.01554404145078,
+      "cpu_percent_host": 0.3886010362695,
+      "cpu_power_watt": 0.22506036308744
+    },
+    {
+      "ts": "2026-01-06T17:29:27",
+      "cpu_cores_used": 0.01526717557252,
+      "cpu_percent_host": 0.381679389313,
+      "cpu_power_watt": 0.22012615223346
+    },
+    {
+      "ts": "2026-01-06T17:29:28",
+      "cpu_cores_used": 0.02150537634409,
+      "cpu_percent_host": 0.53763440860225,
+      "cpu_power_watt": 0.27011605225598
+    },
+    {
+      "ts": "2026-01-06T17:29:29",
+      "cpu_cores_used": 0.01827676240209,
+      "cpu_percent_host": 0.45691906005224997,
+      "cpu_power_watt": 0.17545256610372
+    },
+    {
+      "ts": "2026-01-06T17:29:30",
+      "cpu_cores_used": 0.01827676240209,
+      "cpu_percent_host": 0.45691906005224997,
+      "cpu_power_watt": 0.18465392248278
+    },
+    {
+      "ts": "2026-01-06T17:29:31",
+      "cpu_cores_used": 0.01837270341207,
+      "cpu_percent_host": 0.45931758530175,
+      "cpu_power_watt": 0.22028412438294
+    },
+    {
+      "ts": "2026-01-06T17:29:32",
+      "cpu_cores_used": 0.02051282051282,
+      "cpu_percent_host": 0.5128205128205,
+      "cpu_power_watt": 0.25013852649001
+    },
+    {
+      "ts": "2026-01-06T17:29:33",
+      "cpu_cores_used": 0.024,
+      "cpu_percent_host": 0.6,
+      "cpu_power_watt": 0.31309887181967
+    },
+    {
+      "ts": "2026-01-06T17:29:34",
+      "cpu_cores_used": 0.02666666666667,
+      "cpu_percent_host": 0.66666666666675,
+      "cpu_power_watt": 0.24321041549506
+    },
+    {
+      "ts": "2026-01-06T17:29:35",
+      "cpu_cores_used": 0.01851851851852,
+      "cpu_percent_host": 0.462962962963,
+      "cpu_power_watt": 0.19358223160351
+    },
+    {
+      "ts": "2026-01-06T17:29:36",
+      "cpu_cores_used": 0.01047120418848,
+      "cpu_percent_host": 0.26178010471200003,
+      "cpu_power_watt": 0.19189243486602
+    }
+  ],
+  "reservation": [
+    {
+      "ts": "2026-01-06T17:29:08",
+      "cpu_cores_used": 0.00253164556962,
+      "cpu_percent_host": 0.0632911392405,
+      "cpu_power_watt": 0.07916818867428
+    },
+    {
+      "ts": "2026-01-06T17:29:09",
+      "cpu_cores_used": 0.00765306122449,
+      "cpu_percent_host": 0.19132653061225,
+      "cpu_power_watt": 0.08433487957613
+    },
+    {
+      "ts": "2026-01-06T17:29:10",
+      "cpu_cores_used": 0.02313624678663,
+      "cpu_percent_host": 0.57840616966575,
+      "cpu_power_watt": 0.48606212280065
+    },
+    {
+      "ts": "2026-01-06T17:29:11",
+      "cpu_cores_used": 0.01025641025641,
+      "cpu_percent_host": 0.25641025641025,
+      "cpu_power_watt": 0.42650155163811
+    },
+    {
+      "ts": "2026-01-06T17:29:12",
+      "cpu_cores_used": 0.03076923076923,
+      "cpu_percent_host": 0.7692307692307501,
+      "cpu_power_watt": 0.73208805625453
+    },
+    {
+      "ts": "2026-01-06T17:29:13",
+      "cpu_cores_used": 0.02046035805627,
+      "cpu_percent_host": 0.51150895140675,
+      "cpu_power_watt": 0.63358199404927
+    },
+    {
+      "ts": "2026-01-06T17:29:14",
+      "cpu_cores_used": 0.03191489361702,
+      "cpu_percent_host": 0.7978723404254999,
+      "cpu_power_watt": 0.35143619307105
+    },
+    {
+      "ts": "2026-01-06T17:29:15",
+      "cpu_cores_used": 0.02544529262087,
+      "cpu_percent_host": 0.63613231552175,
+      "cpu_power_watt": 0.42093160696954
+    },
+    {
+      "ts": "2026-01-06T17:29:16",
+      "cpu_cores_used": 0.06169665809769,
+      "cpu_percent_host": 1.5424164524422501,
+      "cpu_power_watt": 0.98844495794657
+    },
+    {
+      "ts": "2026-01-06T17:29:17",
+      "cpu_cores_used": 0.06052631578947,
+      "cpu_percent_host": 1.51315789473675,
+      "cpu_power_watt": 1.00762453838583
+    },
+    {
+      "ts": "2026-01-06T17:29:18",
+      "cpu_cores_used": 0.03324808184143,
+      "cpu_percent_host": 0.83120204603575,
+      "cpu_power_watt": 0.63108870280049
+    },
+    {
+      "ts": "2026-01-06T17:29:19",
+      "cpu_cores_used": 0.06266318537859,
+      "cpu_percent_host": 1.56657963446475,
+      "cpu_power_watt": 0.62116615245754
+    },
+    {
+      "ts": "2026-01-06T17:29:20",
+      "cpu_cores_used": 0.03617571059432,
+      "cpu_percent_host": 0.904392764858,
+      "cpu_power_watt": 0.53010301926996
+    },
+    {
+      "ts": "2026-01-06T17:29:21",
+      "cpu_cores_used": 0.08290155440415,
+      "cpu_percent_host": 2.0725388601037498,
+      "cpu_power_watt": 1.13540310953999
+    },
+    {
+      "ts": "2026-01-06T17:29:22",
+      "cpu_cores_used": 0.02577319587629,
+      "cpu_percent_host": 0.6443298969072501,
+      "cpu_power_watt": 0.54908874837896
+    },
+    {
+      "ts": "2026-01-06T17:29:23",
+      "cpu_cores_used": 0.07733333333333,
+      "cpu_percent_host": 1.93333333333325,
+      "cpu_power_watt": 1.14931287741646
+    },
+    {
+      "ts": "2026-01-06T17:29:24",
+      "cpu_cores_used": 0.06989247311828,
+      "cpu_percent_host": 1.747311827957,
+      "cpu_power_watt": 0.65643415603778
+    },
+    {
+      "ts": "2026-01-06T17:29:25",
+      "cpu_cores_used": 0.04199475065617,
+      "cpu_percent_host": 1.0498687664042499,
+      "cpu_power_watt": 0.54573540691642
+    },
+    {
+      "ts": "2026-01-06T17:29:26",
+      "cpu_cores_used": 0.05958549222798,
+      "cpu_percent_host": 1.4896373056995,
+      "cpu_power_watt": 0.8712405357399
+    },
+    {
+      "ts": "2026-01-06T17:29:27",
+      "cpu_cores_used": 0.05343511450382,
+      "cpu_percent_host": 1.3358778625955,
+      "cpu_power_watt": 0.77044153281712
+    },
+    {
+      "ts": "2026-01-06T17:29:28",
+      "cpu_cores_used": 0.08847184986595,
+      "cpu_percent_host": 2.21179624664875,
+      "cpu_power_watt": 1.09688693020935
+    },
+    {
+      "ts": "2026-01-06T17:29:29",
+      "cpu_cores_used": 0.05989583333333,
+      "cpu_percent_host": 1.49739583333325,
+      "cpu_power_watt": 0.57696430695611
+    },
+    {
+      "ts": "2026-01-06T17:29:30",
+      "cpu_cores_used": 0.08376963350785,
+      "cpu_percent_host": 2.09424083769625,
+      "cpu_power_watt": 0.842478436461
+    },
+    {
+      "ts": "2026-01-06T17:29:31",
+      "cpu_cores_used": 0.09685863874346,
+      "cpu_percent_host": 2.4214659685865,
+      "cpu_power_watt": 1.17133323609042
+    },
+    {
+      "ts": "2026-01-06T17:29:32",
+      "cpu_cores_used": 0.07474226804124,
+      "cpu_percent_host": 1.868556701031,
+      "cpu_power_watt": 0.90801049049346
+    },
+    {
+      "ts": "2026-01-06T17:29:33",
+      "cpu_cores_used": 0.07466666666667,
+      "cpu_percent_host": 1.8666666666667502,
+      "cpu_power_watt": 0.96616350382982
+    },
+    {
+      "ts": "2026-01-06T17:29:34",
+      "cpu_cores_used": 0.0911528150134,
+      "cpu_percent_host": 2.278820375335,
+      "cpu_power_watt": 0.83282071247692
+    },
+    {
+      "ts": "2026-01-06T17:29:35",
+      "cpu_cores_used": 0.05540897097625,
+      "cpu_percent_host": 1.38522427440625,
+      "cpu_power_watt": 0.58004866487962
+    },
+    {
+      "ts": "2026-01-06T17:29:36",
+      "cpu_cores_used": 0.04450261780105,
+      "cpu_percent_host": 1.1125654450262499,
+      "cpu_power_watt": 0.8043940116933
+    }
+  ]
+}

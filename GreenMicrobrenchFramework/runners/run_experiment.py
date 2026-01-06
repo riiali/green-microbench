@@ -248,31 +248,87 @@ def main():
     # -----------------------------------------------------------------------
     # Retrieve and parse PowerJoular per-PID data
     # -----------------------------------------------------------------------
-    # Design choice:
-    # PowerJoular CSVs are converted into a structured JSON format
-    # to simplify:
-    # - aggregation
-    # - alignment with Shelly
-    # - service-level attribution
+    # PowerJoular stores per-run data inside a timestamped subdirectory.
+    # This block:
+    # - copies the whole PowerJoular root directory
+    # - detects the run-specific subfolder
+    # - parses CSVs from that folder only
+    # - generates explicit PID metadata
+    # -----------------------------------------------------------------------
 
     powerjoular_data = {}
-    local_pj_dir = out_dir / "power_joular_data"
-    local_pj_dir.mkdir(exist_ok=True)
+    powerjoular_pid_metadata = {}
 
-    for service, info in SERVICE_RUNTIME_MAP.items():
-        pid = info["pid"]
-        remote_file = f"{remote_power_dir}/consumption-{pid}.csv"
-        local_file = local_pj_dir / f"consumption-{pid}.csv"
+    local_pj_root = out_dir / "power_joular_data"
+    local_pj_root.mkdir(exist_ok=True)
 
-        try:
-            sp.check_call([
-                "scp",
-                f"{RASPBERRY_HOST}:{remote_file}",
-                str(local_file)
-            ])
-            powerjoular_data[service] = parse_powerjoular_csv(local_file)
-        except Exception as e:
-            print(f"[WARN] PowerJoular data missing for {service}: {e}")
+    # -----------------------------------------------------------------------
+    # Copy PowerJoular root directory from Raspberry Pi
+    # -----------------------------------------------------------------------
+
+    try:
+        sp.check_call([
+            "scp",
+            "-r",
+            f"{RASPBERRY_HOST}:{remote_power_dir}/",
+            str(local_pj_root)
+        ])
+    except Exception as e:
+        print(f"[WARN] Failed to copy PowerJoular directory: {e}")
+
+    # -----------------------------------------------------------------------
+    # Detect PowerJoular run subdirectory (latest one)
+    # -----------------------------------------------------------------------
+
+    run_dirs = [
+        d for d in local_pj_root.iterdir()
+        if d.is_dir()
+    ]
+
+    if not run_dirs:
+        raise RuntimeError("No PowerJoular run directory found")
+
+    pj_run_dir = max(run_dirs, key=lambda d: d.stat().st_mtime)
+
+    print(f"[INFO] Detected PowerJoular run directory: {pj_run_dir.name}")
+
+    # -----------------------------------------------------------------------
+    # Parse CSVs and build PID metadata
+    # -----------------------------------------------------------------------
+
+    for csv_file in pj_run_dir.glob("consumption-*.csv"):
+        pid = csv_file.stem.split("-")[1]
+
+        matched_service = None
+        matched_info = None
+
+        for service, info in SERVICE_RUNTIME_MAP.items():
+            if str(info["pid"]) == pid:
+                matched_service = service
+                matched_info = info
+                break
+
+        if matched_service is None:
+            print(f"[WARN] Unmapped PowerJoular PID {pid}")
+            continue
+
+        powerjoular_pid_metadata[pid] = {
+            "service": matched_service,
+            "container_name": matched_info.get("container_name"),
+            "container_id": matched_info.get("container_id"),
+            "csv_file": csv_file.name,
+            "run_directory": pj_run_dir.name,
+        }
+
+        powerjoular_data[matched_service] = parse_powerjoular_csv(csv_file)
+
+    # -----------------------------------------------------------------------
+    # Persist metadata and aggregated data
+    # -----------------------------------------------------------------------
+
+    pid_metadata_json = pj_run_dir / "powerjoular_pid_metadata.json"
+    with pid_metadata_json.open("w") as f:
+        json.dump(powerjoular_pid_metadata, f, indent=2)
 
     pj_json = out_dir / "power_joular_data.json"
     with pj_json.open("w") as f:
