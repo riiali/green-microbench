@@ -1,5 +1,5 @@
 name: steady_10m
-locustfile: locustfile.py
+locustfile: locustfile_hreservation.py
 host: http://192.168.1.237:5000
 users: 150
 spawn_rate: 15

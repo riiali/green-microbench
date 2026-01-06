@@ -71,7 +71,7 @@ class CAdvisorAdapter:
         start_iso: str,
         end_iso: str,
         service_runtime_map: Dict[str, dict],
-        window: str = "30s",
+        window: str = "15s",
         raspberry_cores: int = 4,
     ) -> Dict[str, List[dict]]:
         """
@@ -114,7 +114,7 @@ class CAdvisorAdapter:
             query=query,
             start=start_iso,
             end=end_iso,
-            step="1s",
+            step="5s",
         )
 
         out: Dict[str, List[dict]] = {}
@@ -158,7 +158,7 @@ class CAdvisorAdapter:
         start_iso: str,
         end_iso: str,
         service_runtime_map: Dict[str, dict],
-        window: str = "5s",
+        window: str = "15s",
         raspberry_cores: int = 4,
     ) -> Dict[str, List[dict]]:
         """
@@ -182,7 +182,7 @@ class CAdvisorAdapter:
             query=query,
             start=start_iso,
             end=end_iso,
-            step="1s",
+            step="5s",
         )
 
         out: Dict[str, List[dict]] = {}

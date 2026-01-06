@@ -1,0 +1,27 @@
+Method,Name,Error,Occurrences
+GET,/hotels,"ConnectTimeoutError(<HTTPConnection(host='192.168.1.237', port=5000) at 0x12c3fa87a50>, 'Connection to 192.168.1.237 timed out. (connect timeout=None)')",1
+GET,/hotels,"ConnectTimeoutError(<HTTPConnection(host='192.168.1.237', port=5000) at 0x12c41255fd0>, 'Connection to 192.168.1.237 timed out. (connect timeout=None)')",1
+GET,/hotels,"ConnectTimeoutError(<HTTPConnection(host='192.168.1.237', port=5000) at 0x12c4131a450>, 'Connection to 192.168.1.237 timed out. (connect timeout=None)')",1
+GET,/hotels,"ConnectTimeoutError(<HTTPConnection(host='192.168.1.237', port=5000) at 0x12c4130db10>, 'Connection to 192.168.1.237 timed out. (connect timeout=None)')",1
+GET,/hotels,"ConnectTimeoutError(<HTTPConnection(host='192.168.1.237', port=5000) at 0x12c3ff4a090>, 'Connection to 192.168.1.237 timed out. (connect timeout=None)')",1
+GET,/hotels,"ConnectTimeoutError(<HTTPConnection(host='192.168.1.237', port=5000) at 0x12c41266450>, 'Connection to 192.168.1.237 timed out. (connect timeout=None)')",1
+GET,/recommendations,"ConnectTimeoutError(<HTTPConnection(host='192.168.1.237', port=5000) at 0x12c3fa7dad0>, 'Connection to 192.168.1.237 timed out. (connect timeout=None)')",1
+GET,/recommendations,"ConnectTimeoutError(<HTTPConnection(host='192.168.1.237', port=5000) at 0x12c3fae29d0>, 'Connection to 192.168.1.237 timed out. (connect timeout=None)')",1
+GET,/hotels,"ConnectTimeoutError(<HTTPConnection(host='192.168.1.237', port=5000) at 0x12c3f8cb510>, 'Connection to 192.168.1.237 timed out. (connect timeout=None)')",1
+GET,/hotels,"ConnectTimeoutError(<HTTPConnection(host='192.168.1.237', port=5000) at 0x12c3fb27290>, 'Connection to 192.168.1.237 timed out. (connect timeout=None)')",1
+GET,/recommendations,"ConnectTimeoutError(<HTTPConnection(host='192.168.1.237', port=5000) at 0x12c3fae8450>, 'Connection to 192.168.1.237 timed out. (connect timeout=None)')",1
+GET,/recommendations,"ConnectTimeoutError(<HTTPConnection(host='192.168.1.237', port=5000) at 0x12c3fadf410>, 'Connection to 192.168.1.237 timed out. (connect timeout=None)')",1
+GET,/hotels,"ConnectTimeoutError(<HTTPConnection(host='192.168.1.237', port=5000) at 0x12c3fb1f790>, 'Connection to 192.168.1.237 timed out. (connect timeout=None)')",1
+GET,/recommendations,"ConnectTimeoutError(<HTTPConnection(host='192.168.1.237', port=5000) at 0x12c3faeb810>, 'Connection to 192.168.1.237 timed out. (connect timeout=None)')",1
+GET,/recommendations,"ConnectTimeoutError(<HTTPConnection(host='192.168.1.237', port=5000) at 0x12c3face210>, 'Connection to 192.168.1.237 timed out. (connect timeout=None)')",1
+GET,/hotels,"ConnectTimeoutError(<HTTPConnection(host='192.168.1.237', port=5000) at 0x12c3f8ae590>, 'Connection to 192.168.1.237 timed out. (connect timeout=None)')",1
+GET,/hotels,"ConnectTimeoutError(<HTTPConnection(host='192.168.1.237', port=5000) at 0x12c3fa703d0>, 'Connection to 192.168.1.237 timed out. (connect timeout=None)')",1
+GET,/recommendations,"ConnectTimeoutError(<HTTPConnection(host='192.168.1.237', port=5000) at 0x12c3fb309d0>, 'Connection to 192.168.1.237 timed out. (connect timeout=None)')",1
+GET,/hotels,"ConnectTimeoutError(<HTTPConnection(host='192.168.1.237', port=5000) at 0x12c3f8b44d0>, 'Connection to 192.168.1.237 timed out. (connect timeout=None)')",1
+GET,/hotels,"ConnectTimeoutError(<HTTPConnection(host='192.168.1.237', port=5000) at 0x12c3fefccd0>, 'Connection to 192.168.1.237 timed out. (connect timeout=None)')",1
+GET,/recommendations,"ConnectTimeoutError(<HTTPConnection(host='192.168.1.237', port=5000) at 0x12c3fb4d590>, 'Connection to 192.168.1.237 timed out. (connect timeout=None)')",1
+GET,/recommendations,"ConnectTimeoutError(<HTTPConnection(host='192.168.1.237', port=5000) at 0x12c3fadd950>, 'Connection to 192.168.1.237 timed out. (connect timeout=None)')",1
+GET,/recommendations,"ConnectTimeoutError(<HTTPConnection(host='192.168.1.237', port=5000) at 0x12c3fa94bd0>, 'Connection to 192.168.1.237 timed out. (connect timeout=None)')",1
+GET,/hotels,"ConnectTimeoutError(<HTTPConnection(host='192.168.1.237', port=5000) at 0x12c3fb25510>, 'Connection to 192.168.1.237 timed out. (connect timeout=None)')",1
+GET,/hotels,"ConnectTimeoutError(<HTTPConnection(host='192.168.1.237', port=5000) at 0x12c3f8b7d10>, 'Connection to 192.168.1.237 timed out. (connect timeout=None)')",1
+GET,/hotels,"ConnectTimeoutError(<HTTPConnection(host='192.168.1.237', port=5000) at 0x12c3fb45ed0>, 'Connection to 192.168.1.237 timed out. (connect timeout=None)')",1
