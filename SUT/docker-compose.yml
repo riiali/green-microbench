@@ -6,7 +6,7 @@ services:
     image: otel/opentelemetry-collector:0.100.0
     command: ["--config=/etc/otelcol/config.yaml"]
     volumes:
-      - ../GreenMicrobrenchFramework/collectors/otel/otel-collector.yaml:/etc/otelcol/config.yaml:ro
+      - ../GreenMicrobenchFramework/collectors/otel/otel-collector.yaml:/etc/otelcol/config.yaml:ro
     ports:
       - "4317:4317"   # OTLP gRPC
       - "9464:9464"   # /metrics Prometheus
@@ -26,7 +26,7 @@ services:
   prometheus:
     image: prom/prometheus
     volumes:
-      - ../GreenMicrobrenchFramework/collectors/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - ../GreenMicrobenchFramework/collectors/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
     ports:
       - "9090:9090"
     networks: [my-network]

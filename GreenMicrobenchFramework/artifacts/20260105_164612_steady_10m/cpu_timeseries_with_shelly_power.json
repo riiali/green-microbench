@@ -1,0 +1,396 @@
+{
+  "frontend": [
+    {
+      "ts": "2026-01-05T17:46:18+00:00",
+      "cpu_cores_used": 0.0001507205291755059,
+      "cpu_percent_host": 0.0037680132293876475,
+      "estimated_power_from_shelly_watt": 0.0016925561932059126
+    },
+    {
+      "ts": "2026-01-05T17:46:22+00:00",
+      "cpu_cores_used": 0.00762151492721443,
+      "cpu_percent_host": 0.19053787318036075,
+      "estimated_power_from_shelly_watt": 0.0
+    },
+    {
+      "ts": "2026-01-05T17:46:48+00:00",
+      "cpu_cores_used": 0.08243585198315978,
+      "cpu_percent_host": 2.0608962995789946,
+      "estimated_power_from_shelly_watt": 2.2623497865771416
+    },
+    {
+      "ts": "2026-01-05T17:46:58+00:00",
+      "cpu_cores_used": 0.08224399916510122,
+      "cpu_percent_host": 2.0560999791275307,
+      "estimated_power_from_shelly_watt": 2.7370630016634285
+    },
+    {
+      "ts": "2026-01-05T17:47:08+00:00",
+      "cpu_cores_used": 0.07885386890093633,
+      "cpu_percent_host": 1.9713467225234083,
+      "estimated_power_from_shelly_watt": 2.613318988034786
+    },
+    {
+      "ts": "2026-01-05T17:47:18+00:00",
+      "cpu_cores_used": 0.12239352170916623,
+      "cpu_percent_host": 3.059838042729156,
+      "estimated_power_from_shelly_watt": 2.0095500719639547
+    }
+  ],
+  "search": [
+    {
+      "ts": "2026-01-05T17:46:18+00:00",
+      "cpu_cores_used": 0.00021900919076440386,
+      "cpu_percent_host": 0.005475229769110097,
+      "estimated_power_from_shelly_watt": 0.0024594218466793194
+    },
+    {
+      "ts": "2026-01-05T17:46:43+00:00",
+      "cpu_cores_used": 0.06299826914755516,
+      "cpu_percent_host": 1.574956728688879,
+      "estimated_power_from_shelly_watt": 2.3397910655019296
+    },
+    {
+      "ts": "2026-01-05T17:46:53+00:00",
+      "cpu_cores_used": 0.034999783690244445,
+      "cpu_percent_host": 0.8749945922561111,
+      "estimated_power_from_shelly_watt": 2.8826019989175653
+    },
+    {
+      "ts": "2026-01-05T17:47:02+00:00",
+      "cpu_cores_used": 0.0398888606307223,
+      "cpu_percent_host": 0.9972215157680575,
+      "estimated_power_from_shelly_watt": 2.9
+    },
+    {
+      "ts": "2026-01-05T17:47:13+00:00",
+      "cpu_cores_used": 0.0419403956924618,
+      "cpu_percent_host": 1.048509892311545,
+      "estimated_power_from_shelly_watt": 0.3993928362479763
+    },
+    {
+      "ts": "2026-01-05T17:46:28+00:00",
+      "cpu_cores_used": 0.030996133496133504,
+      "cpu_percent_host": 0.7749033374033376,
+      "estimated_power_from_shelly_watt": 3.3279447294501
+    }
+  ],
+  "memcached-profile": [
+    {
+      "ts": "2026-01-05T17:46:18+00:00",
+      "cpu_cores_used": 0.0002578959327425578,
+      "cpu_percent_host": 0.006447398318563944,
+      "estimated_power_from_shelly_watt": 0.002896110838741464
+    },
+    {
+      "ts": "2026-01-05T17:46:27+00:00",
+      "cpu_cores_used": 0.00025328250741210817,
+      "cpu_percent_host": 0.006332062685302705,
+      "estimated_power_from_shelly_watt": 0.05686098397468157
+    },
+    {
+      "ts": "2026-01-05T17:46:53+00:00",
+      "cpu_cores_used": 0.00021124188311688597,
+      "cpu_percent_host": 0.005281047077922149,
+      "estimated_power_from_shelly_watt": 0.0173980010824345
+    },
+    {
+      "ts": "2026-01-05T17:47:03+00:00",
+      "cpu_cores_used": 0.00024421708185053104,
+      "cpu_percent_host": 0.006105427046263276,
+      "estimated_power_from_shelly_watt": 0.0032890349749199084
+    }
+  ],
+  "reservation": [
+    {
+      "ts": "2026-01-05T17:46:18+00:00",
+      "cpu_cores_used": 0.0005472306143001028,
+      "cpu_percent_host": 0.013680765357502568,
+      "estimated_power_from_shelly_watt": 0.006145271453147459
+    },
+    {
+      "ts": "2026-01-05T17:46:32+00:00",
+      "cpu_cores_used": 0.0008211361944926837,
+      "cpu_percent_host": 0.020528404862317093,
+      "estimated_power_from_shelly_watt": 0.0
+    },
+    {
+      "ts": "2026-01-05T17:46:43+00:00",
+      "cpu_cores_used": 0.003814126394052045,
+      "cpu_percent_host": 0.09535315985130112,
+      "estimated_power_from_shelly_watt": 0.14165879444394866
+    },
+    {
+      "ts": "2026-01-05T17:47:18+00:00",
+      "cpu_cores_used": 0.0018254779902178739,
+      "cpu_percent_host": 0.04563694975544685,
+      "estimated_power_from_shelly_watt": 0.029972088190483148
+    }
+  ],
+  "cadvisor": [
+    {
+      "ts": "2026-01-05T17:46:18+00:00",
+      "cpu_cores_used": 0.24816249713105304,
+      "cpu_percent_host": 6.204062428276326,
+      "estimated_power_from_shelly_watt": 2.786806639668226
+    },
+    {
+      "ts": "2026-01-05T17:46:33+00:00",
+      "cpu_cores_used": 0.21734256198346666,
+      "cpu_percent_host": 5.433564049586667,
+      "estimated_power_from_shelly_watt": 3.1918846911994723
+    },
+    {
+      "ts": "2026-01-05T17:47:03+00:00",
+      "cpu_cores_used": 0.22887342727730584,
+      "cpu_percent_host": 5.721835681932646,
+      "estimated_power_from_shelly_watt": 3.0823917043017035
+    },
+    {
+      "ts": "2026-01-05T17:47:13+00:00",
+      "cpu_cores_used": 0.24002658582089606,
+      "cpu_percent_host": 6.000664645522401,
+      "estimated_power_from_shelly_watt": 2.2857414028441396
+    }
+  ],
+  "consul": [
+    {
+      "ts": "2026-01-05T17:46:23+00:00",
+      "cpu_cores_used": 0.014344173441734396,
+      "cpu_percent_host": 0.3586043360433599,
+      "estimated_power_from_shelly_watt": 2.6150992526553587
+    },
+    {
+      "ts": "2026-01-05T17:46:27+00:00",
+      "cpu_cores_used": 0.014891733723482101,
+      "cpu_percent_host": 0.37229334308705253,
+      "estimated_power_from_shelly_watt": 3.3431390160253187
+    },
+    {
+      "ts": "2026-01-05T17:46:48+00:00",
+      "cpu_cores_used": 0.014011163483006576,
+      "cpu_percent_host": 0.3502790870751644,
+      "estimated_power_from_shelly_watt": 0.38451901633712415
+    },
+    {
+      "ts": "2026-01-05T17:47:07+00:00",
+      "cpu_cores_used": 0.014685034965034736,
+      "cpu_percent_host": 0.3671258741258684,
+      "estimated_power_from_shelly_watt": 1.0971246016821874
+    },
+    {
+      "ts": "2026-01-05T17:47:08+00:00",
+      "cpu_cores_used": 0.014685034965034736,
+      "cpu_percent_host": 0.3671258741258684,
+      "estimated_power_from_shelly_watt": 0.4866810119652142
+    }
+  ],
+  "rate": [
+    {
+      "ts": "2026-01-05T17:46:23+00:00",
+      "cpu_cores_used": 0.0006771688484579571,
+      "cpu_percent_host": 0.01692922121144893,
+      "estimated_power_from_shelly_watt": 0.12345526612021872
+    },
+    {
+      "ts": "2026-01-05T17:46:33+00:00",
+      "cpu_cores_used": 0.001221833449965012,
+      "cpu_percent_host": 0.0305458362491253,
+      "estimated_power_from_shelly_watt": 0.01794380009395228
+    },
+    {
+      "ts": "2026-01-05T17:46:43+00:00",
+      "cpu_cores_used": 0.002829506802721089,
+      "cpu_percent_host": 0.07073767006802723,
+      "estimated_power_from_shelly_watt": 0.10508947033572054
+    },
+    {
+      "ts": "2026-01-05T17:47:03+00:00",
+      "cpu_cores_used": 0.0008368471490177311,
+      "cpu_percent_host": 0.020921178725443277,
+      "estimated_power_from_shelly_watt": 0.011270380928824226
+    },
+    {
+      "ts": "2026-01-05T17:47:18+00:00",
+      "cpu_cores_used": 0.0013019111015675326,
+      "cpu_percent_host": 0.03254777753918831,
+      "estimated_power_from_shelly_watt": 0.02137576818863422
+    }
+  ],
+  "geo": [
+    {
+      "ts": "2026-01-05T17:46:23+00:00",
+      "cpu_cores_used": 0.0006153489450498469,
+      "cpu_percent_host": 0.015383723626246173,
+      "estimated_power_from_shelly_watt": 0.11218482353539816
+    },
+    {
+      "ts": "2026-01-05T17:46:33+00:00",
+      "cpu_cores_used": 0.0006967866634452793,
+      "cpu_percent_host": 0.017419666586131984,
+      "estimated_power_from_shelly_watt": 0.010232982733736852
+    },
+    {
+      "ts": "2026-01-05T17:46:58+00:00",
+      "cpu_cores_used": 0.0008964776632302398,
+      "cpu_percent_host": 0.022411941580755997,
+      "estimated_power_from_shelly_watt": 0.02983458816149552
+    }
+  ],
+  "memcached-rate": [
+    {
+      "ts": "2026-01-05T17:46:23+00:00",
+      "cpu_cores_used": 0.0002702013764975798,
+      "cpu_percent_host": 0.006755034412439494,
+      "estimated_power_from_shelly_watt": 0.04926065768902419
+    },
+    {
+      "ts": "2026-01-05T17:46:43+00:00",
+      "cpu_cores_used": 0.00036242504996669386,
+      "cpu_percent_host": 0.009060626249167347,
+      "estimated_power_from_shelly_watt": 0.013460669718400828
+    },
+    {
+      "ts": "2026-01-05T17:46:52+00:00",
+      "cpu_cores_used": 0.0002000469043151953,
+      "cpu_percent_host": 0.005001172607879883,
+      "estimated_power_from_shelly_watt": 0.02147169216552183
+    },
+    {
+      "ts": "2026-01-05T17:47:03+00:00",
+      "cpu_cores_used": 0.00022638510445050538,
+      "cpu_percent_host": 0.005659627611262635,
+      "estimated_power_from_shelly_watt": 0.003048879794552298
+    },
+    {
+      "ts": "2026-01-05T17:47:18+00:00",
+      "cpu_cores_used": 0.0003493369913122939,
+      "cpu_percent_host": 0.008733424782807349,
+      "estimated_power_from_shelly_watt": 0.005735680828756783
+    }
+  ],
+  "user": [
+    {
+      "ts": "2026-01-05T17:46:32+00:00",
+      "cpu_cores_used": 0.0010427837992013707,
+      "cpu_percent_host": 0.026069594980034267,
+      "estimated_power_from_shelly_watt": 0.0
+    },
+    {
+      "ts": "2026-01-05T17:46:33+00:00",
+      "cpu_cores_used": 0.001042783799201371,
+      "cpu_percent_host": 0.026069594980034274,
+      "estimated_power_from_shelly_watt": 0.015314283656759678
+    },
+    {
+      "ts": "2026-01-05T17:46:48+00:00",
+      "cpu_cores_used": 0.0007008175779253948,
+      "cpu_percent_host": 0.017520439448134868,
+      "estimated_power_from_shelly_watt": 0.019233069831957522
+    },
+    {
+      "ts": "2026-01-05T17:47:13+00:00",
+      "cpu_cores_used": 0.0006466406787434082,
+      "cpu_percent_host": 0.016166016968585207,
+      "estimated_power_from_shelly_watt": 0.006157873583511887
+    }
+  ],
+  "memcached-reserve": [
+    {
+      "ts": "2026-01-05T17:46:32+00:00",
+      "cpu_cores_used": 0.0002507783753184257,
+      "cpu_percent_host": 0.006269459382960642,
+      "estimated_power_from_shelly_watt": 0.0
+    },
+    {
+      "ts": "2026-01-05T17:46:33+00:00",
+      "cpu_cores_used": 0.0002507783753184257,
+      "cpu_percent_host": 0.006269459382960642,
+      "estimated_power_from_shelly_watt": 0.0036829217883409763
+    },
+    {
+      "ts": "2026-01-05T17:46:48+00:00",
+      "cpu_cores_used": 0.00026805251641137337,
+      "cpu_percent_host": 0.006701312910284334,
+      "estimated_power_from_shelly_watt": 0.007356369088277502
+    },
+    {
+      "ts": "2026-01-05T17:46:52+00:00",
+      "cpu_cores_used": 0.00024322210636079698,
+      "cpu_percent_host": 0.006080552659019925,
+      "estimated_power_from_shelly_watt": 0.026105828598079212
+    }
+  ],
+  "prometheus": [
+    {
+      "ts": "2026-01-05T17:46:33+00:00",
+      "cpu_cores_used": 0.024577301161751684,
+      "cpu_percent_host": 0.6144325290437921,
+      "estimated_power_from_shelly_watt": 0.360941320527738
+    },
+    {
+      "ts": "2026-01-05T17:46:41+00:00",
+      "cpu_cores_used": 0.044853581321724935,
+      "cpu_percent_host": 1.1213395330431233,
+      "estimated_power_from_shelly_watt": 2.5
+    },
+    {
+      "ts": "2026-01-05T17:46:42+00:00",
+      "cpu_cores_used": 0.044853581321724935,
+      "cpu_percent_host": 1.1213395330431233,
+      "estimated_power_from_shelly_watt": 2.5
+    },
+    {
+      "ts": "2026-01-05T17:46:52+00:00",
+      "cpu_cores_used": 0.025643698321222413,
+      "cpu_percent_host": 0.6410924580305604,
+      "estimated_power_from_shelly_watt": 2.7524224792363987
+    },
+    {
+      "ts": "2026-01-05T17:47:07+00:00",
+      "cpu_cores_used": 0.028147029702970703,
+      "cpu_percent_host": 0.7036757425742676,
+      "estimated_power_from_shelly_watt": 2.102875398317813
+    },
+    {
+      "ts": "2026-01-05T17:47:17+00:00",
+      "cpu_cores_used": 0.0324851775755794,
+      "cpu_percent_host": 0.812129439389485,
+      "estimated_power_from_shelly_watt": 2.6
+    },
+    {
+      "ts": "2026-01-05T17:47:18+00:00",
+      "cpu_cores_used": 0.0324851775755794,
+      "cpu_percent_host": 0.812129439389485,
+      "estimated_power_from_shelly_watt": 0.5333663908281714
+    }
+  ],
+  "profile": [
+    {
+      "ts": "2026-01-05T17:46:48+00:00",
+      "cpu_cores_used": 0.0009671326956095139,
+      "cpu_percent_host": 0.024178317390237847,
+      "estimated_power_from_shelly_watt": 0.02654175816549974
+    },
+    {
+      "ts": "2026-01-05T17:47:13+00:00",
+      "cpu_cores_used": 0.0009144186046511608,
+      "cpu_percent_host": 0.02286046511627902,
+      "estimated_power_from_shelly_watt": 0.008707887324372235
+    }
+  ],
+  "recommendation": [
+    {
+      "ts": "2026-01-05T17:46:58+00:00",
+      "cpu_cores_used": 0.0009946700507614226,
+      "cpu_percent_host": 0.024866751269035568,
+      "estimated_power_from_shelly_watt": 0.03310241017507582
+    },
+    {
+      "ts": "2026-01-05T17:46:28+00:00",
+      "cpu_cores_used": 0.0006711153479504288,
+      "cpu_percent_host": 0.01677788369876072,
+      "estimated_power_from_shelly_watt": 0.07205527054989942
+    }
+  ]
+}

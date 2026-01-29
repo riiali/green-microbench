@@ -1,0 +1,7 @@
+name: very_heavy_30m
+locustfile: locustfile_hreservation.py
+host: http://192.168.1.237:5000
+users: 1000
+spawn_rate: 30
+run_time: 30m
+notes: "very heavy 30 minute duration"

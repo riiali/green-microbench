@@ -1,0 +1,5 @@
+Method,Name,Error,Occurrences
+GET,/recommendations,HTTPError('500 Server Error: Internal Server Error for url: /recommendations'),16943
+POST,/reservation,HTTPError('500 Server Error: Internal Server Error for url: /reservation'),201
+POST,/login,HTTPError('500 Server Error: Internal Server Error for url: /login'),193
+GET,/hotels,HTTPError('500 Server Error: Internal Server Error for url: /hotels'),26405
