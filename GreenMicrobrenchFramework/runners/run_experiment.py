@@ -86,13 +86,10 @@ def get_container_runtime_info(host: str) -> dict:
     return info
 
 
-import csv
-import pathlib
-from datetime import datetime
+
 
 def parse_powerjoular_csv(
-    csv_path: pathlib.Path,
-    host_cpu_cores: int = 4,
+    csv_path: pathlib.Path
 ):
     """
     Parses a PowerJoular per-process CSV file.
@@ -101,8 +98,7 @@ def parse_powerjoular_csv(
     [
       {
         "ts": "...",
-        "cpu_cores_used": float,
-        "cpu_percent_host": float,
+        "cpu_utilization": float,
         "cpu_power_watt": float
       }
     ]
@@ -122,12 +118,10 @@ def parse_powerjoular_csv(
             )
 
             cpu_cores = float(r["CPU Utilization"])
-            cpu_percent_host = (cpu_cores / host_cpu_cores) * 100
 
             rows.append({
                 "ts": ts,
-                "cpu_cores_used": cpu_cores,
-                "cpu_percent_host": cpu_percent_host,
+                "cpu_utilization": cpu_cores,
                 "cpu_power_watt": float(r["CPU Power"]),
             })
 
@@ -184,11 +178,19 @@ def main():
     shelly_file = out_dir / "power.jsonl"
 
     if args.shelly:
-        shelly = ShellyAdapter(args.shelly)
-        shelly.start(out_path=str(shelly_file), hz=args.hz)
-        print("[INFO] Shelly warm-up (3s before experiment)")
-        time.sleep(3)
+        try: 
+            shelly = ShellyAdapter(args.shelly)
+            shelly.start(out_path=str(shelly_file), hz=args.hz)
+        except Exception as e:
+            print(f"[ERROR] Shelly initialization failed: {e}")
+            sys.exit(1)
+    else: 
+        print("[ERROR] Error: No Shelly power meter configured")
+        sys.exit(1)
 
+
+    print("[INFO] Shelly warm-up (3s before experiment)")
+    time.sleep(3)
     # -----------------------------------------------------------------------
     # Docker runtime info (PID mapping)
     # -----------------------------------------------------------------------

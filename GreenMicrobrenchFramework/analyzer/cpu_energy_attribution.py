@@ -65,7 +65,7 @@ class ShellyPowerAttributor:
         self,
         *,
         host_cpu_cores: int = 4,
-        max_time_skew_s: float = 5.0,
+        max_time_skew_s: float = 1.0,
         cpu_epsilon_cores: float = 0.01,
     ):
         self.host_cpu_cores = host_cpu_cores

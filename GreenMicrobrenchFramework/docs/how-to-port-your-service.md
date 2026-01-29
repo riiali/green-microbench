@@ -1,6 +1,6 @@
-#  How to Port Your Service to GreenMicrobenchFramework
+#  How to Port Your Service to GreenMicrobrenchFramework
 
-The goal of **GreenMicrobenchFramework** is to analyze and monitor the performance and energy impact of microservice-based applications under load — **without changing their code**.  
+The goal of **GreenMicrobrenchFramework** is to analyze and monitor the performance and energy impact of microservice-based applications under load — **without changing their code**.  
 You only need to modify your **Dockerfiles** and **docker-compose.yml** and simulate the load through locust files. 
 
 ---

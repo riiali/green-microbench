@@ -174,7 +174,7 @@ def analyze_run(run_dir: str, service_prefix_map=None):
 <html>
 <head>
 <meta charset="utf-8"/>
-<title>GreenMicrobrench Report</title>
+<title>GreenMicrobench Report</title>
 <style>
 body {{ font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; margin: 32px; }}
 h1,h2 {{ margin: 0.2em 0; }}
