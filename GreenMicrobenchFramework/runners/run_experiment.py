@@ -15,7 +15,6 @@ from GreenMicrobenchFramework.adapters.power.shelly_adapter import ShellyAdapter
 from GreenMicrobenchFramework.adapters.metrics.prometheus_adapter import PrometheusAdapter
 from GreenMicrobenchFramework.adapters.resources.cadvisor_adapter import CAdvisorAdapter
 from GreenMicrobenchFramework.adapters.metrics.prometheus_export import export_core_series
-from GreenMicrobenchFramework.adapters.traces.jaeger_adapter import JaegerAdapter
 from GreenMicrobenchFramework.analyzer.analyze_run import analyze_run
 from GreenMicrobenchFramework.analyzer.cpu_energy_attribution import ShellyPowerAttributor
 
@@ -118,11 +117,19 @@ def parse_powerjoular_csv(
             )
 
             cpu_cores = float(r["CPU Utilization"])
+            raw_power = str(r["CPU Power"])
 
+            if raw_power.startswith("+Inf"):
+                cpu_power = 999
+            elif raw_power.startswith("NaN"):
+                cpu_power = 0
+            else:
+                cpu_power = float(raw_power)
+                
             rows.append({
                 "ts": ts,
                 "cpu_utilization": cpu_cores,
-                "cpu_power_watt": float(r["CPU Power"]),
+                "cpu_power_watt": cpu_power,
             })
 
     return rows
@@ -337,7 +344,7 @@ def main():
         json.dump(powerjoular_data, f, indent=2)
 
     # -----------------------------------------------------------------------
-    # Prometheus, Jaeger and analysis (unchanged logic)
+    # Prometheus, cAdvisor
     # -----------------------------------------------------------------------
 
     prom = PrometheusAdapter(args.prom)
@@ -392,13 +399,6 @@ def main():
     }
 
     export_core_series(prom, start_iso, end_iso, args.step, prom_files, args.window)
-
-    jaeger = JaegerAdapter(args.jaeger)
-    traces = jaeger.sample_traces(args.services, start_iso, end_iso)
-
-    with (out_dir / "jaeger_traces_sample.json").open("w") as f:
-        json.dump(traces, f, indent=2)
-
 
     # -----------------------------------------------------------------------
     # Summary file (high-level experiment overview)
@@ -538,7 +538,6 @@ def main():
 
             "power_joular_data": str(pj_json),
             "summary": str(summary_file),
-            "jaeger_sample": str(out_dir / "jaeger_traces_sample.json"),
         }
     }
 

@@ -213,7 +213,7 @@ def load_powerjoular_timeseries(path: Path) -> Dict[str, pd.DataFrame]:
     Expected structure:
       {
         "<service>": [
-          {"ts": "...", "cpu_cores_used": ..., "cpu_percent_host": ..., "cpu_power_watt": ...},
+          {"ts": "...", "cpu_utilization": ..., "cpu_power_watt": ...},
           ...
         ],
         ...
@@ -239,7 +239,7 @@ def load_powerjoular_timeseries(path: Path) -> Dict[str, pd.DataFrame]:
         df = df.dropna(subset=["ts"]).sort_values("ts")
 
         # Normalize / coerce expected columns
-        for col in ("cpu_cores_used", "cpu_percent_host", "cpu_power_watt"):
+        for col in ("cpu_utilization", "cpu_power_watt"):
             if col in df.columns:
                 df[col] = pd.to_numeric(df[col], errors="coerce")
             else:
@@ -698,7 +698,7 @@ def build_html_report(
         if pj_available:
             x_pj = [t.isoformat() for t in pj_df["ts"].tolist()]
             y_pj_pow = [float(v) if v == v else None for v in pj_df["cpu_power_watt"].tolist()]
-            y_pj_cpu = [float(v) if v == v else None for v in pj_df["cpu_cores_used"].tolist()]
+            y_pj_cpu = [float(v) if v == v else None for v in pj_df["cpu_utilization"].tolist()]
             
             pow_fig_pj = _line_fig(
               x=x_pj,
@@ -732,15 +732,6 @@ def build_html_report(
                 title=f"{s.name} — Power - Shelly estimate vs PowerJoular (over time)",
             )
             
-            # Comparison charts.
-            cmp_fig_cpu = _line_multi_fig(
-                traces=[
-                    {"x": x, "y": y_cpu, "name": "estimated_power_from_shelly_watt"},
-                    {"x": x_pj, "y": y_pj_cpu, "name": "cpu_cores_used"},
-                ],
-                y_title="CPU cores used",
-                title=f"{s.name} — CPU - Shelly estimate vs PowerJoular (over time)",
-            )
 
            # cmp_bar_fig = _bar_compare_fig(
             #    metrics=["Energy (Wh)", "Avg (W)", "P95 (W)", "Max (W)"],
@@ -813,7 +804,6 @@ def build_html_report(
         
         if pj_available and div_cmp and div_cmp_cpu and div_cmp_bar and cmp_fig:
             figs[div_cmp] = cmp_fig
-            figs[div_cmp_cpu] = cmp_fig_cpu
              #figs[div_cmp_bar] = cmp_bar_fig
 
     # “Most impactful” analysis section.
