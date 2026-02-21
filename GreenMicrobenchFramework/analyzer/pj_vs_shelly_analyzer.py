@@ -213,7 +213,7 @@ def load_powerjoular_timeseries(path: Path) -> Dict[str, pd.DataFrame]:
     Expected structure:
       {
         "<service>": [
-          {"ts": "...", "cpu_cores_used": ..., "cpu_percent_host": ..., "cpu_power_watt": ...},
+          {"ts": "...", "cpu_utilization": ..., "cpu_power_watt": ...},
           ...
         ],
         ...
@@ -239,7 +239,7 @@ def load_powerjoular_timeseries(path: Path) -> Dict[str, pd.DataFrame]:
         df = df.dropna(subset=["ts"]).sort_values("ts")
 
         # Normalize / coerce expected columns
-        for col in ("cpu_cores_used", "cpu_percent_host", "cpu_power_watt"):
+        for col in ("cpu_utilization", "cpu_power_watt"):
             if col in df.columns:
                 df[col] = pd.to_numeric(df[col], errors="coerce")
             else:
@@ -336,29 +336,44 @@ def _plotly_script(div_id: str, fig: dict) -> str:
 """.strip()
 
 
+from typing import List, Optional
+
 def _line_fig(
     x: List[str],
     y: List[float],
     name: str,
     y_title: str,
     title: str,
+    line_color: Optional[str] = None,  # es. "red", "#1f77b4", "rgba(0,0,0,0.8)"
 ) -> dict:
+    trace = {
+        "type": "scatter",
+        "mode": "lines",
+        "x": x,
+        "y": y,
+        "name": name,
+        "hovertemplate": "%{x}<br>%{y:.4f}<extra></extra>",
+    }
+
+    if line_color is not None:
+        trace["line"] = {"color": line_color}
+
     return {
-        "data": [
-            {
-                "type": "scatter",
-                "mode": "lines",
-                "x": x,
-                "y": y,
-                "name": name,
-                "hovertemplate": "%{x}<br>%{y:.4f}<extra></extra>",
-            }
-        ],
+        "data": [trace],
         "layout": {
             "title": {"text": title, "x": 0.01, "xanchor": "left"},
             "margin": {"l": 55, "r": 18, "t": 45, "b": 45},
-            "xaxis": {"title": "Time (UTC)", "type": "date", "showgrid": True, "zeroline": False},
-            "yaxis": {"title": y_title, "showgrid": True, "zeroline": False},
+            "xaxis": {
+                "title": "Time (UTC)",
+                "type": "date",
+                "showgrid": True,
+                "zeroline": False,
+            },
+            "yaxis": {
+                "title": y_title,
+                "showgrid": True,
+                "zeroline": False,
+            },
             "hovermode": "x unified",
             "paper_bgcolor": "rgba(0,0,0,0)",
             "plot_bgcolor": "rgba(0,0,0,0)",
@@ -366,44 +381,67 @@ def _line_fig(
     }
 
 
+from typing import List, Dict
 
 def _line_multi_fig(
     *,
-    traces: List[dict],
+    traces: List[Dict],
     y_title: str,
     title: str,
 ) -> dict:
     """
     Create a multi-trace time-series figure.
-    Each trace dict must contain: x, y, name.
+
+    Each trace dict may contain:
+    - x: List[str]
+    - y: List[float]
+    - name: str
+    - color: str (optional, es. "#ff7f0e")
     """
     data = []
+
     for tr in traces:
-        data.append(
-            {
-                "type": "scatter",
-                "mode": "lines",
-                "x": tr.get("x", []),
-                "y": tr.get("y", []),
-                "name": tr.get("name", ""),
-                "hovertemplate": "%{x}<br>%{y:.4f}<extra></extra>",
-            }
-        )
+        trace = {
+            "type": "scatter",
+            "mode": "lines",
+            "x": tr.get("x", []),
+            "y": tr.get("y", []),
+            "name": tr.get("name", ""),
+            "visible": True,  # 🔹 forzata visibilità
+            "hovertemplate": "%{x}<br>%{y:.4f}<extra></extra>",
+        }
+
+        if "color" in tr:
+            trace["line"] = {"color": tr["color"]}
+
+        data.append(trace)
 
     return {
         "data": data,
         "layout": {
             "title": {"text": title, "x": 0.01, "xanchor": "left"},
             "margin": {"l": 55, "r": 18, "t": 45, "b": 45},
-            "xaxis": {"title": "Time (UTC)", "type": "date", "showgrid": True, "zeroline": False},
-            "yaxis": {"title": y_title, "showgrid": True, "zeroline": False},
+            "xaxis": {
+                "title": "Time (UTC)",
+                "type": "date",
+                "showgrid": True,
+                "zeroline": False,
+            },
+            "yaxis": {
+                "title": y_title,
+                "showgrid": True,
+                "zeroline": False,
+            },
             "hovermode": "x unified",
-            "legend": {"orientation": "h", "y": 1.15, "x": 0.0},
+            "legend": {
+                "orientation": "h",
+                "y": 1.15,
+                "x": 0.0,
+            },
             "paper_bgcolor": "rgba(0,0,0,0)",
             "plot_bgcolor": "rgba(0,0,0,0)",
         },
     }
-
 
 def _bar_compare_fig(
     *,
@@ -614,8 +652,8 @@ def build_html_report(
     if hourly_series:
         figs["stacked_top"] = _stacked_area_fig(hourly_series, f"Stacked estimated power over experiment duration (top services)")
 
-    if all_cpu and all_pow:
-        figs["scatter_cpu_pow"] = _scatter_fig(all_cpu, all_pow, "CPU cores vs estimated power (all samples)")
+    #if all_cpu and all_pow:
+     #   figs["scatter_cpu_pow"] = _scatter_fig(all_cpu, all_pow, "CPU cores vs estimated power (all samples)")
 
     # Service-specific figures.
     service_sections: List[str] = []
@@ -625,15 +663,18 @@ def build_html_report(
         y_pow = [float(v) if v == v else None for v in df["estimated_power_from_shelly_watt"].tolist()]
         y_cpu = [float(v) if v == v else None for v in df["cpu_cores_used"].tolist()]
 
-        div_pow = f"svc_pow_{re.sub(r'[^a-zA-Z0-9_]', '_', s.name)}"
+        div_pow_shelly = f"svc_pow_{re.sub(r'[^a-zA-Z0-9_]', '_', s.name)}"
+        div_pow_pj = f"svc_pow_pj_{re.sub(r'[^a-zA-Z0-9_]', '_', s.name)}"
         div_cpu = f"svc_cpu_{re.sub(r'[^a-zA-Z0-9_]', '_', s.name)}"
+        
 
-        pow_fig = _line_fig(
+        pow_fig_shelly = _line_fig(
             x=x,
             y=y_pow,
             name="estimated_power_from_shelly_watt",
             y_title="Estimated power (W)",
-            title=f"{s.name} — estimated power over time",
+            title=f"{s.name} — estimated power over time (SHELLY)",
+            line_color="#1f77b4"
         )
         cpu_fig = _line_fig(
             x=x,
@@ -653,12 +694,20 @@ def build_html_report(
         div_cmp_cpu = None
         div_cmp_bar = None
         cmp_fig = None
-        cmp_bar_fig = None
 
         if pj_available:
             x_pj = [t.isoformat() for t in pj_df["ts"].tolist()]
             y_pj_pow = [float(v) if v == v else None for v in pj_df["cpu_power_watt"].tolist()]
-            y_pj_cpu = [float(v) if v == v else None for v in pj_df["cpu_cores_used"].tolist()]
+            y_pj_cpu = [float(v) if v == v else None for v in pj_df["cpu_utilization"].tolist()]
+            
+            pow_fig_pj = _line_fig(
+              x=x_pj,
+              y=y_pj_pow,
+              name="power_from_pj_watt",
+              y_title="Estimated power (W)",
+              title=f"{s.name} — estimated power over time (PowerJoular)",
+              line_color="#ff7f0e"
+            )
 
             # Summary stats for PowerJoular.
             pj_energy_wh = _integrate_energy_wh(pj_df, "cpu_power_watt")
@@ -675,38 +724,30 @@ def build_html_report(
             # Comparison charts.
             cmp_fig = _line_multi_fig(
                 traces=[
-                    {"x": x, "y": y_pow, "name": "estimated_power_from_shelly_watt"},
-                    {"x": x_pj, "y": y_pj_pow, "name": "cpu_power_watt"},
+                   {"x": x_pj, "y": y_pj_pow, "name": "cpu_power_pj_watt", "color":"#ff7f0e"},
+                    {"x": x, "y": y_pow, "name": "cpu_power_shelly_watt", "color":"#1f77b4"},
+                   
                 ],
                 y_title="Power (W)",
                 title=f"{s.name} — Power - Shelly estimate vs PowerJoular (over time)",
             )
             
-            # Comparison charts.
-            cmp_fig_cpu = _line_multi_fig(
-                traces=[
-                    {"x": x, "y": y_cpu, "name": "estimated_power_from_shelly_watt"},
-                    {"x": x_pj, "y": y_pj_cpu, "name": "cpu_cores_used"},
-                ],
-                y_title="CPU cores used",
-                title=f"{s.name} — CPU - Shelly estimate vs PowerJoular (over time)",
-            )
 
-            cmp_bar_fig = _bar_compare_fig(
-                metrics=["Energy (Wh)", "Avg (W)", "P95 (W)", "Max (W)"],
-                a_name="Shelly estimated_power",
-                a_vals=[float(s.energy_wh), float(s.avg_power_w), float(s.p95_power_w), float(s.max_power_w)],
-                b_name="PowerJoular cpu_power",
-                b_vals=[float(pj_energy_wh), float(pj_avg), float(pj_p95), float(pj_max)],
-                title=f"{s.name} — summary comparison (Shelly vs PowerJoular)",
-            )
+           # cmp_bar_fig = _bar_compare_fig(
+            #    metrics=["Energy (Wh)", "Avg (W)", "P95 (W)", "Max (W)"],
+             #   a_name="Shelly estimated_power",
+              #  a_vals=[float(s.energy_wh), float(s.avg_power_w), float(s.p95_power_w), float(s.max_power_w)],
+               # b_name="PowerJoular cpu_power",
+               # b_vals=[float(pj_energy_wh), float(pj_avg), float(pj_p95), float(pj_max)],
+               # title=f"{s.name} — summary comparison (Shelly vs PowerJoular)",
+            #)
 
             pj_kpis_html = f"""
     <div class="kpi-row kpi-row-alt">
-      <div class="kpi"><div class="kpi-label">PJ Energy</div><div class="kpi-value">{pj_energy_wh:.3f} Wh</div></div>
-      <div class="kpi"><div class="kpi-label">PJ Avg power</div><div class="kpi-value">{pj_avg:.3f} W</div></div>
-      <div class="kpi"><div class="kpi-label">PJ P95 power</div><div class="kpi-value">{pj_p95:.3f} W</div></div>
-      <div class="kpi"><div class="kpi-label">PJ Max power</div><div class="kpi-value">{pj_max:.3f} W</div></div>
+      <div class="kpi kpi--pj"><div class="kpi-label">PJ Energy</div><div class="kpi-value">{pj_energy_wh:.3f} Wh</div></div>
+      <div class="kpi kpi--pj"><div class="kpi-label">PJ Avg power</div><div class="kpi-value">{pj_avg:.3f} W</div></div>
+      <div class="kpi kpi--pj"><div class="kpi-label">PJ P95 power</div><div class="kpi-value">{pj_p95:.3f} W</div></div>
+      <div class="kpi kpi--pj"><div class="kpi-label">PJ Max power</div><div class="kpi-value">{pj_max:.3f} W</div></div>
     </div>
 """.rstrip()
 
@@ -718,14 +759,7 @@ def build_html_report(
     </div>
     <div style="height: 16px;"></div>
 
-    <div class="chart-wrap">
-      {_plotly_div(div_cmp_cpu)}
-    </div>
-    <div style="height: 16px;"></div>
 
-    <div class="chart-wrap">
-      {_plotly_div(div_cmp_bar)}
-    </div>
 """.rstrip()
 
 
@@ -740,27 +774,23 @@ def build_html_report(
       <span class="badge {'badge-stack' if badge=='TECH STACK' else 'badge-sut'}">{badge}</span>
     </div>
     <div class="kpi-row">
-      <div class="kpi"><div class="kpi-label">Energy</div><div class="kpi-value">{s.energy_wh:.3f} Wh</div></div>
-      <div class="kpi"><div class="kpi-label">Avg power</div><div class="kpi-value">{s.avg_power_w:.3f} W</div></div>
-      <div class="kpi"><div class="kpi-label">P95 power</div><div class="kpi-value">{s.p95_power_w:.3f} W</div></div>
-      <div class="kpi"><div class="kpi-label">Max power</div><div class="kpi-value">{s.max_power_w:.3f} W</div></div>
-      <div class="kpi"><div class="kpi-label">Avg CPU</div><div class="kpi-value">{s.avg_cpu_cores:.3f} cores</div></div>
-      <div class="kpi"><div class="kpi-label">P95 CPU</div><div class="kpi-value">{s.p95_cpu_cores:.3f} cores</div></div>
-      <div class="kpi"><div class="kpi-label">Max CPU</div><div class="kpi-value">{s.max_cpu_cores:.3f} cores</div></div>
-      <div class="kpi"><div class="kpi-label">Samples</div><div class="kpi-value">{s.n_samples}</div></div>
+      <div class="kpi kpi--shelly"><div class="kpi-label">Energy</div><div class="kpi-value">{s.energy_wh:.3f} Wh</div></div>
+      <div class="kpi kpi--shelly"><div class="kpi-label">Avg power</div><div class="kpi-value">{s.avg_power_w:.3f} W</div></div>
+      <div class="kpi kpi--shelly"><div class="kpi-label">P95 power</div><div class="kpi-value">{s.p95_power_w:.3f} W</div></div>
+      <div class="kpi kpi--shelly"><div class="kpi-label">Max power</div><div class="kpi-value">{s.max_power_w:.3f} W</div></div>
     </div>
   </div>
 {pj_kpis_html}
 
   <div class="card-body">
     <div class="chart-wrap">
-      {_plotly_div(div_pow)}
+      {_plotly_div(div_pow_shelly)}
     </div>
 
     <div style="height: 16px;"></div>
     
     <div class="chart-wrap">
-      {_plotly_div(div_cpu)}
+      {_plotly_div(div_pow_pj)}
     </div>
 {extra_charts_html}
   </div>
@@ -768,12 +798,13 @@ def build_html_report(
 """.strip()
             )
 
-        figs[div_pow] = pow_fig
+        figs[div_pow_shelly] = pow_fig_shelly
+        figs[div_pow_pj] = pow_fig_pj if pj_available else None
         figs[div_cpu] = cpu_fig
-        if pj_available and div_cmp and div_cmp_cpu and div_cmp_bar and cmp_fig and cmp_bar_fig:
+        
+        if pj_available and div_cmp and div_cmp_cpu and div_cmp_bar and cmp_fig:
             figs[div_cmp] = cmp_fig
-            figs[div_cmp_cpu] = cmp_fig_cpu
-            figs[div_cmp_bar] = cmp_bar_fig
+             #figs[div_cmp_bar] = cmp_bar_fig
 
     # “Most impactful” analysis section.
     impactful_html = ""
@@ -1022,6 +1053,18 @@ def build_html_report(
       border: 1px solid rgba(255,255,255,0.08);
       background: rgba(0,0,0,0.14);
     }}
+
+    .kpi--pj {{
+      background: rgba(255, 127, 14, 0.18);
+      border: 1px solid rgba(255, 127, 14, 0.35);
+    }}
+
+
+    .kpi--shelly {{
+      background: rgba(31, 119, 180, 0.18);
+      border: 1px solid rgba(31, 119, 180, 0.35);
+    }}
+    
     .kpi-label {{
       color: var(--muted);
       font-size: 12px;
@@ -1144,7 +1187,6 @@ def build_html_report(
           {_plotly_div("bar_avg_power")}
         </div>
         {"<div class='chart-wrap' style='grid-column: 1 / -1;'>" + _plotly_div("stacked_top") + "</div>" if "stacked_top" in figs else ""}
-        {"<div class='chart-wrap' style='grid-column: 1 / -1;'>" + _plotly_div("scatter_cpu_pow") + "</div>" if "scatter_cpu_pow" in figs else ""}
       </div>
     </section>
 

@@ -501,8 +501,8 @@ def build_html_report(
     if hourly_series:
         figs["stacked_top"] = _stacked_area_fig(hourly_series, f"Stacked estimated power over experiment duration (top services)")
 
-    if all_cpu and all_pow:
-        figs["scatter_cpu_pow"] = _scatter_fig(all_cpu, all_pow, "CPU cores vs estimated power (all samples)")
+    #if all_cpu and all_pow:
+        #figs["scatter_cpu_pow"] = _scatter_fig(all_cpu, all_pow, "CPU cores vs estimated power (all samples)")
 
     # Service-specific figures.
     service_sections: List[str] = []
@@ -510,10 +510,10 @@ def build_html_report(
         df = services[s.name]
         x = [t.isoformat() for t in df["ts"].tolist()]
         y_pow = [float(v) if v == v else None for v in df["estimated_power_from_shelly_watt"].tolist()]
-        y_cpu = [float(v) if v == v else None for v in df["cpu_cores_used"].tolist()]
+       #y_cpu = [float(v) if v == v else None for v in df["cpu_cores_used"].tolist()]
 
         div_pow = f"svc_pow_{re.sub(r'[^a-zA-Z0-9_]', '_', s.name)}"
-        div_cpu = f"svc_cpu_{re.sub(r'[^a-zA-Z0-9_]', '_', s.name)}"
+       # div_cpu = f"svc_cpu_{re.sub(r'[^a-zA-Z0-9_]', '_', s.name)}"
 
         pow_fig = _line_fig(
             x=x,
@@ -522,13 +522,13 @@ def build_html_report(
             y_title="Estimated power (W)",
             title=f"{s.name} — estimated power over time",
         )
-        cpu_fig = _line_fig(
-            x=x,
-            y=y_cpu,
-            name="cpu_cores_used",
-            y_title="CPU cores used",
-            title=f"{s.name} — CPU cores used over time",
-        )
+        #cpu_fig = _line_fig(
+         #   x=x,
+          #  y=y_cpu,
+           # name="cpu_cores_used",
+           # y_title="CPU cores used",
+           # title=f"{s.name} — CPU cores used over time",
+        #)
 
         badge = "TECH STACK" if _is_tech_stack(s.name, tech_stack_patterns) else "SUT"
         service_sections.append(
@@ -557,17 +557,13 @@ def build_html_report(
     </div>
 
     <div style="height: 16px;"></div>
-    
-    <div class="chart-wrap">
-      {_plotly_div(div_cpu)}
-    </div>
   </div>
 </section>
 """.strip()
             )
 
         figs[div_pow] = pow_fig
-        figs[div_cpu] = cpu_fig
+        #figs[div_cpu] = cpu_fig
 
     # “Most impactful” analysis section.
     impactful_html = ""
@@ -933,7 +929,7 @@ def build_html_report(
           {_plotly_div("bar_avg_power")}
         </div>
         {"<div class='chart-wrap' style='grid-column: 1 / -1;'>" + _plotly_div("stacked_top") + "</div>" if "stacked_top" in figs else ""}
-        {"<div class='chart-wrap' style='grid-column: 1 / -1;'>" + _plotly_div("scatter_cpu_pow") + "</div>" if "scatter_cpu_pow" in figs else ""}
+        
       </div>
     </section>
 
