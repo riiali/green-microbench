@@ -141,14 +141,86 @@ def parse_powerjoular_csv(
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--scenario", required=True)
-    ap.add_argument("--prom", default="http://192.168.1.237:9090")
-    ap.add_argument("--shelly", default=None)
-    ap.add_argument("--hz", type=float, default=1.0)
-    ap.add_argument("--out-root", default="GreenMicrobenchFramework/artifacts")
-    ap.add_argument("--services", nargs="*", default=[])
-    ap.add_argument("--step", default="5s")
-    ap.add_argument("--window", default="20s")
+    ap.add_argument(
+        "--scenario",
+        required=True,
+        help="Path to the YAML scenario file defining workload parameters "
+            "(users, spawn_rate, run_time, host, locustfile, etc.)."
+    )
+
+    ap.add_argument(
+        "--prom",
+        default=None,
+        help="Base URL of the Prometheus server used to query metrics "
+        "If not provided, the experiment will fail (prometheus is mandatory)."
+    )
+
+    ap.add_argument(
+        "--shelly",
+        default=None,
+        help="IP address or base URL of the Shelly power meter. "
+            "If not provided, the experiment will fail (power measurement is mandatory)."
+    )
+
+    ap.add_argument(
+        "--hz",
+        type=float,
+        default=1.0,
+        help="Sampling frequency (Hz) for Shelly power measurements "
+            "(default: 1.0 Hz)."
+    )
+
+    ap.add_argument(
+        "--out-root",
+        default="GreenMicrobenchFramework/artifacts",
+        help="Root directory where experiment artifacts will be stored. "
+            "A timestamped subdirectory will be created automatically."
+    )
+
+    ap.add_argument(
+        "--services",
+        nargs="*",
+        default=[],
+        help="Optional list of service names to include in analysis. "
+            "If empty, all detected services will be considered."
+    )
+
+    ap.add_argument(
+        "--step",
+        default="5s",
+        help="Prometheus query resolution step (e.g., 1s, 5s, 10s). "
+            "Controls time-series granularity (default: 5s)."
+    )
+
+    ap.add_argument(
+        "--window",
+        default="20s",
+        help="Prometheus range vector window (e.g., 20s, 30s, 1m, 5m). "
+            "Used for rate/aggregation queries (default: 20s)."
+    )
+
+    ap.add_argument(
+        "--powerjoular",
+        choices=["on", "off"],
+        default="off",
+        help="Enable or disable PowerJoular execution on the Raspberry Pi. "
+            "'on'  -> run per-PID power tracing and parse CSV outputs. "
+            "'off' -> skip PowerJoular completely (default: off)."
+    )
+
+    ap.add_argument(
+        "--raspberry-host",
+        default=None,
+        help="SSH host of the Raspberry Pi used for Docker inspection "
+    )
+
+    ap.add_argument(
+        "--powerjoular-remote-root",
+        default="/home",
+        help="Root directory on the Raspberry Pi where PowerJoular logs "
+            "will be stored before being copied locally "
+            "(default: /home)."
+    )
     args = ap.parse_args()
 
     # -----------------------------------------------------------------------
@@ -199,8 +271,7 @@ def main():
     # -----------------------------------------------------------------------
     # Docker runtime info (PID mapping)
     # -----------------------------------------------------------------------
-
-    RASPBERRY_HOST = "ali@192.168.1.237"
+    RASPBERRY_HOST = args.raspberry_host
     SERVICE_RUNTIME_MAP = get_container_runtime_info(RASPBERRY_HOST)
 
     # -----------------------------------------------------------------------
@@ -208,19 +279,28 @@ def main():
     # -----------------------------------------------------------------------
 
     duration_sec = parse_duration(scenario["run_time"])
-    remote_power_dir = f"/home/ali/Desktop/power_logs/{ts}_{name}"
+    powerjoular_data = {}
+    powerjoular_pid_metadata = {}
+    pj_json = None  
 
-    pid_list = " ".join(str(v["pid"]) for v in SERVICE_RUNTIME_MAP.values())
+    remote_power_dir = None
+    pj_run_dir = None
 
-    ssh_cmd = [
-        "ssh",
-        RASPBERRY_HOST,
-        f"~/Desktop/start_powerjoular_pids.sh "
-        f"{duration_sec} {remote_power_dir} {pid_list}"
-    ]
+    if args.powerjoular == "on":
+        remote_power_dir = f"{args.powerjoular_remote_root}/{ts}_{name}"
+        pid_list = " ".join(str(v["pid"]) for v in SERVICE_RUNTIME_MAP.values())
 
-    print("[INFO] Starting PowerJoular on Raspberry Pi")
-    sp.Popen(ssh_cmd)
+        ssh_cmd = [
+            "ssh",
+            RASPBERRY_HOST,
+            f"~/Desktop/start_powerjoular_pids.sh "
+            f"{duration_sec} {remote_power_dir} {pid_list}"
+        ]
+
+        print("[INFO] Starting PowerJoular on Raspberry Pi")
+        sp.Popen(ssh_cmd)
+    else:
+        print("[INFO] PowerJoular disabled (--powerjoular not set)")
 
     # -----------------------------------------------------------------------
     # Workload execution (Locust)
@@ -266,81 +346,84 @@ def main():
     powerjoular_data = {}
     powerjoular_pid_metadata = {}
 
-    local_pj_root = out_dir / "power_joular_data"
-    local_pj_root.mkdir(exist_ok=True)
+    if args.powerjoular == "on":
+        local_pj_root = out_dir / "power_joular_data"
+        local_pj_root.mkdir(exist_ok=True)
 
-    # -----------------------------------------------------------------------
-    # Copy PowerJoular root directory from Raspberry Pi
-    # -----------------------------------------------------------------------
+        # -----------------------------------------------------------------------
+        # Copy PowerJoular root directory from Raspberry Pi
+        # -----------------------------------------------------------------------
 
-    try:
-        sp.check_call([
-            "scp",
-            "-r",
-            f"{RASPBERRY_HOST}:{remote_power_dir}/",
-            str(local_pj_root)
-        ])
-    except Exception as e:
-        print(f"[WARN] Failed to copy PowerJoular directory: {e}")
+        try:
+            sp.check_call([
+                "scp",
+                "-r",
+                f"{RASPBERRY_HOST}:{remote_power_dir}/",
+                str(local_pj_root)
+            ])
+        except Exception as e:
+            print(f"[WARN] Failed to copy PowerJoular directory: {e}")
 
-    # -----------------------------------------------------------------------
-    # Detect PowerJoular run subdirectory (latest one)
-    # -----------------------------------------------------------------------
+        # -----------------------------------------------------------------------
+        # Detect PowerJoular run subdirectory (latest one)
+        # -----------------------------------------------------------------------
 
-    run_dirs = [
-        d for d in local_pj_root.iterdir()
-        if d.is_dir()
-    ]
+        run_dirs = [
+            d for d in local_pj_root.iterdir()
+            if d.is_dir()
+        ]
 
-    if not run_dirs:
-        raise RuntimeError("No PowerJoular run directory found")
+        if not run_dirs:
+            raise RuntimeError("No PowerJoular run directory found")
 
-    pj_run_dir = max(run_dirs, key=lambda d: d.stat().st_mtime)
+        pj_run_dir = max(run_dirs, key=lambda d: d.stat().st_mtime)
 
-    print(f"[INFO] Detected PowerJoular run directory: {pj_run_dir.name}")
+        print(f"[INFO] Detected PowerJoular run directory: {pj_run_dir.name}")
 
-    # -----------------------------------------------------------------------
-    # Parse CSVs and build PID metadata
-    # -----------------------------------------------------------------------
+        # -----------------------------------------------------------------------
+        # Parse CSVs and build PID metadata
+        # -----------------------------------------------------------------------
 
-    for csv_file in pj_run_dir.glob("consumption-*.csv"):
-        pid = csv_file.stem.split("-")[1]
+        for csv_file in pj_run_dir.glob("consumption-*.csv"):
+            pid = csv_file.stem.split("-")[1]
 
-        matched_service = None
-        matched_info = None
+            matched_service = None
+            matched_info = None
 
-        for service, info in SERVICE_RUNTIME_MAP.items():
-            if str(info["pid"]) == pid:
-                matched_service = service
-                matched_info = info
-                break
+            for service, info in SERVICE_RUNTIME_MAP.items():
+                if str(info["pid"]) == pid:
+                    matched_service = service
+                    matched_info = info
+                    break
 
-        if matched_service is None:
-            print(f"[WARN] Unmapped PowerJoular PID {pid}")
-            continue
+            if matched_service is None:
+                print(f"[WARN] Unmapped PowerJoular PID {pid}")
+                continue
 
-        powerjoular_pid_metadata[pid] = {
-            "service": matched_service,
-            "container_name": matched_info.get("container_name"),
-            "container_id": matched_info.get("container_id"),
-            "csv_file": csv_file.name,
-            "run_directory": pj_run_dir.name,
-        }
+            powerjoular_pid_metadata[pid] = {
+                "service": matched_service,
+                "container_name": matched_info.get("container_name"),
+                "container_id": matched_info.get("container_id"),
+                "csv_file": csv_file.name,
+                "run_directory": pj_run_dir.name,
+            }
 
-        powerjoular_data[matched_service] = parse_powerjoular_csv(csv_file)
+            powerjoular_data[matched_service] = parse_powerjoular_csv(csv_file)
 
-    # -----------------------------------------------------------------------
-    # Persist metadata and aggregated data
-    # -----------------------------------------------------------------------
+        # -----------------------------------------------------------------------
+        # Persist metadata and aggregated data
+        # -----------------------------------------------------------------------
 
-    pid_metadata_json = pj_run_dir / "powerjoular_pid_metadata.json"
-    with pid_metadata_json.open("w") as f:
-        json.dump(powerjoular_pid_metadata, f, indent=2)
+        pid_metadata_json = pj_run_dir / "powerjoular_pid_metadata.json"
+        with pid_metadata_json.open("w") as f:
+            json.dump(powerjoular_pid_metadata, f, indent=2)
 
-    pj_json = out_dir / "power_joular_data.json"
-    with pj_json.open("w") as f:
-        json.dump(powerjoular_data, f, indent=2)
-
+        pj_json = out_dir / "power_joular_data.json"
+        with pj_json.open("w") as f:
+            json.dump(powerjoular_data, f, indent=2)
+    
+    else:
+        pj_json = None
     # -----------------------------------------------------------------------
     # Prometheus, cAdvisor
     # -----------------------------------------------------------------------
