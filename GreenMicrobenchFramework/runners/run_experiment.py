@@ -15,7 +15,6 @@ from GreenMicrobenchFramework.adapters.power.shelly_adapter import ShellyAdapter
 from GreenMicrobenchFramework.adapters.metrics.prometheus_adapter import PrometheusAdapter
 from GreenMicrobenchFramework.adapters.resources.cadvisor_adapter import CAdvisorAdapter
 from GreenMicrobenchFramework.adapters.metrics.prometheus_export import export_core_series
-from GreenMicrobenchFramework.analyzer.analyze_run import analyze_run
 from GreenMicrobenchFramework.analyzer.cpu_energy_attribution import ShellyPowerAttributor
 
 
@@ -144,13 +143,12 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--scenario", required=True)
     ap.add_argument("--prom", default="http://192.168.1.237:9090")
-    ap.add_argument("--jaeger", default="http://192.168.1.237:16686")
     ap.add_argument("--shelly", default=None)
     ap.add_argument("--hz", type=float, default=1.0)
     ap.add_argument("--out-root", default="GreenMicrobenchFramework/artifacts")
     ap.add_argument("--services", nargs="*", default=[])
     ap.add_argument("--step", default="5s")
-    ap.add_argument("--window", default="1m")
+    ap.add_argument("--window", default="20s")
     args = ap.parse_args()
 
     # -----------------------------------------------------------------------
@@ -350,18 +348,6 @@ def main():
     prom = PrometheusAdapter(args.prom)
     cadv = CAdvisorAdapter(prom)
 
-    # -----------------------------------------------------------------------
-    # CPU fraction over the entire experiment period (via cAdvisor/Prometheus)
-    # -----------------------------------------------------------------------
-    cpu_frac = cadv.cpu_map_fraction_over_period(
-        start_iso,
-        end_iso,
-        step=args.step,
-        service_runtime_map=SERVICE_RUNTIME_MAP
-    )
-    cpu_frac_file = out_dir / "prom_cpu_by_service.json"
-    with cpu_frac_file.open("w") as f:
-        json.dump(cpu_frac, f, indent=2)
     
     # -----------------------------------------------------------------------
     # CPU % timeseries per container on Raspberry Pi (via cAdvisor/Prometheus)
@@ -392,13 +378,9 @@ def main():
     # Prometheus core metrics export
     # -----------------------------------------------------------------------
     prom_files = {
-        "requests": str(out_dir / "prom_requests_per_service.json"),
-        "p95": str(out_dir / "prom_p95_latency_per_service.json"),
-        "cpu": str(out_dir / "prom_cpu_by_service.json"),
         "cpu_percent_raspberry_per_service_timeseries": str(cpu_ts_file),
     }
 
-    export_core_series(prom, start_iso, end_iso, args.step, prom_files, args.window)
 
     # -----------------------------------------------------------------------
     # Summary file (high-level experiment overview)
@@ -413,7 +395,6 @@ def main():
         "end_iso": end_iso,
         "locust": locust_artifacts,
         "shelly_jsonl": str(shelly_file) if shelly else None,
-        "cpu_fraction": cpu_frac,
         "cpu_percent_raspberry_per_service_timeseries": str(cpu_ts_file),
         "power_joular_data_json": str(pj_json),
     }
@@ -530,10 +511,6 @@ def main():
             "locust_report": locust_artifacts.get("report_html"),
 
             "shelly_jsonl": str(shelly_file) if shelly else None,
-
-            "prom_requests": prom_files["requests"],
-            "prom_p95": prom_files["p95"],
-            "prom_cpu": prom_files["cpu"],
             "prom_cpu_timeseries": str(cpu_ts_file),
 
             "power_joular_data": str(pj_json),

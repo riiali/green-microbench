@@ -116,9 +116,6 @@ def analyze_run(run_dir: str, service_prefix_map=None):
     summary = json.loads((run_dir / "summary.json").read_text())
 
     prom_requests = _read_json(manifest["files"].get("prom_requests"))
-    prom_p95 = _read_json(manifest["files"].get("prom_p95"))
-    prom_cpu = _read_json(manifest["files"].get("prom_cpu"))
-    jaeger_sample = _read_json(manifest["files"].get("jaeger_sample"))
 
     energy_by_service = _drop_others(summary.get("energy_by_service_wh", {}))
     cpu_fraction = _drop_others(summary.get("cpu_fraction", {}))

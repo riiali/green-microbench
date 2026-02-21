@@ -30,42 +30,6 @@ class CAdvisorAdapter:
             return {k: 0.0 for k in per_service}
         return {k: v / total for k, v in per_service.items()}
     
-    def cpu_map_fraction_over_period(
-        self,
-        start_iso: str,
-        end_iso: str,
-        step: str = "5s",
-        service_runtime_map: dict = None
-    ) -> Dict[str, float]:
-
-        per_container, total = self.cpu_share_over_period(start_iso, end_iso, "1m")
-        #print (per_container, total)
-         #print("SERVICE RUNTIME MAP:", service_runtime_map)
-        #print("PER CONTAINER:", per_container)
-        #print("TOTAL:", total)
-        
-        if service_runtime_map is None:
-            # default: return per container id
-            return {k: v / total for k, v in per_container.items()}
-
-        out = {}
-        others = 0.0
-
-        for cid, cpu in per_container.items():
-            matched = False
-            for service_name, info in service_runtime_map.items():
-                if info["container_id"] in cid:
-                    out[service_name] = out.get(service_name, 0.0) + (cpu / total)
-                    matched = True
-                    break
-            if not matched:
-                others += cpu / total
-
-        if others > 0:
-            out["others"] = others
-
-        return out
-
     def cpu_percent_raspberry_per_service_timeseries(
         self,
         start_iso: str,
